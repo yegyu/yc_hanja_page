@@ -1,0 +1,14 @@
+
+.sideBar-year{
+    text-align: center;
+    margin-top: 1em;
+    
+    cursor: pointer;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.sideBar-month{
+    text-align: center;
+    cursor: pointer;
+}

@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import { getFrontHeaderTableList, getYears, now, nowYear } from "./util/util";
+import { BrowserRouter, Link, Route, Router } from "react-router-dom";
+import { MakeLine } from "./view/header";
+import SideBar from "./view/SideBar";
+import {Git} from "./view/Contents";
+import "./App.css"
 function App() {
+  const frontList = getYears();
+  console.log(frontList);
+
+  const [yearMonth ,updateYearMonth] = useState("/" + nowYear + "/" + (now.getMonth() + 1))
+  const handleUpdate = (yearMonth:string)=>{
+    updateYearMonth(yearMonth)
+    console.log("App > update");
+    
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SideBar years={getYears()} stateHandler={handleUpdate}  />
+      <Git yearMonth={yearMonth} />
     </div>
   );
 }
