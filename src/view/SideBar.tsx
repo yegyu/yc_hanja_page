@@ -18,7 +18,7 @@ const MonthList = (monthProps: MonthProps) => {
   const list: Array<JSX.Element> = []
   const onClick = (e:React.MouseEvent<HTMLElement>)=>{
     const id =e.currentTarget.id
-    monthProps.stateHandler.call(this,id)
+    monthProps.stateHandler(id)
   }
   getMonth(monthProps.thisYear).map((month) => {
     list.push(
