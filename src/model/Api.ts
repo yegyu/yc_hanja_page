@@ -56,5 +56,6 @@ export class HTTPError extends Error {
     }
 }
 
-export  interface TotalList extends Map<string,string[]> {
+export  interface YearJson {
+    month_files:string[]
 }

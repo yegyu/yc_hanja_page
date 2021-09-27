@@ -7,16 +7,34 @@
 .sideBar{
   display: table-cell;
   height: 100%;
-  width: 25%;
+  width: 10%;
   border-right: 1px solid rgb(230, 230, 230);
   position: absolute;
 }
 
 .contents{
   display: table-cell;
-	width: 75%;
+	width: 88%;
 }
 
 body{
   height: fit-content;
+}
+
+.hanja{
+  font-family: "hanja0";
+}
+
+@font-face {
+  font-family: 'hanja0';
+  src: url("view/font/cwTeXQKai-Medium.ttf");
+}
+@font-face {
+  font-family: 'hanja1';
+  src: url("view/font/cwTeXQKaiZH-Medium.ttf");
+}
+
+@font-face {
+  font-family: 'hanja2';
+  src: url("view/font/cwTeXQMingZH-Medium.ttf");
 }

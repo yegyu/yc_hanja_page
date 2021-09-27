@@ -1,8 +1,9 @@
 import "./Contents.css"
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from "react"
-import { ContentsDto, TotalList } from "../model/Api"
+import { ContentsDto, YearJson } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
+import "./Contents.css"
 type ContentsProps = {
     yearMonth: string
 }
@@ -17,30 +18,36 @@ function getPath(yearMonth: string): string {
     return year + month
 }
 
-var beforeYearMonth: string = ""
+var beforeYearMonth: string = "999999"
 export const Git = (contentsProps: ContentsProps) => {
     console.log('git', contentsProps.yearMonth);
 
-    const [totalList, setGit] = useState<TotalList | null>(null);
+    const [monthFiles, setMonthFiles] = useState<YearJson | null>(null);
     const [contents, setContents] = useState<ContentsDto | null>(null);
     const [loading, setLoading] = useState<boolean | null>(null);
     const [error, setError] = useState(false);
 
+    const [year, month] = contentsProps.yearMonth
+        .split('/')
+        .filter((v) => v != "")
+    console.log("year month",year,month);
+    
     useEffect(() => {
-        if (totalList == null) {
+        if (  year != beforeYearMonth.substring(1,5)) {
             console.log("useEffect")
             const fetchGits = async () => {
                 try {
-                    setGit(null);
                     setLoading(true);
-                    const response: AxiosResponse<TotalList> = await axios(
+                    const response: AxiosResponse<YearJson> = await axios(
                         {
                             method: "get",
-                            baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/",
-                            url: "total_list.json",
+                            baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/year/",
+                            url: `${year}.json`,
                         }
                     );
-                    setGit(response.data);
+                    setMonthFiles(response.data);
+                    console.log(response);
+                    
 
                 } catch (error) {
                     console.log(error);
@@ -50,19 +57,17 @@ export const Git = (contentsProps: ContentsProps) => {
         }
     })
     useEffect(() => {
-        if (beforeYearMonth != contentsProps.yearMonth) {
+        if (beforeYearMonth != contentsProps.yearMonth ) {
             const fetchContents = async () => {
                 try {
-                    const path = getPath(contentsProps.yearMonth);
-                    const year: string = contentsProps.yearMonth.substring(1, 5);
+                    const path = monthFiles?.month_files[Number.parseInt(month)-1];
 
-                    const json = path + ".json"
 
                     const response: AxiosResponse<ContentsDto> = await axios(
                         {
                             method: "get",
                             baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/",
-                            url: year + "/" + json,
+                            url: year + "/" + path,
                         }
                     );
                     setContents(response.data);
@@ -100,20 +105,22 @@ export const Git = (contentsProps: ContentsProps) => {
 
 const ContentView = (contentsDto: ContentsDto) => {
 
-    console.log(contentsDto);
-    
+    const frontList = contentsDto.front_hanja_list.map((front) =>
+        <div className="front">
+            <p> {"count :" + front.count} </p>
+            <p>{"hanja" + front.hanja}</p>
+            <p>{"이름" + front.name}</p>
+        </div>
+    );
+    console.log(frontList);
+
     return (
         <div>
             <h1>{contentsDto.week}</h1>
-            <p>
-                {contentsDto.front_hanja_list.map((FrontHanjaList, index) => {
-                    <div>
-                        <h2>{FrontHanjaList.hanja}</h2>
-                        {/* <h1>{FrontHanjaList.draw_list} </h1> */}
-                    </div>
-                })}
-            </p>
-            <h1>{contentsDto.back_hanja_list}</h1>
+            <ul>
+                {frontList}
+            </ul>
+            <h1 className="hanja">{contentsDto.back_hanja_list}</h1>
         </div>
     )
 }
