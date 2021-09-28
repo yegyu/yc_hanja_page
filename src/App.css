@@ -8,8 +8,8 @@
   display: table-cell;
   height: 100%;
   width: 10%;
-  border-right: 1px solid rgb(230, 230, 230);
-  position: absolute;
+  position: fixed;
+  font-size: larger;
 }
 
 .contents{
@@ -23,6 +23,7 @@ body{
 
 .hanja{
   font-family: "hanja0";
+  font-size: xx-large;
 }
 
 @font-face {
