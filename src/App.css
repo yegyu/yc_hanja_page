@@ -1,41 +1,72 @@
 .App {
   display: table;
-	width: 100%;
-  height: 100%;
+  /* grid-template-rows: auto auto; */
 }
 
-.sideBar{
+.sideBar {
   display: table-cell;
-  height: 100%;
+  overflow: scroll;
+  position:fixed;
+  /* flex: auto auto; */
+  height: 100vh;
+  float: right;
+  
   width: 10%;
-  position: fixed;
-  font-size: larger;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.sideBar::-webkit-scrollbar{
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  .App{
+    display: grid;
+  }
+  .sideBar {
+    
+    position: relative;
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sideBar-year{
+    padding-left: 1em;
+  }
+  .sideBar-month{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+  }
 }
 
-.contents{
-  display: table-cell;
-	width: 88%;
+.contents {
+  width: 80%;
+  height: 100%;
+  float: right;
 }
 
-body{
-  height: fit-content;
+body {
+  height: 100vh;
+  
 }
 
-.hanja{
-  font-family: "hanja0";
+.hanja {
+  font-family: 'hanja0';
   font-size: xx-large;
 }
 
 @font-face {
   font-family: 'hanja0';
-  src: url("view/font/cwTeXQKai-Medium.ttf");
+  src: url('view/font/cwTeXQKai-Medium.ttf');
 }
 @font-face {
   font-family: 'hanja1';
-  src: url("view/font/cwTeXQKaiZH-Medium.ttf");
+  src: url('view/font/cwTeXQKaiZH-Medium.ttf');
 }
 
 @font-face {
   font-family: 'hanja2';
-  src: url("view/font/cwTeXQMingZH-Medium.ttf");
+  src: url('view/font/cwTeXQMingZH-Medium.ttf');
 }

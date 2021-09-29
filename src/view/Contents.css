@@ -1,11 +1,16 @@
-.front{
-    border: 1px solid black;
+.front_container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 .y_word{
     /* padding-left: 100px; */
 }
-.y_where{
-    padding-left: 400px;
+.y_where, .questions{
+    line-height: 1.5em;
+}
+.error{
+    margin-left: 1em;
+    font-size: xx-large;
 }
 
 #main_title{

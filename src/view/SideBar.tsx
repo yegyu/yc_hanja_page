@@ -6,23 +6,23 @@ import ContentsContainer from "./Contents";
 
 type YearsProps = {
   years: Array<Number>;
-  stateHandler: (path:string) => void;
+  stateHandler: (path: string) => void;
 };
 
 type MonthProps = {
   thisYear: Number;
-  stateHandler: (path:string) => void;
+  stateHandler: (path: string) => void;
 }
 const MonthList = (monthProps: MonthProps) => {
   console.log("month list", monthProps);
   const list: Array<JSX.Element> = []
-  const onClick = (e:React.MouseEvent<HTMLElement>)=>{
-    const id =e.currentTarget.id
+  const onClick = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.id
     monthProps.stateHandler(id)
   }
   getMonth(monthProps.thisYear).map((month) => {
     list.push(
-      <p className="sideBar-month" id={`/${monthProps.thisYear}/${month}`} onClick={onClick}>
+      <p  className="sideBar-month" id={`/${monthProps.thisYear}/${month}`} onClick={onClick}>
         <Link to={`/${monthProps.thisYear}/${month}`}  >
 
           {month}
@@ -50,16 +50,15 @@ const SideBar = (yearsProps: YearsProps) => {
   return (
 
     <div className="sideBar">
-      <br>
-      </br>
-      <p className="sideBar-year">연도</p>
       {
         yearsProps.years.map((year) => {
           return (
-            <div>
+            <span>
               <p className="sideBar-year" id={year.toString()} onClick={handleClick}> {year}</p>
-              {year == selectedYear && <MonthList thisYear={year} stateHandler={yearsProps.stateHandler} />}
-            </div>
+              <div className="sideBar-month">
+                {year == selectedYear && <MonthList thisYear={year} stateHandler={yearsProps.stateHandler} />}
+              </div>
+            </span>
           );
         })
       }

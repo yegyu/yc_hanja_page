@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { ContentsDto, YearJson } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
 import "./Contents.css"
+import { error } from "console"
 type ContentsProps = {
     yearMonth: string
 }
@@ -19,69 +20,84 @@ function getPath(yearMonth: string): string {
 }
 
 var beforeYearMonth: string = "999999"
-export const Git = (contentsProps: ContentsProps) => {
+export const ContentsWrapper = (contentsProps: ContentsProps) => {
     console.log('git', contentsProps.yearMonth);
 
     const [monthFiles, setMonthFiles] = useState<YearJson | null>(null);
     const [monthJson, setMonthJson] = useState<ContentsDto[] | null>(null);
 
+    const [errorState, setError] = useState<Error | null>(null)
     const [year, month] = contentsProps.yearMonth
         .split('/')
         .filter((v) => v != "")
     console.log("year month", year, month);
 
-    const showError = ()=>(
-        <div>Not found</div>
-    )
     useEffect(() => {
-        if (year != beforeYearMonth.substring(1, 5)) {
-            console.log("useEffect")
-            const fetchGits = async () => {
-                try {
-                    const response: AxiosResponse<YearJson> = await axios(
-                        {
-                            method: "get",
-                            baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/year/",
-                            url: `${year}.json`,
-                        }
-                    );
-                    setMonthFiles(response.data);
-                    console.log(response);
-                } catch (error) {
-                    console.log('year.json',error);
-                    return ()=>{showError()}
-                }
-            }
-            fetchGits();
+        if (monthFiles === null || year != contentsProps.yearMonth.substring(1, 5)) {
+            console.log("useEffect");
+            // const fetchGits = 
+            (async () => {
+                await axios(
+                    {
+                        method: "get",
+                        baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/year/",
+                        url: `${year}.json`,
+                    }
+                ).then((res: AxiosResponse<YearJson>) => {
+                    const yaerJson: YearJson = res.data as YearJson
+                    setMonthFiles(yaerJson)
+                    console.log(yaerJson)
+                }).catch((error) => {
+                    console.error("1", error)
+                    setError(error)
+                })
+            }).call(this);
         }
-    })
-    useEffect(() => {
-        if (beforeYearMonth != contentsProps.yearMonth) {
-            const fetchContents = async () => {
+
+        if (contentsProps.yearMonth != beforeYearMonth) {
+            (async () => {
+                var path: string | undefined
                 try {
-                    const path = monthFiles?.month_files[Number.parseInt(month) - 1];
+                    path = monthFiles?.month_files[Number.parseInt(month) - 1];
+                } catch (error) {
+                    console.error("2", error)
+                } finally {
+                    console.log("path", path);
 
-
-                    const response: AxiosResponse<ContentsDto[]> = await axios(
-                        {
-                            method: "get",
-                            baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/",
-                            url: year + "/" + path,
-                        }
-                    );
-                    setMonthJson(response.data);
-                    console.log(response.data);
-
+                }
+                await axios(
+                    {
+                        method: "get",
+                        baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/",
+                        url: year + "/" + path,
+                    }
+                ).then((res: AxiosResponse<ContentsDto[]>) => {
+                    setMonthJson(res.data);
+                    setError(null);
+                    console.log(res.data);
+                }).catch((error) => {
+                    console.error("3", error);
+                    setError(error)
+                }).then(() => {
                     beforeYearMonth = contentsProps.yearMonth
-                } catch (error) {
-                    console.log('year-month',error);
-                }
-            }
-            fetchContents();
+                })
+            }).call(this);
         }
-    })
-    if (!monthJson) return <div>Not found</div>;
+    });
 
+
+    if (errorState) {
+        return (
+            <div className="contents" >
+                <div className="error">
+                    {year}년{month}월 정보가 없습니다.  <br />
+                    message : {errorState.message}
+                </div>
+            </div>
+        );
+    }
+
+    if (!monthJson) return <div className="contents">Not found</div>;
 
     return (
         <div className="contents">
@@ -93,24 +109,28 @@ export const Git = (contentsProps: ContentsProps) => {
                         questions={content.questions}
                         yojeol={content.yojeol}
                         back_hanja_list={content.back_hanja_list}
-                        week={content.week} primary_words={content.primary_words} />
+                        week={content.week} main_words={content.main_words} />
                 ))
             }
-            <br /><br /><br />
+            <br /><br />
         </div>
     );
 }
 
 const ContentView = (contentsDto: ContentsDto) => {
-    const frontList = contentsDto.front_hanja_list.map((front) =>
+    const frontList = (
+        <div className="front_container">
+            {contentsDto.front_hanja_list.map((front) =>
+                <div className="front">
+                    <span className="front_hanja">{front.hanja}</span>,{front.name}<br />
+                    {"획순:" + front.count},<span >{front.draw_list}</span>
+                </div>
 
-        <div className="front">
-            <span className="front_hanja">{front.hanja}</span>,{front.name}<br />
-            {"획순:" + front.count},<span >{front.draw_list}</span>
+            )}
         </div>
     );
     const questions = (
-        <div>
+        <div className="questions">
             <br /> <span>-문답-</span><br />
             {
                 contentsDto.questions.map((value, index) => (
@@ -135,10 +155,10 @@ const ContentView = (contentsDto: ContentsDto) => {
     const yojeol = (
         <div>
             <br /><div>-요절-</div>
-            다음주 오전요절 <div className="y_word">- {contentsDto.yojeol.morning.words}</div> <div className="y_where">({contentsDto.yojeol.morning.where}) </div>
-            유년반 오후요절 <div className="y_word">- {contentsDto.yojeol.child_afternoon.words}</div> <div className="y_where"> ({contentsDto.yojeol.child_afternoon.where}) </div>
-            중등반 오후요절 <div className="y_word">- {contentsDto.yojeol.youth_afternoon.words}</div> <div className="y_where"> ({contentsDto.yojeol.youth_afternoon.where})</div>
-            장년반 요절 <div className="y_word"><span >- {contentsDto.yojeol.adult.words}</span></div> <div className="y_where"> ({contentsDto.yojeol.adult.where})</div>
+            <br /> 다음주 오전요절 <div className="y_word">- {contentsDto.yojeol.morning.words}<span className="y_where">({contentsDto.yojeol.morning.where}) </span></div>
+            <br /> 유년반 오후요절 <div className="y_word">- {contentsDto.yojeol.child_afternoon.words}<span className="y_where"> ({contentsDto.yojeol.child_afternoon.where}) </span></div>
+            <br /> 중등반 오후요절 <div className="y_word">- {contentsDto.yojeol.youth_afternoon.words}<span className="y_where"> ({contentsDto.yojeol.youth_afternoon.where})</span></div>
+            <br /> 장년반 요절     <div className="y_word">- {contentsDto.yojeol.adult.words}<span className="y_where"> ({contentsDto.yojeol.adult.where})</span></div>
         </div>
     );
     // console.log(frontList);
@@ -146,13 +166,13 @@ const ContentView = (contentsDto: ContentsDto) => {
     return (
         <div className="hanja">
             <br />
-            <div id="week"># {contentsDto.week}주차 ({contentsDto.primary_words})</div><br />
+            <div id="week"># {contentsDto.week}주차 ({contentsDto.main_words})</div><br />
             {frontList}
             {questions}
             {yojeol}
-            
-            <hr/>
+
+            <hr />
         </div>
     )
 }
-export default Git
+export default ContentsWrapper

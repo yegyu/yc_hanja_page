@@ -41,7 +41,7 @@ export interface Yojeol {
 
 export interface ContentsDto {
     front_hanja_list: FrontHanjaList[];
-    primary_words:string;
+    main_words:string;
     questions: Question[];
     yojeol: Yojeol;
     back_hanja_list: string[];

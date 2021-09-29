@@ -70,13 +70,17 @@ export function getNextSundayAndWeekOrder(
   callback(first, order);
 }
 
-export const now = new Date();
-export const nowYear = now.getFullYear();
-console.log("now year",nowYear);
+export const nowAsNextWeek:Date = (() => {
+  var date = new Date();
+  date.setDate(date.getDate() + 7);
+  return date;
+}).call(this);
+export const nowYear = nowAsNextWeek.getFullYear();
+console.log("now year", nowYear);
 
 export function getYears(): Array<Number> {
-  let first = new Date();
   let list: Array<Number> = [];
+  let first = new Date();
   first.setFullYear(2018);
   while (true) {
     const compareYear = first.getFullYear();
@@ -95,7 +99,7 @@ export function getMonth(year: Number): Array<Number> {
       list[index] = index + 1;
     }
   } else {
-    for (let index = 0; index < now.getMonth() + 1; index++) {
+    for (let index = 0; index < nowAsNextWeek.getMonth() + 1; index++) {
       list[index] = index + 1;
     }
   }
