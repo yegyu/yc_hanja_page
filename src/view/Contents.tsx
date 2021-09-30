@@ -5,8 +5,10 @@ import { ContentsDto, YearJson } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
 import "./Contents.css"
 import { error } from "console"
+import { throws } from "assert"
 type ContentsProps = {
-    yearMonth: string
+    yearMonth: string;
+    handleContentDto: (contentDto: ContentsDto) => void
 }
 function getPath(yearMonth: string): string {
     const pathLilst = yearMonth.split("/").filter((value) => value != "")
@@ -18,13 +20,14 @@ function getPath(yearMonth: string): string {
     //2020/04 -> 2004
     return year + month
 }
+const defaultString = "999999"
 
-var beforeYearMonth: string = "999999"
 export const ContentsWrapper = (contentsProps: ContentsProps) => {
     console.log('git', contentsProps.yearMonth);
 
     const [monthFiles, setMonthFiles] = useState<YearJson | null>(null);
     const [monthJson, setMonthJson] = useState<ContentsDto[] | null>(null);
+    const [beforeYearMonth,setBeforeYearMonth] = useState<string>(defaultString);
 
     const [errorState, setError] = useState<Error | null>(null)
     const [year, month] = contentsProps.yearMonth
@@ -45,14 +48,17 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                     }
                 ).then((res: AxiosResponse<YearJson>) => {
                     const yaerJson: YearJson = res.data as YearJson
-                    setMonthFiles(yaerJson)
-                    console.log(yaerJson)
+                    if (yaerJson != null && yaerJson != undefined)
+                        setMonthFiles(yaerJson)
+                    console.log('yearJson', yaerJson)
                 }).catch((error) => {
                     console.error("1", error)
                     setError(error)
                 })
             }).call(this);
         }
+
+
 
         if (contentsProps.yearMonth != beforeYearMonth) {
             (async () => {
@@ -61,9 +67,6 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                     path = monthFiles?.month_files[Number.parseInt(month) - 1];
                 } catch (error) {
                     console.error("2", error)
-                } finally {
-                    console.log("path", path);
-
                 }
                 await axios(
                     {
@@ -74,12 +77,12 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                 ).then((res: AxiosResponse<ContentsDto[]>) => {
                     setMonthJson(res.data);
                     setError(null);
-                    console.log(res.data);
+                    console.log('res', res.data);
                 }).catch((error) => {
                     console.error("3", error);
                     setError(error)
                 }).then(() => {
-                    beforeYearMonth = contentsProps.yearMonth
+                    setBeforeYearMonth(contentsProps.yearMonth)
                 })
             }).call(this);
         }
@@ -97,19 +100,23 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
         );
     }
 
+    console.log('monthJson', monthJson);
+
     if (!monthJson) return <div className="contents">Not found</div>;
 
     return (
         <div className="contents">
             <div className="hanja" id="main_title">{year}년 {month}월</div>
             {
-                monthJson.map((content) => (
+                monthJson.map((content, index) => (
                     <ContentView
                         front_hanja_list={content.front_hanja_list}
                         questions={content.questions}
                         yojeol={content.yojeol}
                         back_hanja_list={content.back_hanja_list}
-                        week={content.week} main_words={content.main_words} />
+                        week={content.week} main_words={content.main_words}
+                        handleContentDto={contentsProps.handleContentDto}
+                    />
                 ))
             }
             <br /><br />
@@ -125,7 +132,6 @@ const ContentView = (contentsDto: ContentsDto) => {
                     <span className="front_hanja">{front.hanja}</span>,{front.name}<br />
                     {"획순:" + front.count},<span >{front.draw_list}</span>
                 </div>
-
             )}
         </div>
     );
@@ -138,7 +144,6 @@ const ContentView = (contentsDto: ContentsDto) => {
                         <span>{index + 1}. {value.q}</span> <br />
                         <span> - {value.a}</span>
                     </div>
-
                 ))
             }
         </div>
@@ -170,6 +175,8 @@ const ContentView = (contentsDto: ContentsDto) => {
             {frontList}
             {questions}
             {yojeol}
+            <br />
+            <button onClick={() => contentsDto.handleContentDto.call(this, contentsDto)}>{`${contentsDto.week}주차 프린트 화면`}</button>
 
             <hr />
         </div>

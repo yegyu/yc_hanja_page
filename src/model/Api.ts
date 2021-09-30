@@ -46,6 +46,7 @@ export interface ContentsDto {
     yojeol: Yojeol;
     back_hanja_list: string[];
     week:number
+    handleContentDto: (contentsDto: ContentsDto) => void
 }
 
 export class HTTPError extends Error {

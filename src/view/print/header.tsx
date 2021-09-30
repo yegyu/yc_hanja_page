@@ -4,7 +4,7 @@
 
 import React, { Props, PropsWithRef, ReactInstance } from "react";
 import { getEnabledCategories } from "trace_events"
-import { FrontHeaderTable } from "../model/table";
+import { FrontHeaderTable } from "../../model/table";
 
 //     const row0_col0 = document.createElement("div");
 //     row0_col0.id = "no";
