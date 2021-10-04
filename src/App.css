@@ -1,5 +1,6 @@
 .App {
   display: table;
+  width: 100vw;
   /* grid-template-rows: auto auto; */
 }
 
@@ -42,8 +43,8 @@
 }
 
 .contents {
-  width: 80%;
-  height: 100%;
+  width: 90%;
+  /* height: 100%; */
   float: right;
 }
 

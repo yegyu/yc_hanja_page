@@ -1,11 +1,12 @@
 import "./Contents.css"
 import axios, { AxiosResponse } from 'axios'
-import React, { useEffect, useState } from "react"
+import React, { DOMElement, ReactNode, useEffect, useState } from "react"
 import { ContentsDto, YearJson } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
 import "./Contents.css"
 import { error } from "console"
 import { throws } from "assert"
+import { BrowserRouter, Link } from "react-router-dom"
 type ContentsProps = {
     yearMonth: string;
     handleContentDto: (contentDto: ContentsDto) => void
@@ -27,7 +28,7 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
 
     const [monthFiles, setMonthFiles] = useState<YearJson | null>(null);
     const [monthJson, setMonthJson] = useState<ContentsDto[] | null>(null);
-    const [beforeYearMonth,setBeforeYearMonth] = useState<string>(defaultString);
+    const [beforeYearMonth, setBeforeYearMonth] = useState<string>(defaultString);
 
     const [errorState, setError] = useState<Error | null>(null)
     const [year, month] = contentsProps.yearMonth
@@ -59,7 +60,6 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
         }
 
 
-
         if (contentsProps.yearMonth != beforeYearMonth) {
             (async () => {
                 var path: string | undefined
@@ -88,7 +88,6 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
         }
     });
 
-
     if (errorState) {
         return (
             <div className="contents" >
@@ -109,14 +108,24 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
             <div className="hanja" id="main_title">{year}년 {month}월</div>
             {
                 monthJson.map((content, index) => (
-                    <ContentView
-                        front_hanja_list={content.front_hanja_list}
-                        questions={content.questions}
-                        yojeol={content.yojeol}
-                        back_hanja_list={content.back_hanja_list}
-                        week={content.week} main_words={content.main_words}
-                        handleContentDto={contentsProps.handleContentDto}
-                    />
+                    <p>
+                        <ContentView
+                            front_hanja_list={content.front_hanja_list}
+                            questions={content.questions}
+                            yojeol={content.yojeol}
+                            back_hanja_list={content.back_hanja_list}
+                            week={content.week} main_words={content.main_words}
+                            handleContentDto={contentsProps.handleContentDto}
+                        />
+                        {
+                            // 리액트 링크(URL) 훅 만들기
+                            <BrowserRouter>
+                                <Link to={`/${year}/${month}/${content.week}`}>
+                                    <button onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
+                                </Link>
+                            </BrowserRouter>
+                        }
+                    </p>
                 ))
             }
             <br /><br />
@@ -175,10 +184,7 @@ const ContentView = (contentsDto: ContentsDto) => {
             {frontList}
             {questions}
             {yojeol}
-            <br />
-            <button onClick={() => contentsDto.handleContentDto.call(this, contentsDto)}>{`${contentsDto.week}주차 프린트 화면`}</button>
 
-            <hr />
         </div>
     )
 }

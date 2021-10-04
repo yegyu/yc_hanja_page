@@ -22,12 +22,11 @@ const MonthList = (monthProps: MonthProps) => {
   }
   getMonth(monthProps.thisYear).map((month) => {
     list.push(
-      <p  className="sideBar-month" id={`/${monthProps.thisYear}/${month}`} onClick={onClick}>
-        <Link to={`/${monthProps.thisYear}/${month}`}  >
-
+      <Link to={`/${monthProps.thisYear}/${month}`}  >
+        <p className="sideBar-month" id={`/${monthProps.thisYear}/${month}`} onClick={onClick}>
           {month}
-        </Link>
-      </p>
+        </p>
+      </Link>
     )
   })
   return (

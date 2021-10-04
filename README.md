@@ -1,3 +1,11 @@
+### Get Hanja-strok links script (https://hanja.dict.naver.com/) from console
+```javascript
+const strokList = document.getElementsByClassName("stroke_item")
+for(var i = 0 ; i < strokList.length; i++){
+    console.log(strokList[i].firstElementChild.firstElementChild.src);
+}
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
