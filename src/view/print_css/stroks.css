@@ -1,0 +1,110 @@
+#stroke-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    '. .'
+    '. .';
+}
+
+.stroke0,
+.stroke1,
+.stroke2,
+.stroke3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    'grid-hanja0 grid-hanja0 grid-sub0 grid-sub0 grid-s0-0 grid-s0-1 grid-s0-2 grid-s0-3 grid-s0-4'
+    'grid-hanja0 grid-hanja0 grid-sub0 grid-sub0 grid-s0-0 grid-s0-1 grid-s0-2 grid-s0-3 grid-s0-4'
+    'grid-hanja0 grid-hanja0 grid-sub0 grid-sub0 grid-s0-0 grid-s0-1 grid-s0-2 grid-s0-3 grid-s0-4'
+    'grid-hanja0 grid-hanja0 grid-s0-5 grid-s0-6 grid-s0-7 grid-s0-8 grid-s0-9 grid-s0-10 grid-s0-11'
+    'grid-name0 grid-name0 grid-s0-5 grid-s0-6 grid-s0-7 grid-s0-8 grid-s0-9 grid-s0-10 grid-s0-11'
+    'grid-name0 grid-name0 grid-s0-5 grid-s0-6 grid-s0-7 grid-s0-8 grid-s0-9 grid-s0-10 grid-s0-11';
+
+  border-left: var(--border);
+  border-top: var(--border);
+  height: 140px;
+}
+.stroke1{
+    border-left: 0px;
+}
+.stroke2{
+    border-top: 0px;
+}
+.stroke3{
+    border-top: 0px;
+    border-left: 0px;
+}
+.stroke0 > div,
+.stroke1 > div,
+.stroke2> div,
+.stroke3 > div {
+  border-bottom: var(--border);
+  border-right: var(--border);
+}
+
+.grid-hanja0 {
+  grid-area: grid-hanja0;
+}
+
+.grid-name0 {
+  grid-area: grid-name0;
+}
+
+.grid-sub0 {
+  grid-area: grid-sub0;
+}
+
+.grid-s0-0 {
+  grid-area: grid-s0-0;
+}
+
+.grid-s0-1 {
+  grid-area: grid-s0-1;
+}
+
+.grid-s0-2 {
+  grid-area: grid-s0-2;
+}
+
+.grid-s0-3 {
+  grid-area: grid-s0-3;
+}
+
+.grid-s0-4 {
+  grid-area: grid-s0-4;
+}
+
+.grid-s0-5 {
+  grid-area: grid-s0-5;
+}
+
+.grid-s0-6 {
+  grid-area: grid-s0-6;
+}
+
+.grid-s0-7 {
+  grid-area: grid-s0-7;
+}
+
+.grid-s0-8 {
+  grid-area: grid-s0-8;
+}
+
+.grid-s0-9 {
+  grid-area: grid-s0-9;
+}
+
+.grid-s0-10 {
+  grid-area: grid-s0-10;
+}
+
+.grid-s0-11 {
+  grid-area: grid-s0-11;
+}
