@@ -1,23 +1,19 @@
 // import { throws } from "assert";
-import { bracketRegex, roomList, weeklyList } from "./const";
+import { bracketRegex,  weeklyList } from "./const";
 import { Room } from "./enum";
 
 export class FrontHeaderTable {
   no: number;
-  room: Room;
   date: Date;
   weekly: number;
   ban: string;
-  constructor(no: number, room: Room, date: Date, weekly: number, ban: string) {
+  dateString: string ;
+  constructor(no: number,  date: Date, weekly: number, ban: string) {
     this.no = no;
-    this.room = room;
     this.date = date;
     this.weekly = weekly;
     this.ban = ban;
-  }
-
-  dateString(): string {
-    return (
+    this.dateString =
       this.date.getFullYear() +
       " 년 " +
       (this.date.getMonth() + 1) +
@@ -25,7 +21,7 @@ export class FrontHeaderTable {
       this.date.getDate() +
       " 일 " +
       weeklyList[this.weekly - 1]
-    );
+    
   }
 }
 

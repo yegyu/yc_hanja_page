@@ -3,13 +3,18 @@ import axios, { AxiosResponse } from 'axios'
 import React, { DOMElement, ReactNode, useEffect, useState } from "react"
 import { ContentsDto, YearJson } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
-import "./Contents.css"
+
 import { error } from "console"
 import { throws } from "assert"
 import { BrowserRouter, Link } from "react-router-dom"
 type ContentsProps = {
+    contentsList: ContentsDto[] | null;
     yearMonth: string;
-    handleContentDto: (contentDto: ContentsDto) => void
+    handleContentDto: (contentDto: ContentsDto) => void;
+    notFound: string | null;
+    year: string;
+    month: string;
+    week: string;
 }
 function getPath(yearMonth: string): string {
     const pathLilst = yearMonth.split("/").filter((value) => value != "")
@@ -25,112 +30,48 @@ const defaultString = "999999"
 
 export const ContentsWrapper = (contentsProps: ContentsProps) => {
     console.log('git', contentsProps.yearMonth);
-
-    const [monthFiles, setMonthFiles] = useState<YearJson | null>(null);
-    const [monthJson, setMonthJson] = useState<ContentsDto[] | null>(null);
-    const [beforeYearMonth, setBeforeYearMonth] = useState<string>(defaultString);
-
-    const [errorState, setError] = useState<Error | null>(null)
-    const [year, month] = contentsProps.yearMonth
-        .split('/')
-        .filter((v) => v != "")
-    console.log("year month", year, month);
-
-    useEffect(() => {
-        if (monthFiles === null || year != contentsProps.yearMonth.substring(1, 5)) {
-            console.log("useEffect");
-            // const fetchGits = 
-            (async () => {
-                await axios(
-                    {
-                        method: "get",
-                        baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/year/",
-                        url: `${year}.json`,
-                    }
-                ).then((res: AxiosResponse<YearJson>) => {
-                    const yaerJson: YearJson = res.data as YearJson
-                    if (yaerJson != null && yaerJson != undefined)
-                        setMonthFiles(yaerJson)
-                    console.log('yearJson', yaerJson)
-                }).catch((error) => {
-                    console.error("1", error)
-                    setError(error)
-                })
-            }).call(this);
-        }
-
-
-        if (contentsProps.yearMonth != beforeYearMonth) {
-            (async () => {
-                var path: string | undefined
-                try {
-                    path = monthFiles?.month_files[Number.parseInt(month) - 1];
-                } catch (error) {
-                    console.error("2", error)
-                }
-                await axios(
-                    {
-                        method: "get",
-                        baseURL: "https://raw.githubusercontent.com/yegyu/yc_hanja/main/",
-                        url: year + "/" + path,
-                    }
-                ).then((res: AxiosResponse<ContentsDto[]>) => {
-                    setMonthJson(res.data);
-                    setError(null);
-                    console.log('res', res.data);
-                }).catch((error) => {
-                    console.error("3", error);
-                    setError(error)
-                }).then(() => {
-                    setBeforeYearMonth(contentsProps.yearMonth)
-                })
-            }).call(this);
-        }
-    });
-
-    if (errorState) {
+    if (contentsProps.notFound || !contentsProps.contentsList) {
         return (
             <div className="contents" >
                 <div className="error">
-                    {year}년{month}월 정보가 없습니다.  <br />
-                    message : {errorState.message}
+                    {contentsProps.notFound}
                 </div>
             </div>
         );
+    } else {
+
+
+
+        return (
+            <div className="contents">
+                <div className="hanja" id="main_title">{contentsProps.year}년 {contentsProps.month}월</div>
+                {
+                    contentsProps.contentsList!.map((content, index) => (
+                        <div>
+                            <ContentView
+                                front_hanja_list={content.front_hanja_list}
+                                questions={content.questions}
+                                yojeol={content.yojeol}
+                                back_hanja_list={content.back_hanja_list}
+                                week={content.week} main_words={content.main_words}
+                                handleContentDto={contentsProps.handleContentDto}
+                                month={parseInt(contentsProps.month)}
+                                yaer={parseInt(contentsProps.year)} />
+                            {
+                                // 리액트 링크(URL) 훅 만들기
+                                <BrowserRouter>
+                                    <Link to={`/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
+                                        <button onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
+                                    </Link>
+                                </BrowserRouter>
+                            }
+                        </div>
+                    ))
+                }
+                <br /><br />
+            </div>
+        );
     }
-
-    console.log('monthJson', monthJson);
-
-    if (!monthJson) return <div className="contents">Not found</div>;
-
-    return (
-        <div className="contents">
-            <div className="hanja" id="main_title">{year}년 {month}월</div>
-            {
-                monthJson.map((content, index) => (
-                    <p>
-                        <ContentView
-                            front_hanja_list={content.front_hanja_list}
-                            questions={content.questions}
-                            yojeol={content.yojeol}
-                            back_hanja_list={content.back_hanja_list}
-                            week={content.week} main_words={content.main_words}
-                            handleContentDto={contentsProps.handleContentDto}
-                        />
-                        {
-                            // 리액트 링크(URL) 훅 만들기
-                            <BrowserRouter>
-                                <Link to={`/${year}/${month}/${content.week}`}>
-                                    <button onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
-                                </Link>
-                            </BrowserRouter>
-                        }
-                    </p>
-                ))
-            }
-            <br /><br />
-        </div>
-    );
 }
 
 const ContentView = (contentsDto: ContentsDto) => {

@@ -5,6 +5,7 @@
 import React, { Props, PropsWithRef, ReactInstance } from "react";
 import { getEnabledCategories } from "trace_events"
 import { FrontHeaderTable } from "../../model/table";
+import "../Contents.css"
 
 //     const row0_col0 = document.createElement("div");
 //     row0_col0.id = "no";
@@ -20,40 +21,19 @@ import { FrontHeaderTable } from "../../model/table";
 //     container.appendChild(row0_col1);
 //     container.appendChild(row0_col2);
 
-    
+
 // }
 
-export function MakeLine(props: FrontHeaderTable){
-    
-    return(
-            <div>
-                {props.dateString()}
-            </div>
+export const HeaderView = (header: FrontHeaderTable) => {
+
+    return (
+        <div className="top hanja">
+            <div className="grid-000 top-item">第 {header.no} 號</div>
+            <div className="grid-001 top-item">聖 經 漢 字 工 夫</div>
+            <div className="grid-002 top-item">{header.ban} 班</div>
+            <div className="grid-010 top-item">{header.dateString}</div>
+            <div className="grid-011 top-item">漢字 姓名</div>
+            <div className="grid-012 top-item"> </div>
+        </div>
     )
-}
-
-export function makeHeaderTable(htmlElement:HTMLElement){
-    const container = document.createElement("div");
-    container.className = "container"
-
-    const row0_col0 = document.createElement("span");
-    row0_col0.id = "no";
-    row0_col0.className  = "itme";
-    row0_col0.textContent = "호수" ;
-    const row0_col1 = document.createElement("span");
-    row0_col1.id = "title";
-    row0_col1.className = "item";
-    row0_col1.textContent = "제목"
-    const row0_col2 = document.createElement("span"); 
-    row0_col2.id = "ban";
-    row0_col2.className = "item";
-    row0_col2.textContent = "반"
-
-    container.appendChild(row0_col0);
-    container.appendChild(row0_col1);
-    container.appendChild(row0_col2);
-
-    document.getElementById("elementary_front")?.append(container);
-
-    
 }
