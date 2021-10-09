@@ -9,7 +9,7 @@ td,
 th {
   padding: 3px;
   width: 30px;
-  height: 25px;
+  height: 20px;
 }
 th {
   background: #f0e6cc;
@@ -34,9 +34,24 @@ html {
   /* ... the rest of the rules ... */
 }
 
-#a4 {
-  size: A4;
-  margin: 0;
+img{
+  max-width: 100%;
+  max-height: 100%;
+  height: var(--height-write-hanja);
+}
+
+
+.a4 {
+  size: A4 portrait;
+  /* margin: 0; */
+  background: white;
+  width: 210mm; /*793px*/
+  height: 297mm;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-sizing: border-box;
+  page-break-after: always;
 }
 #word-table {
   height: 5%;
@@ -52,23 +67,35 @@ html {
 #stroke-table tr {
   height: 60px;
 }
-#bottom-table {
+.bottom-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: var(--margin-top);
 }
-#bottom-table tr {
+.bottom-table tr {
   height: var(--height-write-hanja);
 }
-#bottom-table tr:nth-of-type(2) {
+.bottom-table tr:nth-of-type(2) {
   height: var(--height-write-hanja-name);
 }
-#bottom-table tr:nth-of-type(4) {
+.bottom-table tr:nth-of-type(4) {
   height: var(--height-write-hanja-name);
 }
-#bottom-left {
+.bottom-left {
   margin-right: 1.5px;
 }
-#bottom-right {
+.bottom-right {
   margin-left: 1.5px;
+}
+
+.hanja-big{
+  position: relative;
+}
+.hanja-big td{
+  font-size: 70px;
+  font-family: var(--font-family);
+  text-align: center;
+  position: relative;
+  height: var(--height-write-hanja);
+  line-height: var(--height-write-hanja);
 }

@@ -6,23 +6,18 @@ import React, { Props, PropsWithRef, ReactInstance } from "react";
 import { getEnabledCategories } from "trace_events"
 import { FrontHeaderTable } from "../../model/table";
 import "../Contents.css"
-
-//     const row0_col0 = document.createElement("div");
-//     row0_col0.id = "no";
-//     row0_col0.className  = "itme";
-//     const row0_col1 = document.createElement("div");
-//     row0_col1.id = "title";
-//     row0_col1.className = "item";
-//     const row0_col2 = document.createElement("div"); 
-//     row0_col2.id = "ban";
-//     row0_col2.className = "item";
-
-//     container.appendChild(row0_col0);
-//     container.appendChild(row0_col1);
-//     container.appendChild(row0_col2);
-
-
-// }
+import "../print_css/back.css"
+export const BackHeaderView = () => {
+    return (
+        <div className="back-header">
+            <div className="grid-back-center">1</div>
+            <div className="grid-back-top-right">1</div>
+            <div className="grid-back-bottom-right">1</div>
+            <div className="grid-back-bottom-left">1</div>
+            <div className="grid-back-top-left">1</div>
+        </div>
+    )
+}
 
 export const HeaderView = (header: FrontHeaderTable) => {
 
