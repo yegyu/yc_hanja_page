@@ -124,15 +124,14 @@ function App(linkState: AppProps) {
       view = (
         <div>
           <PrintView front_hanja_list={content.front_hanja_list}
-            main_words={content.main_words}
-            questions={content.questions}
-            yojeol={content.yojeol}
-            back_hanja_list={content.back_hanja_list}
-            week={content.week}
-            handleContentDto={content.handleContentDto}
-            month={parseInt(month)}
-            yaer={parseInt(year)}
-          />
+          main_words={content.main_words}
+          questions={content.questions}
+          yojeol={content.yojeol}
+          back_hanja_list={content.back_hanja_list}
+          week={content.week}
+          handleContentDto={content.handleContentDto}
+          month={parseInt(month)}
+          yaer={parseInt(year)} voca_list={content.voca_list}          />
         </div>
       )
       return view;

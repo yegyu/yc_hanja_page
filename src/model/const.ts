@@ -43,7 +43,7 @@ export const getDate = (year: number, month: number, week: number): Date => {
     const d = new Date();
     d.setFullYear(year);
     d.setMonth(month - 1);
-    d.setDate(1);
+    d.setDate(0);
 
     d.setHours(0, 0, 0, 0);
     while (true) {

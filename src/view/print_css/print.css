@@ -22,8 +22,8 @@ th {
 }
 body,
 html {
-  width: 210mm; /*793px*/
-  height: 297mm;
+  width: 210mm !important; /*793px*/
+  height: 297mm !important;
 }
 @media print {
   html,

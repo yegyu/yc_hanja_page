@@ -7,10 +7,12 @@
     --height-write-hanja: 85px;
     --height-write-hanja-name:10px;
 
+    --font-small-size:large;
     --font-norm-size:x-large;
     --font-title-size:xxx-large;
 
 
     --font-family:"hanja0";
 
+    --back-margin-top:10px;
 }

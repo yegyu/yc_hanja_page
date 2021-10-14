@@ -15,14 +15,25 @@
 .kinder-header >div{
     border-left: var(--border);
     border-bottom: var(--border);
+    display: grid;
+    align-items: center;
+    text-align: center !important;
+    font-size: large;
 }
 
+.kinder-date{
+  font-size: var(--font-small-size);
+  margin: 7px;
+}
 .grid-kinder-center {
   grid-area: grid-kinder-center;
+  font-size: xx-large !important;
+  padding: 20px ;
 }
 
 .grid-kinder-name-title {
   grid-area: grid-kinder-name-title;
+  
 }
 
 .grid-kinder-name0 {

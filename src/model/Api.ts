@@ -2,9 +2,9 @@
 export interface FrontHanjaList {
     hanja: string;
     name: string;
-    count: number;
-    draw_list: any[];
-    sub_hanja: string;
+    count: string;
+    draw_list: string[];
+    sub: string;
 }
 
 export interface Question {
@@ -40,6 +40,7 @@ export interface Yojeol {
 }
 
 export interface ContentsDto {
+    voca_list:Voca[];
     front_hanja_list: FrontHanjaList[];
     main_words:string;
     questions: Question[];
@@ -49,6 +50,21 @@ export interface ContentsDto {
     month:number;
     yaer:number;
     handleContentDto: (contentsDto: ContentsDto) => void;
+}
+export interface BackContents{
+    main_words:string;
+    questions: Question[];
+    yojeol: Yojeol;
+    back_hanja_list: string[];
+    week:number;
+    month:number;
+    yaer:number;
+    index:number;
+    order:number
+}
+export interface Voca{
+    hanja:string;
+    mean:string;
 }
 
 export class HTTPError extends Error {

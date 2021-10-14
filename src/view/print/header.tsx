@@ -7,14 +7,21 @@ import { getEnabledCategories } from "trace_events"
 import { FrontHeaderTable } from "../../model/table";
 import "../Contents.css"
 import "../print_css/back.css"
-export const BackHeaderView = () => {
+
+export interface BackHeader{
+    no:number
+    main_word:string
+    ban:string
+}
+const centerText = "聖 經 工 課 問 答"
+export const BackHeaderView = (back:BackHeader) => {
     return (
         <div className="back-header">
-            <div className="grid-back-center">1</div>
-            <div className="grid-back-top-right">1</div>
-            <div className="grid-back-bottom-right">1</div>
-            <div className="grid-back-bottom-left">1</div>
-            <div className="grid-back-top-left">1</div>
+            <div className="grid-back-center">{centerText}</div>
+            <div className="grid-back-top-left">{back.ban}반 제 {back.no} 호</div>
+            <div className="grid-back-bottom-right"></div>
+            <div className="grid-back-bottom-left">{back.main_word}</div>
+            <div className="grid-back-top-right">確   認</div>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 // import { throws } from "assert";
-import { bracketRegex,  weeklyList } from "./const";
+import { bracketRegex, weeklyList } from "./const";
 import { Room } from "./enum";
 
 export class FrontHeaderTable {
@@ -7,8 +7,8 @@ export class FrontHeaderTable {
   date: Date;
   weekly: number;
   ban: string;
-  dateString: string ;
-  constructor(no: number,  date: Date, weekly: number, ban: string) {
+  dateString: string;
+  constructor(no: number, date: Date, weekly: number, ban: string) {
     this.no = no;
     this.date = date;
     this.weekly = weekly;
@@ -20,8 +20,8 @@ export class FrontHeaderTable {
       " 월 " +
       this.date.getDate() +
       " 일 " +
-      weeklyList[this.weekly - 1]
-    
+      weeklyList[this.weekly]
+
   }
 }
 
@@ -77,7 +77,7 @@ export class Question {
     var q = "";
     try {
       q = this.questionList[index];
-      q = q.replace(bracketRegex,"");
+      q = q.replace(bracketRegex, "");
     } catch (error) {
       console.log(error);
     } finally {

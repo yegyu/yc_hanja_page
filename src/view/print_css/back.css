@@ -1,38 +1,80 @@
 .back-header {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-auto-columns: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row dense;
-    grid-template-areas:
-      "grid-back-top-left grid-back-center grid-back-top-right"
-      "grid-back-bottom-left grid-back-center grid-back-bottom-right";
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    "grid-back-top-left grid-back-center grid-back-top-right"
+    "grid-back-bottom-left grid-back-center grid-back-bottom-right";
 
-      border-right: var(--border);
-      border-top: var(--border);
-      height: calc(var(--height)*2);
-  }
-  .back-header > div{
-    border-left: var(--border);
-    border-bottom: var(--border);
-  }
+  border-right: var(--border);
+  border-top: var(--border);
+  height: calc(var(--height) * 1.7);
+}
+.back-header > div {
+  border-left: var(--border);
+  border-bottom: var(--border);
+  font-size: large;
+  font-family: 'hanja0';
+  text-align: center !important;
+  justify-items: center;
+
+  align-items: center;
+  display: grid;
+}
+
+.grid-back-center {
+  grid-area: grid-back-center;
+  font-size: xxx-large !important;
   
-  .grid-back-center { grid-area: grid-back-center; }
+}
+
+.grid-back-top-right {
+  grid-area: grid-back-top-right;
+}
+
+.grid-back-bottom-right {
+  grid-area: grid-back-bottom-right;
+}
+
+.grid-back-bottom-left {
+  grid-area: grid-back-bottom-left;
+}
+
+.grid-back-top-left {
+  grid-area: grid-back-top-left;
+}
+
+.q1, .q2, .q3{
+  height: 110px;
   
-  .grid-back-top-right { grid-area: grid-back-top-right; }
-  
-  .grid-back-bottom-right { grid-area: grid-back-bottom-right; }
-  
-  .grid-back-bottom-left { grid-area: grid-back-bottom-left; }
-  
-  .grid-back-top-left { grid-area: grid-back-top-left; }
-  
- .back-content > table tr:nth-child(1),
- .back-content > table tr:nth-child(2),
- .back-content > table tr:nth-child(3){
-      height: 120px;
-  }
-  .back-content > table tr:nth-child(4){
-        height: 170px;
-  }
+}
+.youth-y1, .youth-y2 {
+  height: 190px;
+}
+.child-y1, .adult-y1{
+  height: 390px;
+}
+.adult-y1{
+
+}
+.back-bottom {
+  /* position: relative; */
+  /* height: 260px; */
+  /* height: 20%; */
+  /* flex: 1; */
+  height: 280px;
+}
+
+
+.back-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.back-content > div {
+  border: var(--border);
+  /* flex: 1; */
+}

@@ -39,9 +39,6 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
             </div>
         );
     } else {
-
-
-
         return (
             <div className="contents">
                 <div className="hanja" id="main_title">{contentsProps.year}년 {contentsProps.month}월</div>
@@ -56,7 +53,7 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                                 week={content.week} main_words={content.main_words}
                                 handleContentDto={contentsProps.handleContentDto}
                                 month={parseInt(contentsProps.month)}
-                                yaer={parseInt(contentsProps.year)} />
+                                yaer={parseInt(contentsProps.year)} voca_list={content.voca_list} />
                             {
                                 // 리액트 링크(URL) 훅 만들기
                                 <BrowserRouter>
@@ -80,7 +77,7 @@ const ContentView = (contentsDto: ContentsDto) => {
             {contentsDto.front_hanja_list.map((front) =>
                 <div className="front">
                     <span className="front_hanja">{front.hanja}</span>,{front.name}<br />
-                    {"획순:" + front.count},<span >{front.draw_list}</span>
+                    {/* {"획순:" + front.count},<span >{front.draw_list}</span> */}
                 </div>
             )}
         </div>

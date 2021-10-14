@@ -10,17 +10,7 @@ import '../print_css/word.css'
 import { BackView } from "./BackView";
 import { HeaderView } from "./header";
 import { KinderPrintView } from "./KinderPrintView";
-const srcList = [
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-01.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-02.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-03.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-04.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-05.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-06.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-07.svg",
-    "https://ssl.pstatic.net/dicimg/cckodict/aniSVG/5900/59D3-08.svg"
-]
-const EachViewList = (weeks: number): number[] => [
+const EachOrderList = (weeks: number): number[] => [
     (Room.KINDERGARTEN + weeks),
     (Room.ELEMENTARY + weeks),
     (Room.TEENAGER + weeks),
@@ -32,20 +22,22 @@ export const PrintView = (contentDto: ContentsDto) => {
     console.log('target', targetDate.toISOString());
 
     const diffWeek = getDiffWeek(targetDate);
-    const numList = EachViewList(diffWeek)
+    const numList = EachOrderList(diffWeek)
     const headerList: FrontHeaderTable[] = numList.map<FrontHeaderTable>((no, index) => {
         return new FrontHeaderTable(no, targetDate, getWeekly(targetDate), banList[index])
     })
+    console.log("headerList", headerList);
+
     const headerViews: JSX.Element[] = headerList.map<JSX.Element>((frontTable) => {
         return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
     })
 
     const wordViews: JSX.Element = (
         <div className="word hanja">
-            <div className="grid-100 word-item">姓名</div>
-            <div className="grid-101 word-item">우리나라 만세</div>
-            <div className="grid-102 word-item">姓名</div>
-            <div className="grid-103 word-item">하나로 마트로 가서 가자</div>
+            <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
+            <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
+            <div className="grid-102 word-item">{contentDto.voca_list[1].hanja}</div>
+            <div className="grid-103 word-item">{contentDto.voca_list[1].mean}</div>
         </div>
     );
 
@@ -55,23 +47,25 @@ export const PrintView = (contentDto: ContentsDto) => {
         <div className="stroke-table">
             {
                 indexList.map((_, index) => {
+                    const el = contentDto.front_hanja_list[index]
+                    const drawCnt = el.draw_list.length
                     return (
                         <div className={"stroke" + index}>
-                            <div className="grid-hanja0">女</div>
-                            <div className="grid-name0"><div className="hanja-name-stroke">{index % 2 == 0 && "여자 여"} 여길 련</div></div>
-                            <div className="grid-sub0">女(여자여)<br />12획</div>
-                            <div className="grid-s0-0"><img src={srcList[0]} /></div>
-                            <div className="grid-s0-1"><img src={srcList[1]} /></div>
-                            <div className="grid-s0-2"><img src={srcList[2]} /></div>
-                            <div className="grid-s0-3"><img src={srcList[3]} /></div>
-                            <div className="grid-s0-4"><img src={srcList[4]} /></div>
-                            <div className="grid-s0-5"><img src={srcList[5]} /></div>
-                            <div className="grid-s0-6"><img src={srcList[6]} /></div>
-                            <div className="grid-s0-7"><img src={srcList[7]} /></div>
-                            <div className="grid-s0-8"><img src={srcList[0]} /></div>
-                            <div className="grid-s0-9"><img src={srcList[0]} /></div>
-                            <div className="grid-s0-10"><img src={srcList[0]} /></div>
-                            <div className="grid-s0-11"><img src={srcList[0]} /></div>
+                            <div className="grid-hanja0">{el.hanja}</div>
+                            <div className="grid-name0"><div className="hanja-name-stroke">{el.name}</div></div>
+                            <div className="grid-sub0">{el.sub}</div>
+                            <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
+                            <div className="grid-s0-1">{drawCnt > 1 && <img src={el.draw_list[1]} />}</div>
+                            <div className="grid-s0-2">{drawCnt > 2 && <img src={el.draw_list[2]} />}</div>
+                            <div className="grid-s0-3">{drawCnt > 3 && <img src={el.draw_list[3]} />}</div>
+                            <div className="grid-s0-4">{drawCnt > 4 && <img src={el.draw_list[4]} />}</div>
+                            <div className="grid-s0-5">{drawCnt > 5 && <img src={el.draw_list[5]} />}</div>
+                            <div className="grid-s0-6">{drawCnt > 6 && <img src={el.draw_list[6]} />}</div>
+                            <div className="grid-s0-7">{drawCnt > 7 && <img src={el.draw_list[7]} />}</div>
+                            <div className="grid-s0-8">{drawCnt > 8 && <img src={el.draw_list[8]} />}</div>
+                            <div className="grid-s0-9">{drawCnt > 9 && <img src={el.draw_list[9]} />}</div>
+                            <div className="grid-s0-10">{drawCnt > 10 && <img src={el.draw_list[10]} />}</div>
+                            <div className="grid-s0-11">{drawCnt > 11 && <img src={el.draw_list[11]} />}</div>
                         </div>
                     )
                 })
@@ -95,10 +89,10 @@ export const PrintView = (contentDto: ContentsDto) => {
                                 {
 
                                 }
-                                <td>{v == 0 && "韓"}</td>
-                                <td>{v == 0 && "韓"}</td>
-                                <td>{v == 0 && "韓"}</td>
-                                <td>{v == 0 && "韓"}</td>
+                                <td>{v == 0 && contentDto.front_hanja_list[0].hanja}</td>
+                                <td>{v == 0 && contentDto.front_hanja_list[1].hanja}</td>
+                                <td>{v == 0 && contentDto.front_hanja_list[2].hanja}</td>
+                                <td>{v == 0 && contentDto.front_hanja_list[3].hanja}</td>
                             </tr>
                         )
                     })
@@ -121,8 +115,6 @@ export const PrintView = (contentDto: ContentsDto) => {
         </div>
     )
 
-
-
     return (
         <div>
 
@@ -132,10 +124,16 @@ export const PrintView = (contentDto: ContentsDto) => {
                     view =
                         <div>
                             <div className="a4">
-                                <KinderPrintView />
+                                <KinderPrintView
+                                    where={contentDto.yojeol.morning.where}
+                                    yojeol={contentDto.yojeol.morning.words}
+                                    order={headerList[0].no} dataString={headerList[0].dateString} />
                             </div>
                             <div className="a4">
-                                <KinderPrintView />
+                                <KinderPrintView
+                                    where={contentDto.yojeol.morning.where}
+                                    yojeol={contentDto.yojeol.morning.words}
+                                    order={headerList[0].no} dataString={headerList[0].dateString} />
                             </div>
                         </div>
                 } else {
@@ -148,7 +146,13 @@ export const PrintView = (contentDto: ContentsDto) => {
                                 {wrtieView}
                             </div>
                             <div className="a4">
-                                <BackView/>
+                                <BackView main_words={contentDto.main_words}
+                                    questions={contentDto.questions}
+                                    yojeol={contentDto.yojeol}
+                                    back_hanja_list={contentDto.back_hanja_list}
+                                    week={contentDto.week}
+                                    month={contentDto.month}
+                                    yaer={contentDto.yaer} index={index} order={numList[index]} />
                             </div>
                         </div>
                     )
@@ -159,221 +163,5 @@ export const PrintView = (contentDto: ContentsDto) => {
 
         </div>
     )
-    // const container = (
-    //     getFrontHeaderTableList().map((frontHeader,index) => {
-    //         <div className="a4">
-    //             <div className="top">
-    //                 <div className="grid-000">${contentDto.front_hanja_list[index]}</div>
-    //                 <div className="grid-001">1</div>
-    //                 <div className="grid-002">1</div>
-    //                 <div className="grid-010">1</div>
-    //                 <div className="grid-011">1</div>
-    //                 <div className="grid-012">1</div>
-    //             </div>
-    //             <div className="word">
-    //                 <div className="grid-100">1</div>
-    //                 <div className="grid-101">1</div>
-    //                 <div className="grid-102">1</div>
-    //                 <div className="grid-103">1</div>
-    //             </div>
-    //             <div id="stroke-table">
-    //                 <div className="stroke0">
-    //                     <div className="grid-hanja0">1</div>
-    //                     <div className="grid-name0">1</div>
-    //                     <div className="grid-sub0">1</div>
-    //                     <div className="grid-s0-0">1</div>
-    //                     <div className="grid-s0-1">1</div>
-    //                     <div className="grid-s0-2">1</div>
-    //                     <div className="grid-s0-3">1</div>
-    //                     <div className="grid-s0-4">1</div>
-    //                     <div className="grid-s0-5">1</div>
-    //                     <div className="grid-s0-6">1</div>
-    //                     <div className="grid-s0-7">1</div>
-    //                     <div className="grid-s0-8">1</div>
-    //                     <div className="grid-s0-9">1</div>
-    //                     <div className="grid-s0-10">1</div>
-    //                     <div className="grid-s0-11">1</div>
-    //                 </div>
-    //                 <div className="stroke1">
-    //                     <div className="grid-hanja0">1</div>
-    //                     <div className="grid-name0">1</div>
-    //                     <div className="grid-sub0">1</div>
-    //                     <div className="grid-s0-0">1</div>
-    //                     <div className="grid-s0-1">1</div>
-    //                     <div className="grid-s0-2">1</div>
-    //                     <div className="grid-s0-3">1</div>
-    //                     <div className="grid-s0-4">1</div>
-    //                     <div className="grid-s0-5">1</div>
-    //                     <div className="grid-s0-6">1</div>
-    //                     <div className="grid-s0-7">1</div>
-    //                     <div className="grid-s0-8">1</div>
-    //                     <div className="grid-s0-9">1</div>
-    //                     <div className="grid-s0-10">1</div>
-    //                     <div className="grid-s0-11">1</div>
-    //                 </div>
-    //                 <div className="stroke2">
-    //                     <div className="grid-hanja0">1</div>
-    //                     <div className="grid-name0">1</div>
-    //                     <div className="grid-sub0">1</div>
-    //                     <div className="grid-s0-0">1</div>
-    //                     <div className="grid-s0-1">1</div>
-    //                     <div className="grid-s0-2">1</div>
-    //                     <div className="grid-s0-3">1</div>
-    //                     <div className="grid-s0-4">1</div>
-    //                     <div className="grid-s0-5">1</div>
-    //                     <div className="grid-s0-6">1</div>
-    //                     <div className="grid-s0-7">1</div>
-    //                     <div className="grid-s0-8">1</div>
-    //                     <div className="grid-s0-9">1</div>
-    //                     <div className="grid-s0-10">1</div>
-    //                     <div className="grid-s0-11">1</div>
-    //                 </div>
-    //                 <div className="stroke3">
-    //                     <div className="grid-hanja0">1</div>
-    //                     <div className="grid-name0">1</div>
-    //                     <div className="grid-sub0">1</div>
-    //                     <div className="grid-s0-0">1</div>
-    //                     <div className="grid-s0-1">1</div>
-    //                     <div className="grid-s0-2">1</div>
-    //                     <div className="grid-s0-3">1</div>
-    //                     <div className="grid-s0-4">1</div>
-    //                     <div className="grid-s0-5">1</div>
-    //                     <div className="grid-s0-6">1</div>
-    //                     <div className="grid-s0-7">1</div>
-    //                     <div className="grid-s0-8">1</div>
-    //                     <div className="grid-s0-9">1</div>
-    //                     <div className="grid-s0-10">1</div>
-    //                     <div className="grid-s0-11">1</div>
-    //                 </div>
-    //             </div>
-
-    //             <div id="bottom-table">
-    //                 <span id="bottom-left">
-    //                     <table>
-    //                         <tbody>
-    //                             <tr className="hanja-big">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr className="hanja-name">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr className="hanja-name">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                         </tbody>
-    //                     </table>
-    //                 </span>
-    //                 <span id="bottom-right">
-    //                     <table>
-    //                         <tbody>
-    //                             <tr className="hanja-big">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr className="hanja-name">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr className="hanja-name">
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                             <tr>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                                 <td></td>
-    //                             </tr>
-    //                         </tbody>
-    //                     </table>
-    //                 </span>
-    //             </div>
-    //         </div>
-    //     })
-
-    // )
-
-    // return  <div></div>;
 
 }
