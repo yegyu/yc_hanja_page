@@ -30,6 +30,7 @@ export interface YouthAfternoon {
 export interface Adult {
     words: string;
     where: string;
+    answer: string
 }
 
 export interface Yojeol {
@@ -40,31 +41,32 @@ export interface Yojeol {
 }
 
 export interface ContentsDto {
-    voca_list:Voca[];
+    voca_list: Voca[];
     front_hanja_list: FrontHanjaList[];
-    main_words:string;
+    main_words: string;
     questions: Question[];
     yojeol: Yojeol;
     back_hanja_list: string[];
-    week:number;
-    month:number;
-    yaer:number;
+    week: number;
+    month: number;
+    yaer: number;
     handleContentDto: (contentsDto: ContentsDto) => void;
 }
-export interface BackContents{
-    main_words:string;
+export interface BackContents {
+    main_words: string;
     questions: Question[];
     yojeol: Yojeol;
+    //0: where, 
     back_hanja_list: string[];
-    week:number;
-    month:number;
-    yaer:number;
-    index:number;
-    order:number
+    week: number;
+    month: number;
+    yaer: number;
+    index: number;
+    order: number
 }
-export interface Voca{
-    hanja:string;
-    mean:string;
+export interface Voca {
+    hanja: string;
+    mean: string;
 }
 
 export class HTTPError extends Error {
@@ -76,6 +78,6 @@ export class HTTPError extends Error {
     }
 }
 
-export  interface YearJson {
-    month_files:string[]
+export interface YearJson {
+    month_files: string[]
 }

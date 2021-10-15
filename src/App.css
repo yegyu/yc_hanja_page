@@ -53,7 +53,10 @@ body {
   width: 100%;
   
 }
-
+@page {
+    size: 21cm 29.7cm;
+     /* change the margins as you want them to be. */
+}
 .hanja {
   font-family: 'hanja0';
 }

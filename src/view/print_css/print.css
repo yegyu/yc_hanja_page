@@ -20,16 +20,19 @@ th {
 .odd {
   background: #fefcf9;
 }
-body,
+/* body,
 html {
-  width: 210mm !important; /*793px*/
-  height: 297mm !important;
-}
+  width: 210mm ; 
+  height: 297mm ;
+} */
 @media print {
   html,
   body {
     width: 210mm; /*793px*/
     height: 297mm;
+    margin: 0px;
+  }
+  .a4{
   }
   /* ... the rest of the rules ... */
 }
@@ -52,6 +55,7 @@ img{
   margin-bottom: 0.5cm;
   box-sizing: border-box;
   page-break-after: always;
+  
 }
 #word-table {
   height: 5%;
@@ -66,6 +70,11 @@ img{
 }
 #stroke-table tr {
   height: 60px;
+}
+.grid-sub0{
+  font-size: large !important; 
+  display: grid;
+  align-items: center;
 }
 .bottom-table {
   display: grid;
@@ -98,4 +107,15 @@ img{
   position: relative;
   height: var(--height-write-hanja);
   line-height: var(--height-write-hanja);
+}
+.grid-hanja0{
+  position: relative;
+  display: grid;
+  align-items: center;
+}
+.total-stroke{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: large !important;
 }

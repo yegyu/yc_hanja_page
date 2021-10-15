@@ -24,6 +24,13 @@
 .kinder-date{
   font-size: var(--font-small-size);
   margin: 7px;
+  display: flex;
+}
+.kinder-date > div:nth-child(2){
+  margin-left: 20px;
+}
+.kinder-date > div:nth-child(3){
+  margin-left: 40px;
 }
 .grid-kinder-center {
   grid-area: grid-kinder-center;

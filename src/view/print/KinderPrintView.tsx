@@ -42,13 +42,14 @@ export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
     }
     // console.log(arr2D);
 
+
     return (
         <div className="hanja">
 
             <KinderHeaderView where={kinderPrintDto.where} yojeol={kinderPrintDto.yojeol} order={kinderPrintDto.order} dataString={kinderPrintDto.dataString} />
 
             <div className="kinder-date">
-                제 {kinderPrintDto.order}호  주후 {kinderPrintDto.dataString}    염천교회 주일학교 유치부
+                <div>제 {kinderPrintDto.order}호 </div><div> 주후 {kinderPrintDto.dataString} </div><div className="kinder-date-end">  염천교회 주일학교 유치부</div>
             </div>
             <table className="kinder-table">
                 {

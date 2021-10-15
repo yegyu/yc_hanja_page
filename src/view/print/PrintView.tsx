@@ -51,9 +51,9 @@ export const PrintView = (contentDto: ContentsDto) => {
                     const drawCnt = el.draw_list.length
                     return (
                         <div className={"stroke" + index}>
-                            <div className="grid-hanja0">{el.hanja}</div>
+                            <div className="grid-hanja0">{el.hanja}<span className="total-stroke">{drawCnt}획</span></div>
                             <div className="grid-name0"><div className="hanja-name-stroke">{el.name}</div></div>
-                            <div className="grid-sub0">{el.sub}</div>
+                            <div className="grid-sub0">{el.sub} </div>
                             <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
                             <div className="grid-s0-1">{drawCnt > 1 && <img src={el.draw_list[1]} />}</div>
                             <div className="grid-s0-2">{drawCnt > 2 && <img src={el.draw_list[2]} />}</div>

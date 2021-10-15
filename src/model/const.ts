@@ -11,7 +11,6 @@ export const banList = [
     "중등",
     "장년"
 ]
-
 export const weeklyList = ["첫째 주일", "둘째 주일", "셋째 주일", "넷째 주일", "다섯째 주일"];
 
 

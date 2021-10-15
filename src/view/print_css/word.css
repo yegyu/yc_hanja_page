@@ -24,12 +24,15 @@
 
 
   font-size: var(--font-small-size);
-    
 }
 
 .word-item {
   text-align: center;
   letter-spacing: 2px;
+}
+.word div:nth-child(1), .word div:nth-child(3){
+
+  font-size: xx-large;
 }
 
 .grid-100 {

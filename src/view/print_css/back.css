@@ -57,15 +57,71 @@
 .child-y1, .adult-y1{
   height: 390px;
 }
+.line1{
+  /* height: 40px;
+  margin-top: 20px; */
+  
+}
+.line{
+  /* display: grid;
+  grid-template-columns: 1fr 50fr ;
+  grid-template-rows: 1fr;
+  text-align: start;
+  align-items: center; */
+color: transparent;
+
+}
+li{
+  border-bottom: var(--border);
+  margin-right: 10px;
+}
+ol{
+  margin-left: 10px;
+  padding: 0px;
+}
+.line1{
+  margin-top: 10px;
+}
+.line3, .line2{
+  margin-top: 70px !important;
+}
+
+
+.back-yojeol-where{
+  text-align: end;
+  margin-right: 20px;
+}
+.back-yojeol-where::before, .yojeol-title::before,.back-bottom-title::before{
+  content: "ᐸ" ;
+  color: black;
+}
+.back-yojeol-where::after, .yojeol-title::after, .back-bottom-title::after{
+  content: 'ᐳ';
+  color: black;
+  ;
+}
+.back-yojeol-where{
+  margin-right: 20px;
+  margin-top: 20px;
+  font-size: var(--font-norm-size);
+}
 .adult-y1{
 
+  height: 300px;
 }
 .back-bottom {
   /* position: relative; */
   /* height: 260px; */
   /* height: 20%; */
   /* flex: 1; */
-  height: 280px;
+  height: 270px;
+  padding-top: 20px;
+  font-size: var(--font-norm-size);
+}
+
+.back-bottom1{
+
+  height: 250px !important;
 }
 
 
@@ -75,6 +131,62 @@
   height: 100%;
 }
 .back-content > div {
-  border: var(--border);
+  border-top: var(--border);
+  border-left: var(--border);
+  border-right: var(--border);
   /* flex: 1; */
+}
+
+.back-text{
+  margin: 20px;
+  font-size: var(--font-norm-size);
+}
+.yojeol-title{
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: var(--font-norm-size);
+}
+.text{
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.back-adult-where{
+  margin-top: 50px;
+}
+.back-bottom{
+  display: flex;
+  flex-direction: column;
+  border-bottom: var(--border);
+}
+.back-bottom-hanja-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows:  1fr 1fr 1fr 1fr;
+  margin-top: 10px;
+}
+.back-bottom-hanja-container > div{
+  display: grid;
+  font-size: xx-large;
+  text-align: center;
+  margin-top: 10px;
+  
+}
+.back-bottom-where{
+  width: max-content;
+  text-align: end;
+  flex-grow: 1;
+}
+.back-title-container{
+  display: grid;
+  grid-template-columns: 1fr 0.5fr  1fr 1fr;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.q-answer::after{
+  content: "-";
+}
+.q-answer{
+  margin-top: 20px;
+  margin-left: 20px;
 }

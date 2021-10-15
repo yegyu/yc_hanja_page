@@ -5,8 +5,8 @@
   gap: 0px 0px;
 
   grid-template-areas:
-    "grid-000 grid-000 grid-001 grid-001 grid-001 grid-001 grid-001 grid-002  grid-002"
-    "grid-010 grid-010 grid-010 grid-010 grid-010 grid-010 grid-011 grid-012 grid-012";
+    "grid-000 grid-000 grid-001 grid-001 grid-001 grid-001 grid-001 grid-002 grid-002 grid-002 grid-002 "
+    "grid-010 grid-010 grid-010 grid-010 grid-010 grid-010 grid-011 grid-012 grid-012 grid-012 grid-012 ";
 }
 .top {
   border-top: var(--border);
