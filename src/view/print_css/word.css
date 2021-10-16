@@ -13,7 +13,21 @@
   border-left: var(--border);
   
 }
-.word > div{
+.word1{
+  display: grid;
+  grid-template-columns: 1fr 3.5fr ;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas: 
+  'grid-100 grid-101';
+  
+  margin-top: var(--margin-top);
+  height: var(--height);  
+  border-bottom: var(--border);
+  border-left: var(--border);
+}
+.word > div, .word1 > div{
   border-right: var(--border);
   border-top: var(--border);
   word-break: break-all;
@@ -30,10 +44,11 @@
   text-align: center;
   letter-spacing: 2px;
 }
-.word div:nth-child(1), .word div:nth-child(3){
+.word div:nth-child(1), .word div:nth-child(3), .word1 div:nth-child(1){
 
   font-size: xx-large;
 }
+
 
 .grid-100 {
   grid-area: grid-100;

@@ -79,12 +79,18 @@
 
 }
 .grid-sub0 {
+  display: grid;
   grid-area: grid-sub0;
   font-family: var(--font-family);
-  font-size: large;
+  font-size: initial;
   text-align: center;
-  line-height: 1.5;
-  padding-top: 10px;
+  align-items: center;
+  position: relative;
+}
+.sub-title{
+  position:absolute;
+  top: 0;
+  font-size: small;
 }
 
 .grid-s0-0 {

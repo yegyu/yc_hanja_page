@@ -10,6 +10,21 @@ import '../print_css/word.css'
 import { BackView } from "./BackView";
 import { HeaderView } from "./header";
 import { KinderPrintView } from "./KinderPrintView";
+export const makeNextLineBracket = (str: string): JSX.Element => {
+    const list = str.split("(").map((el, i) => {
+        if (i == 1) return "(" + el
+        return el
+    })
+
+    return (
+        <>
+            {list[0]}<br />
+            {list[1]}
+        </>
+    )
+
+
+}
 const EachOrderList = (weeks: number): number[] => [
     (Room.KINDERGARTEN + weeks),
     (Room.ELEMENTARY + weeks),
@@ -32,42 +47,78 @@ export const PrintView = (contentDto: ContentsDto) => {
         return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
     })
 
-    const wordViews: JSX.Element = (
-        <div className="word hanja">
-            <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
-            <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
-            <div className="grid-102 word-item">{contentDto.voca_list[1].hanja}</div>
-            <div className="grid-103 word-item">{contentDto.voca_list[1].mean}</div>
-        </div>
-    );
+    const WordViews = () => {
+        // var vocaCnt = 1
+        const vocaCnt = contentDto.voca_list.length
+        var view
+        if (vocaCnt == 2) {
+            view = (<div className="word hanja">
+                <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
+                <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
+                <div className="grid-102 word-item">{contentDto.voca_list[1].hanja}</div>
+                <div className="grid-103 word-item">{contentDto.voca_list[1].mean}</div>
+            </div>)
+        } else {
+            view = (<div className="word1 hanja">
+                <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
+                <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
+            </div>)
+        }
+        return view
+    };
 
     const indexList = [0, 1, 2, 3]
 
     const strokeView: JSX.Element = (
         <div className="stroke-table">
             {
+
                 indexList.map((_, index) => {
-                    const el = contentDto.front_hanja_list[index]
-                    const drawCnt = el.draw_list.length
-                    return (
-                        <div className={"stroke" + index}>
-                            <div className="grid-hanja0">{el.hanja}<span className="total-stroke">{drawCnt}획</span></div>
-                            <div className="grid-name0"><div className="hanja-name-stroke">{el.name}</div></div>
-                            <div className="grid-sub0">{el.sub} </div>
-                            <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
-                            <div className="grid-s0-1">{drawCnt > 1 && <img src={el.draw_list[1]} />}</div>
-                            <div className="grid-s0-2">{drawCnt > 2 && <img src={el.draw_list[2]} />}</div>
-                            <div className="grid-s0-3">{drawCnt > 3 && <img src={el.draw_list[3]} />}</div>
-                            <div className="grid-s0-4">{drawCnt > 4 && <img src={el.draw_list[4]} />}</div>
-                            <div className="grid-s0-5">{drawCnt > 5 && <img src={el.draw_list[5]} />}</div>
-                            <div className="grid-s0-6">{drawCnt > 6 && <img src={el.draw_list[6]} />}</div>
-                            <div className="grid-s0-7">{drawCnt > 7 && <img src={el.draw_list[7]} />}</div>
-                            <div className="grid-s0-8">{drawCnt > 8 && <img src={el.draw_list[8]} />}</div>
-                            <div className="grid-s0-9">{drawCnt > 9 && <img src={el.draw_list[9]} />}</div>
-                            <div className="grid-s0-10">{drawCnt > 10 && <img src={el.draw_list[10]} />}</div>
-                            <div className="grid-s0-11">{drawCnt > 11 && <img src={el.draw_list[11]} />}</div>
-                        </div>
-                    )
+                    const hanjaCount = contentDto.front_hanja_list.length
+                    if (hanjaCount > index) {
+                        const el = contentDto.front_hanja_list[index]
+                        const drawCnt = el.draw_list.length
+                        return (
+                            <div className={"stroke" + index}>
+                                <div className="grid-hanja0">{el.hanja}<span className="total-stroke">{drawCnt}획</span></div>
+                                <div className="grid-name0"><div className="hanja-name-stroke">{el.name}</div></div>
+                                <div className="grid-sub0"><span className="sub-title">부수</span>{makeNextLineBracket(el.sub)} </div>
+                                <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
+                                <div className="grid-s0-1">{drawCnt > 1 && <img src={el.draw_list[1]} />}</div>
+                                <div className="grid-s0-2">{drawCnt > 2 && <img src={el.draw_list[2]} />}</div>
+                                <div className="grid-s0-3">{drawCnt > 3 && <img src={el.draw_list[3]} />}</div>
+                                <div className="grid-s0-4">{drawCnt > 4 && <img src={el.draw_list[4]} />}</div>
+                                <div className="grid-s0-5">{drawCnt > 5 && <img src={el.draw_list[5]} />}</div>
+                                <div className="grid-s0-6">{drawCnt > 6 && <img src={el.draw_list[6]} />}</div>
+                                <div className="grid-s0-7">{drawCnt > 7 && <img src={el.draw_list[7]} />}</div>
+                                <div className="grid-s0-8">{drawCnt > 8 && <img src={el.draw_list[8]} />}</div>
+                                <div className="grid-s0-9">{drawCnt > 9 && <img src={el.draw_list[9]} />}</div>
+                                <div className="grid-s0-10">{drawCnt > 10 && <img src={el.draw_list[10]} />}</div>
+                                <div className="grid-s0-11">{drawCnt > 11 && <img src={el.draw_list[11]} />}</div>
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div className={"stroke" + index}>
+                                <div className="grid-hanja0"></div>
+                                <div className="grid-name0"></div>
+                                <div className="grid-sub0"> </div>
+                                <div className="grid-s0-0"></div>
+                                <div className="grid-s0-1"></div>
+                                <div className="grid-s0-2"></div>
+                                <div className="grid-s0-3"></div>
+                                <div className="grid-s0-4"></div>
+                                <div className="grid-s0-5"></div>
+                                <div className="grid-s0-6"></div>
+                                <div className="grid-s0-7"></div>
+                                <div className="grid-s0-8"></div>
+                                <div className="grid-s0-9"></div>
+                                <div className="grid-s0-10"></div>
+                                <div className="grid-s0-11"></div>
+                            </div>
+                        )
+                    }
+
                 })
             }
 
@@ -82,17 +133,14 @@ export const PrintView = (contentDto: ContentsDto) => {
             <tbody>
                 {
                     nineList.map((v, i) => {
+                        // const hanjaCnt =2
+                        const hanjaCnt = contentDto.front_hanja_list.length
                         return (
-                            <tr className={
-                                v == 0 && "hanja-big" || v == 1 && "hanja-name" || v == 3 && "hanja-name" || ""
-                            } >
-                                {
-
-                                }
+                            <tr className={v == 0 && "hanja-big" || v == 1 && "hanja-name" || v == 3 && "hanja-name" || ""} >
                                 <td>{v == 0 && contentDto.front_hanja_list[0].hanja}</td>
                                 <td>{v == 0 && contentDto.front_hanja_list[1].hanja}</td>
-                                <td>{v == 0 && contentDto.front_hanja_list[2].hanja}</td>
-                                <td>{v == 0 && contentDto.front_hanja_list[3].hanja}</td>
+                                <td>{v == 0 && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
+                                <td>{v == 0 && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
                             </tr>
                         )
                     })
@@ -127,13 +175,13 @@ export const PrintView = (contentDto: ContentsDto) => {
                                 <KinderPrintView
                                     where={contentDto.yojeol.morning.where}
                                     yojeol={contentDto.yojeol.morning.words}
-                                    order={headerList[0].no} dataString={headerList[0].dateString} />
+                                    order={headerList[0].no} dataString={headerList[0].dateString} isFront={true} />
                             </div>
                             <div className="a4">
                                 <KinderPrintView
                                     where={contentDto.yojeol.morning.where}
                                     yojeol={contentDto.yojeol.morning.words}
-                                    order={headerList[0].no} dataString={headerList[0].dateString} />
+                                    order={headerList[0].no} dataString={headerList[0].dateString} isFront={false} />
                             </div>
                         </div>
                 } else {
@@ -141,7 +189,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                         <div>
                             <div className="a4">
                                 {headerViews[index]}
-                                {wordViews}
+                                <WordViews />
                                 {strokeView}
                                 {wrtieView}
                             </div>

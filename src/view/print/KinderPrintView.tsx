@@ -21,21 +21,36 @@ type KinderPrintDto = {
     yojeol: string;
     order: number;
     dataString: string;
+    isFront:boolean
 
 }
 export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
-    const row = 15
+    var row = 15
     const col = 11
-    const yojeol = kinderPrintDto.yojeol;
+
+    // const yojeol = kinderPrintDto.yojeol;
+    const yojeol = " "+ kinderPrintDto.yojeol
+    const yojeolCnt = (yojeol.length)
+    // 가로 11줄, 세로 15줄
+    const yojeolLineCnt = Math.ceil(yojeolCnt / 11)
+    if(yojeolLineCnt > 7){
+        row = 16
+    }
+    const lineDiff = Math.round(15 / yojeolLineCnt)
+
     var arr2D: Array<Array<JSX.Element>> = new Array(15)
     var cnt = 0;
     for (let i = 0; i < row; i++) {
         arr2D[i] = [];
+        var isInsertLine: boolean
+        if (i % lineDiff == 0) isInsertLine = true
+        else isInsertLine = false
+
         for (let j = 0; j < col; j++) {
-            try {
-                arr2D[i][j] = <th>{yojeol[cnt]}</th>
+            if (yojeolCnt > cnt && isInsertLine) {
+                arr2D[i][j] = <th className="one">{yojeol[cnt]}</th>
                 cnt++;
-            } catch (error) {
+            } else {
                 arr2D[i][j] = <th></th>
             }
         }
@@ -46,7 +61,7 @@ export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
     return (
         <div className="hanja">
 
-            <KinderHeaderView where={kinderPrintDto.where} yojeol={kinderPrintDto.yojeol} order={kinderPrintDto.order} dataString={kinderPrintDto.dataString} />
+            <KinderHeaderView where={kinderPrintDto.where} yojeol={kinderPrintDto.yojeol} order={kinderPrintDto.order} dataString={kinderPrintDto.dataString} isFront={false} />
 
             <div className="kinder-date">
                 <div>제 {kinderPrintDto.order}호 </div><div> 주후 {kinderPrintDto.dataString} </div><div className="kinder-date-end">  염천교회 주일학교 유치부</div>

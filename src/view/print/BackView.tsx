@@ -29,7 +29,7 @@ export const BackView = (backContents: BackContents) => {
     const BottomHanjasView = (back: Back) => (
         <div className={'back-box back-bottom ' + "back-bottom" + back.index}  >
             <div className="back-title-container">
-                <div className="back-bottom-title">성경한자 배우기</div>
+                <div className="back-bottom-title">聖經漢字 배우기</div>
                 <div/><div/>
                 <div className="back-bottom-where">({backContents.back_hanja_list[0]})</div>
             </div>

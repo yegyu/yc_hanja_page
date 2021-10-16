@@ -1,6 +1,7 @@
 import {  getStartDate } from '../model/const';
 import { Room } from '../model/enum';
 import { FrontHeaderTable } from '../model/table';
+
 export function toAdultText(text: string): string {
   var cnt = 0
   var str = text

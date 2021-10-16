@@ -35,7 +35,6 @@
 .grid-kinder-center {
   grid-area: grid-kinder-center;
   font-size: xx-large !important;
-  padding: 20px ;
 }
 
 .grid-kinder-name-title {
@@ -45,14 +44,17 @@
 
 .grid-kinder-name0 {
   grid-area: grid-kinder-name0;
+  height: 55px;
 }
 
 .grid-kinder-name1 {
   grid-area: grid-kinder-name1;
+  height: 55px;
 }
 
 .grid-kinder-name2 {
   grid-area: grid-kinder-name2;
+  height: 55px;
 }
 
 .grid-kinder-word-title {
@@ -70,7 +72,8 @@
 }
 
 th {
-    height: 59px;
+    height: 55px;
     width: 55px;
-    font-size: small;
+    font-size: xx-large;
+    font-weight: lighter  !important;
 }
