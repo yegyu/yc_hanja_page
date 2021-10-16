@@ -136,11 +136,11 @@ export const PrintView = (contentDto: ContentsDto) => {
                         // const hanjaCnt =2
                         const hanjaCnt = contentDto.front_hanja_list.length
                         return (
-                            <tr className={v == 0 && "hanja-big" || v == 1 && "hanja-name" || v == 3 && "hanja-name" || ""} >
-                                <td>{v == 0 && contentDto.front_hanja_list[0].hanja}</td>
-                                <td>{v == 0 && contentDto.front_hanja_list[1].hanja}</td>
-                                <td>{v == 0 && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
-                                <td>{v == 0 && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
+                            <tr className={v == 0 && "hanja-big" || v == 1 && "hanja-name" || v == 2 && "hanja-big follow" || v == 3 && "hanja-name" || ""} >
+                                <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[0].hanja}</td>
+                                <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[1].hanja}</td>
+                                <td>{(v == 0 || v ==2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
+                                <td>{(v == 0 || v ==2) && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
                             </tr>
                         )
                     })

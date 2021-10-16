@@ -41,10 +41,21 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
     } else {
         return (
             <div className="contents">
-                <div className="hanja" id="main_title">{contentsProps.year}년 {contentsProps.month}월</div>
+                <div className="hanja" id="main_title">
+                    {contentsProps.year}년 {contentsProps.month}월
+                    
+                </div>
                 {
                     contentsProps.contentsList!.map((content, index) => (
                         <div>
+                             {
+                                // 리액트 링크(URL) 훅 만들기
+                                <BrowserRouter>
+                                    <Link className="print-link" to={`/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
+                                        <button className="print-button" onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
+                                    </Link>
+                                </BrowserRouter>
+                            }
                             <ContentView
                                 front_hanja_list={content.front_hanja_list}
                                 questions={content.questions}
@@ -54,14 +65,7 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                                 handleContentDto={contentsProps.handleContentDto}
                                 month={parseInt(contentsProps.month)}
                                 yaer={parseInt(contentsProps.year)} voca_list={content.voca_list} />
-                            {
-                                // 리액트 링크(URL) 훅 만들기
-                                <BrowserRouter>
-                                    <Link to={`/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
-                                        <button onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
-                                    </Link>
-                                </BrowserRouter>
-                            }
+                           
                         </div>
                     ))
                 }
@@ -76,7 +80,8 @@ const ContentView = (contentsDto: ContentsDto) => {
         <div className="front_container">
             {contentsDto.front_hanja_list.map((front) =>
                 <div className="front">
-                    <span className="front_hanja">{front.hanja}</span>,{front.name}<br />
+                    <div className="front_hanja">{front.hanja}</div>
+                    <div>{front.name}</div>
                     {/* {"획순:" + front.count},<span >{front.draw_list}</span> */}
                 </div>
             )}
@@ -105,7 +110,7 @@ const ContentView = (contentsDto: ContentsDto) => {
         </div>
     );
     const yojeol = (
-        <div>
+        <div className="yojeol-container">
             <br /><div>-요절-</div>
             <br /> 다음주 오전요절 <div className="y_word">- {contentsDto.yojeol.morning.words}<span className="y_where">({contentsDto.yojeol.morning.where}) </span></div>
             <br /> 유년반 오후요절 <div className="y_word">- {contentsDto.yojeol.child_afternoon.words}<span className="y_where"> ({contentsDto.yojeol.child_afternoon.where}) </span></div>

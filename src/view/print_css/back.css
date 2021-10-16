@@ -91,14 +91,22 @@ ol{
   text-align: end;
   margin-right: 20px;
 }
-.back-yojeol-where::before, .yojeol-title::before,.back-bottom-title::before{
-  content: "ᐸ" ;
+.back-yojeol-where::before{
+  content: "(" ;
   color: black;
 }
-.back-yojeol-where::after, .yojeol-title::after, .back-bottom-title::after{
-  content: 'ᐳ';
+.back-yojeol-where::after{
+  content: ')';
   color: black;
   ;
+}
+.yojeol-title::before,.back-bottom-title::before{
+  content: "<" ;
+  color: black;
+}
+.yojeol-title::after, .back-bottom-title::after{
+  content: ">" ;
+  color: black;
 }
 .back-yojeol-where{
   margin-right: 20px;

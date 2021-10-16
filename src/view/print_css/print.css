@@ -26,6 +26,11 @@ html {
     margin: 0px;
   }
   .a4{
+    /* color: blue !important; */
+  }
+   td, th{
+    /* border: blue solid 1px; */
+
   }
   /* ... the rest of the rules ... */
 }
@@ -86,8 +91,11 @@ img{
   margin-left: 1.5px;
 }
 
-.hanja-big{
+/* .hanja-big{
   position: relative;
+} */
+.follow{
+  color: rgba(0, 0, 0, 0.103) !important;
 }
 .hanja-big td{
   font-size: 70px;
@@ -96,7 +104,7 @@ img{
   position: relative;
   height: var(--height-write-hanja);
   width: var(--height-write-hanja);
-  line-height: var(--height-write-hanja);
+  /* line-height: var(--height-write-hanja); */
 }
 .grid-hanja0{
   position: relative;

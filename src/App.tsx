@@ -21,6 +21,9 @@ function App(linkState: AppProps) {
   const frontList = getYears();
   console.log(frontList);
 
+  useEffect(()=>{
+    updateUrlPath(linkState.link)
+  },[linkState.link])
   let view: JSX.Element;
   var notFountMessage: string | null = null;
 
@@ -29,33 +32,33 @@ function App(linkState: AppProps) {
   const [notFound, updateNotFound] = useState<string | null>(null);
   const [printViewContentsDto, setPrintViewContentDto] = useState<ContentsDto | null>(null);
   const [tempPrintViewContentsDto, setTempPrintViewContentDto] = useState<ContentsDto | null>(null);
-
+  
   const [tempYearMonth, updateTempYearMonth] = useState<string>("");
   //init
   if (window.location.pathname == "/")
-    window.location.href = initMonthYear
-
+  window.location.href = initMonthYear
+  
   var pathname = window.location.pathname;
   console.log('pathname', pathname);
-
+  
   var [year, month, week]: string[] = pathname.split("/").filter(v => v != "");
   // if (!year) year = String(nowYear);
   console.log('filtered >>>> ', year, month, week);
   if (!week) {
     if (printViewContentsDto != null)
-      setPrintViewContentDto(null);
+    setPrintViewContentDto(null);
   }
-
+  
   const [monthFiles, updateMonthFiles] = useState<string[] | null>(null);
   useEffect(() => {
     getYearsJson(year).then((yaerJson: YearJson | null) => {
       console.log('getYearsJson>>>>>', yaerJson);
-
-      if (!yaerJson) return;
+      
+      if (!yaerJson) return (<div>Not found</div>);
       updateMonthFiles(yaerJson.month_files);
     })
-  }, [window.location.pathname]);
-
+  }, [pathname]);
+  
   useEffect(() => {
     if (!week){
       console.log("not week");

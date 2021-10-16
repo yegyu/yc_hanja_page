@@ -1,6 +1,6 @@
 .front_container{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
 }
 .y_word{
     /* padding-left: 100px; */
@@ -14,7 +14,7 @@
 }
 
 #main_title{
-    font-size: 40px;
+    font-size: xxx-large;
 }
 .back_hanja{
     font-size: xxx-large;
@@ -23,8 +23,42 @@
     font-size: xxx-large;
     
 }
-hr{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border: 0px;
+.front div:nth-child(1), .front div:nth-child(2){
+    display: grid;
+    text-align: center;
+}
+.yojeol-container{
+    width: 70%;
+}
+body{
+    overflow-x: hidden;
+}
+button{
+    -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.print-link{
+   
+}
+.print-button{
+  padding: 0.5rem 1rem;
+  margin-top: 60px;
+  margin-bottom: 0px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+  width: auto;
+
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  cursor: pointer;
+
+  transition: 0.5s;
 }

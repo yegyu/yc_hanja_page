@@ -21,7 +21,7 @@ type KinderPrintDto = {
     yojeol: string;
     order: number;
     dataString: string;
-    isFront:boolean
+    isFront: boolean
 
 }
 export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
@@ -29,27 +29,34 @@ export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
     const col = 11
 
     // const yojeol = kinderPrintDto.yojeol;
-    const yojeol = " "+ kinderPrintDto.yojeol
+    const yojeol = " " + kinderPrintDto.yojeol
+    const follow = yojeol
     const yojeolCnt = (yojeol.length)
     // 가로 11줄, 세로 15줄
     const yojeolLineCnt = Math.ceil(yojeolCnt / 11)
-    if(yojeolLineCnt > 7){
+    if (yojeolLineCnt > 7) {
         row = 16
     }
     const lineDiff = Math.round(15 / yojeolLineCnt)
 
     var arr2D: Array<Array<JSX.Element>> = new Array(15)
     var cnt = 0;
+    var followCnt = 0;
     for (let i = 0; i < row; i++) {
         arr2D[i] = [];
-        var isInsertLine: boolean
+        var isInsertLine: boolean = false
+        var followInserLine = false
         if (i % lineDiff == 0) isInsertLine = true
+        else if (i % lineDiff == 1) followInserLine = true
         else isInsertLine = false
 
         for (let j = 0; j < col; j++) {
             if (yojeolCnt > cnt && isInsertLine) {
                 arr2D[i][j] = <th className="one">{yojeol[cnt]}</th>
                 cnt++;
+            } else if (yojeolCnt > followCnt && followInserLine) {
+                arr2D[i][j] = <th className="follow">{yojeol[followCnt]}</th>
+                followCnt++;
             } else {
                 arr2D[i][j] = <th></th>
             }
