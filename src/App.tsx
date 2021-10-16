@@ -45,9 +45,13 @@ function App(linkState: AppProps) {
     pathname = initMonthYear
   }
 
+
   console.log('pathname', pathname);
 
   var [year, month, week]: string[] = pathname.split("/").filter(v => v != "");
+  if(year == gitRoot){
+    [year,month] =  initMonthYear.split("/").filter(v=>v != "")
+  }
   // if (!year) year = String(nowYear);
   console.log('filtered >>>> ', year, month, week);
   if (!week) {
