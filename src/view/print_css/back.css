@@ -108,6 +108,10 @@ ol{
   content: ">" ;
   color: black;
 }
+.back-bottom-title span{
+  font-size: xx-large;
+
+}
 .back-yojeol-where{
   margin-right: 20px;
   margin-top: 20px;
@@ -186,7 +190,7 @@ ol{
 }
 .back-title-container{
   display: grid;
-  grid-template-columns: 1fr 0.5fr  1fr 1fr;
+  grid-template-columns: 1.5fr 0.5fr  1fr 1fr;
   margin-left: 20px;
   margin-right: 20px;
 }
