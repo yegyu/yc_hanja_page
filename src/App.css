@@ -56,9 +56,13 @@ body {
 }
 
 .hanja {
+  /* font-family: 'hanja0'; */
   font-family: 'hanja0';
 }
-
+@font-face {
+  font-family: 'han';
+  src: url('view/font/UNI_HSR.TTF');
+}
 
 @font-face {
   font-family: 'hanja0';

@@ -76,7 +76,9 @@ export const PrintView = (contentDto: ContentsDto) => {
                 indexList.map((_, index) => {
                     const hanjaCount = contentDto.front_hanja_list.length
                     if (hanjaCount > index) {
-                        const el = contentDto.front_hanja_list[index]
+                        var el = contentDto.front_hanja_list[index]
+                        if(index == 1) el = contentDto.front_hanja_list[2]
+                        if( index == 2) el = contentDto.front_hanja_list[1]
                         const drawCnt = el.draw_list.length
                         return (
                             <div className={"stroke" + index}>

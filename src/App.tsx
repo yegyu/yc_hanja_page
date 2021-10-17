@@ -10,6 +10,7 @@ import { ContentsDto, YearJson } from "./model/Api";
 import { AxiosResponse } from "axios";
 import { getMonthsJson, getYearsJson } from "./util/api_utils";
 import { PrintView } from "./view/print/PrintView";
+import { GenModal } from "./view/Generator";
 type AppProps = {
   link: string
 }
@@ -120,6 +121,7 @@ function App(linkState: AppProps) {
   if (printViewContentsDto == null) {
     view = (
       <div>
+     
         <SideBar years={getYears()} stateHandler={handleUpdate} />
         <ContentsWrapper yearMonth={url_path} handleContentDto={handleContentDto} notFound={notFound} year={year} month={month} week={week} contentsList={contentsDto} />
       </div>
@@ -148,6 +150,7 @@ function App(linkState: AppProps) {
   }
   return (
     <div className="App">
+      {/* <GenModal/> */}
       {view}
     </div >
   );

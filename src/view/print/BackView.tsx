@@ -50,14 +50,14 @@ export const BackView = (backContents: BackContents) => {
         <>
             <div className="back-box youth-y1">
 
-                <div className="back-text back-yojeol yojeol-title">다음주 午前 要節</div>
+                <div className="back-text back-yojeol yojeol-title">다음 주 午前 要節</div>
                 <div className="back-text back-yojeol">
                     {backContents.yojeol.morning.words}
                 </div>
                 <div className="back-yojeol-where">{backContents.yojeol.morning.where}</div>
             </div>
             <div className="back-box youth-y2">
-                <div className="back-text back-yojeol yojeol-title"> 이번주 午後 要節</div>
+                <div className="back-text back-yojeol yojeol-title"> 이번 주 午後 要節</div>
                 <div className="back-text back-yojeol">{backContents.yojeol.youth_afternoon.words}</div>
                 <div className="back-yojeol-where">{backContents.yojeol.youth_afternoon.where}</div>
             </div>
@@ -67,6 +67,7 @@ export const BackView = (backContents: BackContents) => {
         <>
             <div className="back-box child-y1">
                 <div className="back-text back-yojeol">
+                    <div className="back-child-yojeol-title">다음 주 오전 요절 쓰기</div>
                     {backContents.yojeol.morning.words}
                     <ol>
                         <li> <div className="line line1" >1.</div></li>
@@ -91,7 +92,7 @@ export const BackView = (backContents: BackContents) => {
             <div className="back-yojeol-where back-adult-where">
                 {backContents.yojeol.adult.where}
             </div>
-            <div className="back-text back-last-answer">( 지난주 해답 : {backContents.yojeol.adult.answer})</div>
+            <div className="back-text back-last-answer">( 지난 주 해답 : {backContents.yojeol.adult.answer})</div>
         </div>
     )
     const YouthBackBottomView = (back: Back) => {

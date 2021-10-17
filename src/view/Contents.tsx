@@ -7,6 +7,7 @@ import { FrontHanjaList } from "../model/table"
 import { error } from "console"
 import { throws } from "assert"
 import { BrowserRouter, Link } from "react-router-dom"
+import { GenModal } from "./Generator"
 type ContentsProps = {
     contentsList: ContentsDto[] | null;
     yearMonth: string;
@@ -42,8 +43,8 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
         return (
             <div className="contents">
                 <div className="hanja" id="main_title">
+                 
                     {contentsProps.year}년 {contentsProps.month}월
-                    
                 </div>
                 {
                     contentsProps.contentsList!.map((content, index) => (

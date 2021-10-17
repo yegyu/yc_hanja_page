@@ -54,8 +54,14 @@
 .youth-y1, .youth-y2 {
   height: 190px;
 }
-.child-y1, .adult-y1{
+ .adult-y1{
   height: 390px;
+}
+.child-y1{
+  height: 410px;
+}
+.back-child-yojeol-title{
+  margin-bottom: 20px;
 }
 .line1{
   /* height: 40px;
@@ -100,11 +106,11 @@ ol{
   color: black;
   ;
 }
-.yojeol-title::before,.back-bottom-title::before{
+.yojeol-title::before,.back-bottom-title::before,.back-child-yojeol-title::before{
   content: "<" ;
   color: black;
 }
-.yojeol-title::after, .back-bottom-title::after{
+.yojeol-title::after, .back-bottom-title::after,.back-child-yojeol-title::after{
   content: ">" ;
   color: black;
 }
@@ -133,7 +139,7 @@ ol{
 
 .back-bottom1{
 
-  height: 250px !important;
+  height: 240px !important;
 }
 
 
