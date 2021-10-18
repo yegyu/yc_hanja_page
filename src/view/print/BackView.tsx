@@ -30,7 +30,7 @@ export const BackView = (backContents: BackContents) => {
         <div className={'back-box back-bottom ' + "back-bottom" + back.index}  >
             <div className="back-title-container">
                 <div className="back-bottom-title"><span>聖經漢字</span> 배우기</div>
-                <div/><div/>
+                {/* <div/><div/> */}
                 <div className="back-bottom-where">({backContents.back_hanja_list[0]})</div>
             </div>
             <div className="back-bottom-hanja-container">
@@ -39,8 +39,8 @@ export const BackView = (backContents: BackContents) => {
                     
                     if(back.index == 1 && index >= 12) return
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text"> {val}( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) </div>
-                    return <div className="back-hanja-text">{val}( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</div>
+                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text"> {val.trim()}(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) </div>
+                    return <div className="back-hanja-text">{val.trim()}( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</div>
                 })}
             </div>
 

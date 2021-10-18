@@ -61,7 +61,7 @@
   height: 410px;
 }
 .back-child-yojeol-title{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .line1{
   /* height: 40px;
@@ -89,7 +89,7 @@ ol{
   margin-top: 10px;
 }
 .line3, .line2{
-  margin-top: 70px !important;
+  margin-top: 65px !important;
 }
 
 
@@ -190,13 +190,12 @@ ol{
   
 }
 .back-bottom-where{
-  width: max-content;
   text-align: end;
   flex-grow: 1;
 }
 .back-title-container{
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr  1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   margin-left: 20px;
   margin-right: 20px;
 }
