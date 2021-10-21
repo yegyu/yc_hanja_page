@@ -38,8 +38,8 @@ function App(linkState: AppProps) {
   const [tempYearMonth, updateTempYearMonth] = useState<string>("");
  
   //init
-  if (window.location.pathname == "/" || window.location.pathname == gitRoot + "/") {
-    window.location.href = gitRoot + initMonthYear
+  if (window.location.pathname == "/" || window.location.pathname =="/"+ gitRoot + "/") {
+    window.location.href = "/"+ gitRoot + initMonthYear
   }
 
   var pathname = window.location.pathname;
