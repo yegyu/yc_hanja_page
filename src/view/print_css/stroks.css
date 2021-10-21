@@ -61,7 +61,7 @@
 .grid-name0 {
   grid-area: grid-name0;
   font-family: var(--font-family);
-  font-size: larger;
+  font-size: 16px;
   text-align: center;
   display: grid;
   align-items: center;
