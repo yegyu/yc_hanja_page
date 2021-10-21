@@ -8,6 +8,7 @@ import { error } from "console"
 import { throws } from "assert"
 import { BrowserRouter, Link } from "react-router-dom"
 import { GenModal } from "./Generator"
+import { gitRoot } from "../App"
 type ContentsProps = {
     contentsList: ContentsDto[] | null;
     yearMonth: string;
@@ -52,7 +53,8 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                              {
                                 // 리액트 링크(URL) 훅 만들기
                                 <BrowserRouter>
-                                    <Link className="print-link" to={`/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
+                                    <Link className="print-link" to={`/${gitRoot}/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
+                                        
                                         <button className="print-button" onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
                                     </Link>
                                 </BrowserRouter>

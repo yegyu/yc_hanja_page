@@ -1,5 +1,6 @@
 import React, { Component, MouseEventHandler, ReactElement, ReactHTML, ReactHTMLElement, ReactNode, useState } from "react";
 import { BrowserRouter, Link, Route, Router } from "react-router-dom";
+import { gitRoot } from "../App";
 import { getMonth, getYears, nowYear } from "../util/util";
 import "../view/SideBar.css";
 import ContentsContainer from "./Contents";
@@ -22,8 +23,8 @@ const MonthList = (monthProps: MonthProps) => {
   }
   getMonth(monthProps.thisYear).map((month) => {
     list.push(
-      <Link to={`/${monthProps.thisYear}/${month}`}  >
-        <p className="sideBar-month" id={`/${monthProps.thisYear}/${month}`} onClick={onClick}>
+      <Link to={`/${gitRoot}/${monthProps.thisYear}/${month}`}  >
+        <p className="sideBar-month" id={`/${gitRoot}/${monthProps.thisYear}/${month}`} onClick={onClick}>
           {month}
         </p>
       </Link>

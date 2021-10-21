@@ -15,7 +15,7 @@ import { GenModal } from "./view/Generator";
 type AppProps = {
   link: string
 }
-
+export const gitRoot = "yc_hanja_page"
 const initMonthYear: string = "/" + nowYear + "/" + (nowAsNextWeek.getMonth() + 1)
 
 
@@ -36,18 +36,18 @@ function App(linkState: AppProps) {
   const [tempPrintViewContentsDto, setTempPrintViewContentDto] = useState<ContentsDto | null>(null);
 
   const [tempYearMonth, updateTempYearMonth] = useState<string>("");
-  const gitRoot = "yc_hanja_page"
+ 
   //init
-  if (window.location.pathname == "/" ) {
-    window.location.href = initMonthYear
+  if (window.location.pathname == "/" || window.location.pathname == gitRoot + "/") {
+    window.location.href = gitRoot + initMonthYear
   }
 
   var pathname = window.location.pathname;
   console.log('pathname', pathname);
 
-  var [year, month, week]: string[] = pathname.split("/").filter(v => v != "");
-  if(year == gitRoot){
-    [year,month] =  initMonthYear.split("/").filter(v=>v != "")
+  var [year, month, week]: string[] = pathname.split("/").filter(v => v != "" && !v.includes(gitRoot));
+  if (year == gitRoot) {
+    [year, month] = initMonthYear.split("/").filter(v => v != "" && !v.includes(gitRoot))
   }
   console.log('filtered >>>> ', year, month, week);
   if (!week) {
@@ -122,7 +122,7 @@ function App(linkState: AppProps) {
   if (printViewContentsDto == null) {
     view = (
       <div>
-     
+
         <SideBar years={getYears()} stateHandler={handleUpdate} />
         <ContentsWrapper yearMonth={url_path} handleContentDto={handleContentDto} notFound={notFound} year={year} month={month} week={week} contentsList={contentsDto} />
       </div>

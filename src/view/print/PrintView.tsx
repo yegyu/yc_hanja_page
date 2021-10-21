@@ -11,17 +11,24 @@ import { BackView } from "./BackView";
 import { HeaderView } from "./header";
 import { KinderPrintView } from "./KinderPrintView";
 export const makeNextLineBracket = (str: string): JSX.Element => {
-    const list = str.split("(").map((el, i) => {
-        if (i == 1) return "(" + el
-        return el
-    })
+    try {
+        const list = str.split("(").map((el, i) => {
+            if (i == 1) return "(" + el
+            return el
+        })
 
-    return (
-        <>
-            <span className="sub-ch ch">{list[0]}</span><br/>
-            {list[1]}
-        </>
-    )
+        return (
+            <>
+                <span className="sub-ch ch">{list[0]}</span><br />
+                {list[1]}
+            </>
+        )
+    } catch (error) {
+        console.error(error);
+        return <div>정보가 없어요.</div>
+
+    }
+
 
 
 }
@@ -49,7 +56,14 @@ export const PrintView = (contentDto: ContentsDto) => {
 
     const WordViews = () => {
         // var vocaCnt = 1
-        const vocaCnt = contentDto.voca_list.length
+        
+        var vocaCnt 
+        try {
+           vocaCnt =  contentDto.voca_list.length
+            
+        } catch (error) {
+           return <div>정보 없음</div> 
+        }
         var view
         if (vocaCnt == 2) {
             view = (<div className="word hanja">
@@ -77,8 +91,8 @@ export const PrintView = (contentDto: ContentsDto) => {
                     const hanjaCount = contentDto.front_hanja_list.length
                     if (hanjaCount > index) {
                         var el = contentDto.front_hanja_list[index]
-                        if(index == 1) el = contentDto.front_hanja_list[2]
-                        if( index == 2) el = contentDto.front_hanja_list[1]
+                        if (index == 1) el = contentDto.front_hanja_list[2]
+                        if (index == 2) el = contentDto.front_hanja_list[1]
                         const drawCnt = el.draw_list.length
                         return (
                             <div className={"stroke" + index}>
@@ -139,10 +153,10 @@ export const PrintView = (contentDto: ContentsDto) => {
                         const hanjaCnt = contentDto.front_hanja_list.length
                         return (
                             <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow ch" || v == 3 && "hanja-name kr" || ""} >
-                                <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[0].hanja}</td>
-                                <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[1].hanja}</td>
-                                <td>{(v == 0 || v ==2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
-                                <td>{(v == 0 || v ==2) && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
+                                <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[0].hanja}</td>
+                                <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[1].hanja}</td>
+                                <td>{(v == 0 || v == 2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
+                                <td>{(v == 0 || v == 2) && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
                             </tr>
                         )
                     })
@@ -190,6 +204,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                     view = (
                         <div>
                             <div className="a4">
+                              
                                 {headerViews[index]}
                                 <WordViews />
                                 {strokeView}
