@@ -6,6 +6,7 @@ import { HeaderView } from "./view/print/header";
 import SideBar from "./view/SideBar";
 import { ContentsWrapper } from "./view/Contents";
 import "./App.css"
+// import "./view/print_css/font.scss"
 import { ContentsDto, YearJson } from "./model/Api";
 import { AxiosResponse } from "axios";
 import { getMonthsJson, getYearsJson } from "./util/api_utils";

@@ -66,7 +66,7 @@ export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
 
 
     return (
-        <div className="hanja">
+        <div className="hanja kr">
 
             <KinderHeaderView where={kinderPrintDto.where} yojeol={kinderPrintDto.yojeol} order={kinderPrintDto.order} dataString={kinderPrintDto.dataString} isFront={false} />
 

@@ -7,35 +7,34 @@
 .sideBar {
   display: table-cell;
   overflow: scroll;
-  position:fixed;
+  position: fixed;
   /* flex: auto auto; */
   height: 100vh;
   float: right;
-  
+
   width: 10%;
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-.sideBar::-webkit-scrollbar{
+.sideBar::-webkit-scrollbar {
   display: none;
 }
 @media screen and (max-width: 600px) {
-  .App{
+  .App {
     display: grid;
   }
   .sideBar {
-    
     position: relative;
     width: 100vw;
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
   }
-  .sideBar-year{
+  .sideBar-year {
     padding-left: 1em;
   }
-  .sideBar-month{
+  .sideBar-month {
     display: flex;
     flex-wrap: wrap;
     margin-left: 1rem;
@@ -52,22 +51,40 @@
 body {
   height: 100vh;
   width: 100%;
-  
+  font-family: kr;
 }
 
 .hanja {
   /* font-family: 'hanja0'; */
-  font-family: 'hanja0';
+  font-family: ch;
 }
+.kr{
+  font-family: kr;
+}
+.ch{
+  font-family: ch;
+}
+
 @font-face {
-  font-family: 'han';
-  src: url('view/font/UNI_HSR.TTF');
+  font-family: 'hy';
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: ch;
+  src: url(view/font/ch.ttf);
+}
+
+@font-face {
+  font-family: kr;
+  src: url(view/font/kr.ttf);
 }
 
 @font-face {
   font-family: 'hanja0';
-  src: url('view/font/cwTeXQKai-Medium.ttf');
+  src: url(view/font/cwTeXQKai-Medium.ttf);
 }
+
 @font-face {
   font-family: 'hanja1';
   src: url('view/font/cwTeXQKaiZH-Medium.ttf');

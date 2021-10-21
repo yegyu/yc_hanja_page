@@ -53,7 +53,6 @@
 
 .grid-hanja0 {
   grid-area: grid-hanja0;
-  font-family: var(--font-family);
   font-size: xxx-large;
   text-align: center;
   /* line-height: 2em; */
@@ -87,11 +86,16 @@
   align-items: center;
   position: relative;
 }
+.sub-ch{
+  display: contents;
+  justify-content: baseline;
+}
 .sub-title{
   position:absolute;
   top: 0;
   left: 0;
   font-size: small;
+  color: transparent;
 }
 
 .grid-s0-0 {

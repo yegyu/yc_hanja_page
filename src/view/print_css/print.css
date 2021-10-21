@@ -99,7 +99,6 @@ img{
 }
 .hanja-big td{
   font-size: 70px;
-  font-family: var(--font-family);
   text-align: center;
   position: relative;
   height: var(--height-write-hanja);

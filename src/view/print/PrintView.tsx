@@ -18,7 +18,7 @@ export const makeNextLineBracket = (str: string): JSX.Element => {
 
     return (
         <>
-            {list[0]}<br />
+            <span className="sub-ch ch">{list[0]}</span><br/>
             {list[1]}
         </>
     )
@@ -53,15 +53,15 @@ export const PrintView = (contentDto: ContentsDto) => {
         var view
         if (vocaCnt == 2) {
             view = (<div className="word hanja">
-                <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
-                <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
-                <div className="grid-102 word-item">{contentDto.voca_list[1].hanja}</div>
-                <div className="grid-103 word-item">{contentDto.voca_list[1].mean}</div>
+                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
+                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
+                <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
+                <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
             </div>)
         } else {
             view = (<div className="word1 hanja">
-                <div className="grid-100 word-item">{contentDto.voca_list[0].hanja}</div>
-                <div className="grid-101 word-item">{contentDto.voca_list[0].mean}</div>
+                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
+                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
             </div>)
         }
         return view
@@ -82,9 +82,9 @@ export const PrintView = (contentDto: ContentsDto) => {
                         const drawCnt = el.draw_list.length
                         return (
                             <div className={"stroke" + index}>
-                                <div className="grid-hanja0">{el.hanja}<span className="total-stroke">{drawCnt}획</span></div>
-                                <div className="grid-name0"><div className="hanja-name-stroke">{el.name}</div></div>
-                                <div className="grid-sub0"><span className="sub-title">부수</span>{makeNextLineBracket(el.sub)} </div>
+                                <div className="grid-hanja0 ch">{el.hanja}<span className="total-stroke kr">{drawCnt}획</span></div>
+                                <div className="grid-name0 kr"><div className="hanja-name-stroke">{el.name}</div></div>
+                                <div className="grid-sub0 kr"><span className="sub-title"></span>{makeNextLineBracket(el.sub)} </div>
                                 <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
                                 <div className="grid-s0-1">{drawCnt > 1 && <img src={el.draw_list[1]} />}</div>
                                 <div className="grid-s0-2">{drawCnt > 2 && <img src={el.draw_list[2]} />}</div>
@@ -138,7 +138,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                         // const hanjaCnt =2
                         const hanjaCnt = contentDto.front_hanja_list.length
                         return (
-                            <tr className={v == 0 && "hanja-big" || v == 1 && "hanja-name" || v == 2 && "hanja-big follow" || v == 3 && "hanja-name" || ""} >
+                            <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow ch" || v == 3 && "hanja-name kr" || ""} >
                                 <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[0].hanja}</td>
                                 <td>{(v == 0 || v ==2) && contentDto.front_hanja_list[1].hanja}</td>
                                 <td>{(v == 0 || v ==2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>

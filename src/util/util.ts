@@ -2,27 +2,7 @@ import {  getStartDate } from '../model/const';
 import { Room } from '../model/enum';
 import { FrontHeaderTable } from '../model/table';
 
-export function toAdultText(text: string): string {
-  var cnt = 0
-  var str = text
-  while (true) {
-      if (cnt > 10) {
-          console.error("It may infinit loop")
-          break
-      }
-      let endIndex = str.indexOf(")")
-      let startIndex = str.indexOf("(")
 
-
-      if (endIndex == -1) break
-      let len = endIndex - startIndex - 1
-      console.log(len)
-      str = str.substring(0, startIndex - len) + str.substring(startIndex + 1, endIndex) + str.substring(endIndex + 1, str.length)
-
-      cnt++
-  }
-  return str
-}
 type FrontHeader = {
   ban: string
   date: string

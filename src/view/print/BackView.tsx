@@ -2,11 +2,49 @@ import { BackContents } from "../../model/Api"
 import { banList } from "../../model/const"
 import "../print_css/back.css"
 import { BackHeaderView, HeaderView } from "./header"
-import {toAdultText} from "../../util/util"
 type Back = {
     index: number
 }
+export function toAdultText(text: string): JSX.Element {
+    var cnt = 0
+    var str = text
+    var jsxList: JSX.Element[] = []
+    while (true) {
+        if (cnt > 10) {
+            console.error("It may infinit loop")
+            break
+        }
+        let endIndex = str.indexOf(")")
+        let startIndex = str.indexOf("(")
 
+
+        if (endIndex == -1) break
+        let len = endIndex - startIndex - 1
+        console.log(len)
+        let ch = <span className="ch">{str.substring(startIndex + 1, endIndex)}</span>
+        jsxList.push(ch)
+        str = str.substring(0, startIndex - len) + "$" + str.substring(endIndex + 1, str.length)
+
+        cnt++
+    }
+    var chCnt = 0
+    let jsx:JSX.Element = <>
+        {
+            str.split("").map((val, idx) => {
+                if (val == "$") {
+                    chCnt++
+                    console.log("map"+chCnt);
+                    
+                    return jsxList[chCnt-1]
+                } else return <>{ val }</>
+
+            })
+
+        }
+    </>
+    return jsx
+    // return <>{str.replaceAll("#","<span classNmae='ch'>").replaceAll("$","</span>")}</>
+}
 export const BackView = (backContents: BackContents) => {
 
     const qCnt = backContents.questions.length
@@ -20,27 +58,27 @@ export const BackView = (backContents: BackContents) => {
         })
         return (
             <>
-                <div className="back-box q1">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className="q-answer"/> </div>
-                <div className="back-box q2">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className="q-answer"/> </div>
-                <div className="back-box q3">      <div className="back-text">3. {qCnt > 2 && list[2]}</div><div className="q-answer"/> </div>
+                <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className="q-answer" /> </div>
+                <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className="q-answer" /> </div>
+                <div className="back-box q3 kr">      <div className="back-text">3. {qCnt > 2 && list[2]}</div><div className="q-answer" /> </div>
             </>
         )
     }
     const BottomHanjasView = (back: Back) => (
         <div className={'back-box back-bottom ' + "back-bottom" + back.index}  >
             <div className="back-title-container">
-                <div className="back-bottom-title"><span>聖經漢字</span> 배우기</div>
+                <div className="back-bottom-title kr"><span className="ch">聖經漢字</span> 배우기</div>
                 {/* <div/><div/> */}
-                <div className="back-bottom-where">({backContents.back_hanja_list[0]})</div>
+                <div className="back-bottom-where kr">({backContents.back_hanja_list[0]})</div>
             </div>
             <div className="back-bottom-hanja-container">
 
-                {backContents.back_hanja_list.filter((v,i)=>{return i != 0}).map((val, index) => {
-                    
-                    if(back.index == 1 && index >= 12) return
+                {backContents.back_hanja_list.filter((v, i) => { return i != 0 }).map((val, index) => {
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text"> {val.trim()}(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) </div>
-                    return <div className="back-hanja-text">{val.trim()}( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</div>
+                    if (back.index == 1 && index >= 12) return
+
+                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text "> {val.trim()}(<span className="bracket"></span>) </div>
+                    return <div className="back-hanja-text ">{val.trim()}(<span className="bracket"></span>)</div>
                 })}
             </div>
 
@@ -48,16 +86,16 @@ export const BackView = (backContents: BackContents) => {
     )
     const YouthYojeolView = () => (
         <>
-            <div className="back-box youth-y1">
+            <div className="back-box youth-y1 kr">
 
-                <div className="back-text back-yojeol yojeol-title">다음 주 午前 要節</div>
+                <div className="back-text back-yojeol yojeol-title">다음 주 <span className="ch">午前 要節</span></div>
                 <div className="back-text back-yojeol">
                     {backContents.yojeol.morning.words}
                 </div>
-                <div className="back-yojeol-where">{backContents.yojeol.morning.where}</div>
+                <div className="back-yojeol-where kr">{backContents.yojeol.morning.where}</div>
             </div>
-            <div className="back-box youth-y2">
-                <div className="back-text back-yojeol yojeol-title"> 이번 주 午後 要節</div>
+            <div className="back-box youth-y2 kr">
+                <div className="back-text back-yojeol yojeol-title"> 이번 주 <span className="ch">午後 要節</span></div>
                 <div className="back-text back-yojeol">{backContents.yojeol.youth_afternoon.words}</div>
                 <div className="back-yojeol-where">{backContents.yojeol.youth_afternoon.where}</div>
             </div>
@@ -65,7 +103,7 @@ export const BackView = (backContents: BackContents) => {
     )
     const ChildYojeolView = () => (
         <>
-            <div className="back-box child-y1">
+            <div className="back-box child-y1 kr">
                 <div className="back-text back-yojeol">
                     <div className="back-child-yojeol-title">다음 주 오전 요절 쓰기</div>
                     {backContents.yojeol.morning.words}
@@ -74,7 +112,7 @@ export const BackView = (backContents: BackContents) => {
                         <li> <div className="line line2" >2.</div></li>
                         <li> <div className="line line3" >3.</div></li>
                     </ol>
-                    <div className="back-yojeol-where child-yojeol-where">
+                    <div className="child-yojeol-where">
                         {backContents.yojeol.morning.where}
                     </div>
                 </div>
@@ -82,7 +120,7 @@ export const BackView = (backContents: BackContents) => {
         </>
     )
     const AdultYojeolView = () => (
-        <div className="back-box adult-y1">
+        <div className="back-box adult-y1 kr">
             <div className="yojeol-title">
                 요절 찾고 외우기
             </div>

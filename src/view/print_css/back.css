@@ -17,7 +17,7 @@
   border-left: var(--border);
   border-bottom: var(--border);
   font-size: large;
-  font-family: 'hanja0';
+  font-family: 'kr';
   text-align: center !important;
   justify-items: center;
 
@@ -28,11 +28,13 @@
 .grid-back-center {
   grid-area: grid-back-center;
   font-size: xxx-large !important;
+  font-family: ch  !important;
   
 }
 
 .grid-back-top-right {
   grid-area: grid-back-top-right;
+  font-family: ch !important;
 }
 
 .grid-back-bottom-right {
@@ -97,11 +99,11 @@ ol{
   text-align: end;
   margin-right: 20px;
 }
-.back-yojeol-where::before{
+.back-yojeol-where::before, .child-yojeol-where::before{
   content: "(" ;
   color: black;
 }
-.back-yojeol-where::after{
+.back-yojeol-where::after, .child-yojeol-where::after{
   content: ')';
   color: black;
   ;
@@ -117,6 +119,9 @@ ol{
 .back-bottom-title span{
   font-size: xx-large;
 
+}
+.child-yojeol-where{
+  text-align: end;
 }
 .back-yojeol-where{
   margin-right: 20px;
@@ -183,11 +188,14 @@ ol{
   margin-top: 10px;
 }
 .back-bottom-hanja-container > div{
-  display: grid;
   font-size: xx-large;
   text-align: center;
   margin-top: 10px;
-  
+}
+.bracket{
+  margin-left: 70px;
+}
+.back-bottom-hanja{
 }
 .back-bottom-where{
   text-align: end;
