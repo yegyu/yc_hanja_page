@@ -61,27 +61,16 @@
 .grid-name0 {
   grid-area: grid-name0;
   font-family: var(--font-family);
-  font-size: large;
+  font-size: larger;
   text-align: center;
-  
-  position: relative;
-}
-.hanja-name-stroke{
-  margin: 0;
-  top: 50%;
-  position:absolute;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  text-align: center;
-  left: 1%;
-  right: 1%;
-
+  display: grid;
+  align-items: center;
 }
 .grid-sub0 {
   display: grid;
   grid-area: grid-sub0;
   font-family: var(--font-family);
-  font-size: initial;
+  font-size: medium;
   text-align: center;
   align-items: center;
   position: relative;
