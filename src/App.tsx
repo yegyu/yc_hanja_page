@@ -36,13 +36,15 @@ function App(linkState: AppProps) {
   const [tempPrintViewContentsDto, setTempPrintViewContentDto] = useState<ContentsDto | null>(null);
 
   const [tempYearMonth, updateTempYearMonth] = useState<string>("");
- 
+  var pathname:string
   //init
   if (window.location.pathname == "/" || window.location.pathname =="/"+ gitRoot + "/") {
-    window.location.href = "/"+ gitRoot + initMonthYear
+    pathname = "/"+ gitRoot + initMonthYear
+  } else{
+    pathname = window.location.pathname
   }
 
-  var pathname = window.location.pathname;
+  //  = window.location.pathname;
   console.log('pathname', pathname);
 
   var [year, month, week]: string[] = pathname.split("/").filter(v => v != "" && !v.includes(gitRoot));
