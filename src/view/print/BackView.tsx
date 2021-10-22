@@ -76,9 +76,18 @@ export const BackView = (backContents: BackContents) => {
                 {backContents.back_hanja_list.filter((v, i) => { return i != 0 }).map((val, index) => {
 
                     if (back.index == 1 && index >= 12) return
+                    var el = val.trim()
+                    const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+                    const regex = new RegExp(korean)
+                    var jsx:JSX.Element =<></>
+                    const isKr = el.match(regex) != undefined
+                    if(isKr){
+                       jsx = <span className="bottom-hanja-kr kr">{el}</span> 
+                    }
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text "> {val.trim()}(<span className="bracket"></span>) </div>
-                    return <div className="back-hanja-text ">{val.trim()}(<span className="bracket"></span>)</div>
+
+                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{ !isKr && el}(<span className="bracket">{val.trim()}</span>) </div>
+                    return <div className="back-hanja-text ">{isKr && jsx}{ !isKr && el}(<span className="bracket">{val.trim()}</span>)</div>
                 })}
             </div>
 

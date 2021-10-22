@@ -182,18 +182,26 @@ ol{
   border-bottom: var(--border);
 }
 .back-bottom-hanja-container{
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows:  1fr 1fr 1fr 1fr;
-  margin-top: 10px;
+  margin: 10px;
 }
 .back-bottom-hanja-container > div{
   font-size: xx-large;
   text-align: center;
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex-grow: 1;
 }
 .bracket{
-  margin-left: 70px;
+  color:transparent;
+}
+.bottom-hanja-kr{
+  display: contents;
+  white-space: pre;
 }
 .back-bottom-hanja{
 }
