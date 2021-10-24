@@ -83,9 +83,11 @@ export function getNextSundayAndWeekOrder(
 
 export const nowAsNextWeek: Date = (() => {
   var date = new Date();
+  date.setDate(0)
   date.setDate(date.getDate() + 7);
   return date;
 }).call(this);
+
 export const nowYear = nowAsNextWeek.getFullYear();
 console.log("now year", nowYear);
 
