@@ -97,7 +97,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                         const realCnt = el.count
                         return (
                             <div className={"stroke" + index}>
-                                <div className="grid-hanja0 ch">{el.hanja}<span className="total-stroke kr">{realCnt}획</span></div>
+                                <div className="grid-hanja0 ch">{el.hanja}<span className="total-stroke kr">{realCnt}</span></div>
                                 <div className="grid-name0 kr"><div className="hanja-name-stroke">{el.name}</div></div>
                                 <div className="grid-sub0 kr"><span className="sub-title"></span>{makeNextLineBracket(el.sub)} </div>
                                 <div className="grid-s0-0">{drawCnt > 0 && <img src={el.draw_list[0]} />}</div>
