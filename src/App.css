@@ -75,10 +75,10 @@ body {
   src: url(view/font/ch.ttf);
 }
 
-@font-face {
+/* @font-face {
   font-family: kr1;
   src: url(view/font/kr.ttf);
-}
+} */
 
 @font-face {
   font-family: 'hanja0';

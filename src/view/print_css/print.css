@@ -49,8 +49,8 @@ img{
   width: 210mm; /*793px*/
   height: 297mm;
   display: block;
-  margin: 0 auto;
-  margin-bottom: 0.5cm;
+  margin: 0 auto 2cm;
+  /* margin-bottom: 5.0cm; */
   box-sizing: border-box;
   page-break-after: always;
   
