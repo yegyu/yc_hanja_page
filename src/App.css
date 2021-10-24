@@ -51,7 +51,7 @@
 body {
   height: 100vh;
   width: 100%;
-  font-family: kr;
+  font-family: kr1;
 }
 
 .hanja {
@@ -59,7 +59,7 @@ body {
   font-family: ch;
 }
 .kr{
-  font-family: kr;
+  font-family: kr1;
 }
 .ch{
   font-family: ch;
@@ -76,7 +76,7 @@ body {
 }
 
 @font-face {
-  font-family: kr;
+  font-family: kr1;
   src: url(view/font/kr.ttf);
 }
 

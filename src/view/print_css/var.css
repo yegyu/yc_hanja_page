@@ -4,15 +4,23 @@
     --margin-top:3px;
     --border:black solid 1px;
     --height-stroke: 45px;
-    --height-write-hanja: 80px;
+    --height-write-hanja: 88px;
     --height-write-hanja-name:10px;
 
     --font-small-size:large;
-    --font-norm-size:x-large;
+    --font-norm-size:23px;
     --font-title-size:xxx-large;
 
 
-    --font-family:"kr";
+    --font-family:kr1;
+    /* --font-family: 'Nanum Myeongjo', serif; */
+
 
     --back-margin-top:10px;
+}
+@font-face {
+    font-family: 'kr1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }

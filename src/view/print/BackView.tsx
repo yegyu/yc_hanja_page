@@ -139,7 +139,7 @@ export const BackView = (backContents: BackContents) => {
             <div className="back-yojeol-where back-adult-where">
                 {backContents.yojeol.adult.where}
             </div>
-            <div className="back-text back-last-answer">( 지난 주 해답 : {backContents.yojeol.adult.answer})</div>
+            <div className="back-text back-last-answer">(지난 주 해답 : {backContents.yojeol.adult.answer})</div>
         </div>
     )
     const YouthBackBottomView = (back: Back) => {
