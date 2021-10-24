@@ -52,9 +52,15 @@ export const KinderPrintView = (kinderPrintDto: KinderPrintDto) => {
 
         for (let j = 0; j < col; j++) {
             if (yojeolCnt > cnt && isInsertLine) {
+                if(i != 0 && j == 0 && yojeol[cnt] == " "){
+                    cnt++
+                }
                 arr2D[i][j] = <th className="one">{yojeol[cnt]}</th>
                 cnt++;
             } else if (yojeolCnt > followCnt && followInserLine) {
+                if(i != 1 && j == 0 && yojeol[followCnt] == " "){
+                    followCnt++
+                }
                 arr2D[i][j] = <th className="follow">{yojeol[followCnt]}</th>
                 followCnt++;
             } else {
