@@ -125,8 +125,8 @@ ol{
   text-align: end;
 }
 .back-yojeol-where{
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-right: var(--marign-20);
+  margin-top: var(--marign-20);
   font-size: var(--font-norm-size);
 }
 .adult-y1{
@@ -139,7 +139,7 @@ ol{
   /* height: 20%; */
   /* flex: 1; */
   height: 290px;
-  padding-top: 20px;
+  padding-top: var(--marign-20);
   font-size: var(--font-norm-size);
 }
 
@@ -162,15 +162,15 @@ ol{
 }
 
 .back-text{
-  margin: 20px;
+  margin: var(--marign-20);
   font-size: var(--font-norm-size);
 }
 .back-last-answer{
   font-size: 19px;
 }
 .yojeol-title{
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: var(--marign-20);
+  margin-left: var(--marign-20);
   font-size: var(--font-norm-size);
 }
 .text{
@@ -191,14 +191,14 @@ ol{
   flex-wrap: wrap;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows:  1fr 1fr 1fr 1fr;
-  margin: 10px;
+  margin: var(--back-bottom-hanja-container);
 }
 .back-bottom-hanja-container > div{
   font-size: xx-large;
   text-align: center;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: var(--back-bottom-hanja-container);
+  margin-left: var(--back-bottom-hanja-container);
+  margin-right: var(--back-bottom-hanja-container);
   flex-grow: 1; 
 
 }
@@ -218,14 +218,14 @@ ol{
 .back-title-container{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: var(--marign-20);
+  margin-right: var(--marign-20);
 }
 
 .q-answer::after{
   content: "-";
 }
 .q-answer{
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: var(--marign-20);
+  margin-left: var(--marign-20);
 }

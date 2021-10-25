@@ -23,7 +23,7 @@
 .top-item {
   text-align: center;
   letter-spacing: 2px;
-  font-size: var(--font-small-hanja-size);
+  font-size: var(--font-front-top);
 }
 .grid-000 {
   grid-area: grid-000;

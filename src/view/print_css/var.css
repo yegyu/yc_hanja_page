@@ -9,15 +9,20 @@
 
     --font-small-size:13px;
     --font-small-hanja-size:20px;
-    --font-norm-size:23px;
+    --font-norm-size:22px;
     --font-title-size:xxx-large;
 
     --font-front-mean-hanja-name-size:16px;
 
+    --font-front-top:18px;
 
     --font-family:kr1;
     /* --font-family: 'Nanum Myeongjo', serif; */
+    --marign-20:20px;
 
+    --back-bottom-hanja-container:10px;
+
+    
 
     --back-margin-top:10px;
 }
