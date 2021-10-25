@@ -37,7 +37,7 @@
   align-items: center;
 
 
-  font-size: var(--font-small-size);
+  font-size: var(--font-front-mean-hanja-name-size);
 }
 
 .word-item {
@@ -61,6 +61,9 @@
 
 .grid-102 {
   grid-area: grid-102;
+}
+.grid-101, .grid-103{
+  font-size: var(--font-norm-size);
 }
 
 .grid-103 {

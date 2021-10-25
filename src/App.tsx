@@ -49,7 +49,7 @@ function App(linkState: AppProps) {
 
   var [year, month, week]: string[] = pathname.split("/").filter(v => v != "" && !v.includes(gitRoot));
   if (year == undefined) {
-    [year, month] = initMonthYear.split("/").filter(v => v != "" && !v.includes(gitRoot))
+    [year, month] = initMonthYear.split("/").filter(v => v != "" )
   }
   console.log('filtered >>>> ', year, month, week);
   if (!week) {

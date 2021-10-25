@@ -19,8 +19,8 @@ export const makeNextLineBracket = (str: string): JSX.Element => {
 
         return (
             <>
-                <span className="sub-ch ch">{list[0]}</span><br />
-                {list[1]}
+                <span className="sub-ch ch">{list[0]}</span><br/>
+                <span className="sub-kr kr">{list[1]}</span>
             </>
         )
     } catch (error) {

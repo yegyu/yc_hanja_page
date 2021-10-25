@@ -45,7 +45,7 @@
   width: 90%;
   /* height: 100%; */
   float: right;
-  font-size: var(--font-norm-size);
+  font-size: var(--font-small-size);
 }
 
 body {

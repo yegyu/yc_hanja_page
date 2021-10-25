@@ -7,9 +7,12 @@
     --height-write-hanja: 88px;
     --height-write-hanja-name:10px;
 
-    --font-small-size:large;
+    --font-small-size:13px;
+    --font-small-hanja-size:20px;
     --font-norm-size:23px;
     --font-title-size:xxx-large;
+
+    --font-front-mean-hanja-name-size:16px;
 
 
     --font-family:kr1;

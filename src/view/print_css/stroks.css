@@ -61,7 +61,7 @@
 .grid-name0 {
   grid-area: grid-name0;
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: var(--font-front-mean-hanja-name-size);
   text-align: center;
   display: grid;
   align-items: center;
@@ -78,6 +78,12 @@
 .sub-ch{
   display: contents;
   justify-content: baseline;
+  font-size: var(--font-hanja-small-size);
+}
+.sub-kr{
+  display: contents;
+  justify-content: baseline;
+  font-size: var(--font-small-size);
 }
 .sub-title{
   position:absolute;

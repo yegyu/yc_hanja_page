@@ -42,10 +42,12 @@
 
 .grid-back-bottom-left {
   grid-area: grid-back-bottom-left;
+  font-size: var(--font-front-mean-hanja-name-size) !important;
 }
 
 .grid-back-top-left {
   grid-area: grid-back-top-left;
+  font-size: var(--font-front-mean-hanja-name-size) !important;
 }
 
 .q1, .q2, .q3{
@@ -136,7 +138,7 @@ ol{
   /* height: 260px; */
   /* height: 20%; */
   /* flex: 1; */
-  height: 270px;
+  height: 290px;
   padding-top: 20px;
   font-size: var(--font-norm-size);
 }
@@ -162,6 +164,9 @@ ol{
 .back-text{
   margin: 20px;
   font-size: var(--font-norm-size);
+}
+.back-last-answer{
+  font-size: 19px;
 }
 .yojeol-title{
   margin-top: 20px;
@@ -194,7 +199,8 @@ ol{
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  flex-grow: 1;
+  flex-grow: 1; 
+
 }
 .bracket{
   color:transparent;
