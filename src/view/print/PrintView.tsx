@@ -39,6 +39,8 @@ const EachOrderList = (weeks: number): number[] => [
     (Room.ADULT + weeks)
 ]
 export const PrintView = (contentDto: ContentsDto) => {
+    console.log(contentDto.yaer, contentDto.month, contentDto.week);
+    
     const targetDate = getDate(contentDto.yaer, contentDto.month, contentDto.week);
 
     console.log('target', targetDate.toISOString());
@@ -153,7 +155,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                         // const hanjaCnt =2
                         const hanjaCnt = contentDto.front_hanja_list.length
                         return (
-                            <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow ch" || v == 3 && "hanja-name kr" || ""} >
+                            <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow-ch ch" || v == 3 && "hanja-name kr" || ""} >
                                 <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[0].hanja}</td>
                                 <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[1].hanja}</td>
                                 <td>{(v == 0 || v == 2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>

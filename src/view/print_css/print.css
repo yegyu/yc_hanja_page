@@ -96,6 +96,10 @@ img{
 } */
 .follow{
   color: rgba(0, 0, 0, 0.103) !important;
+  /* color: transparent !important */
+}
+.follow-ch{
+  color:transparent;
 }
 .hanja-big td{
   font-size: 70px;
