@@ -28,15 +28,15 @@ export function toAdultText(text: string): JSX.Element {
         cnt++
     }
     var chCnt = 0
-    let jsx:JSX.Element = <>
+    let jsx: JSX.Element = <>
         {
             str.split("").map((val, idx) => {
                 if (val == "$") {
                     chCnt++
-                    console.log("map"+chCnt);
-                    
-                    return jsxList[chCnt-1]
-                } else return <>{ val }</>
+                    console.log("map" + chCnt);
+
+                    return jsxList[chCnt - 1]
+                } else return <>{val}</>
 
             })
 
@@ -60,7 +60,8 @@ export const BackView = (backContents: BackContents) => {
             <>
                 <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className="q-answer" /> </div>
                 <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className="q-answer" /> </div>
-                <div className="back-box q3 kr">      <div className="back-text">3. {qCnt > 2 && list[2]}</div><div className="q-answer" /> </div>
+
+                {(qCnt == 3 || (qCnt < 3 && backContents.index == 3)) && <div className="back-box q3 kr"><div className="back-text">3. {qCnt > 2 && list[2]}</div><div className="q-answer" /> </div>}
             </>
         )
     }
@@ -79,15 +80,15 @@ export const BackView = (backContents: BackContents) => {
                     var el = val.trim()
                     const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
                     const regex = new RegExp(korean)
-                    var jsx:JSX.Element =<></>
+                    var jsx: JSX.Element = <></>
                     const isKr = el.match(regex) != undefined
-                    if(isKr){
-                       jsx = <span className="bottom-hanja-kr kr">{el}</span> 
+                    if (isKr) {
+                        jsx = <span className="bottom-hanja-kr kr">{el}</span>
                     }
 
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{ !isKr && el}(<span className="bracket">{val.trim()}</span>) </div>
-                    return <div className="back-hanja-text ">{isKr && jsx}{ !isKr && el}(<span className="bracket">{val.trim()}</span>)</div>
+                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{!isKr && el}(<span className="bracket">{val.trim()}</span>) </div>
+                    return <div className="back-hanja-text ">{isKr && jsx}{!isKr && el}(<span className="bracket">{val.trim()}</span>)</div>
                 })}
             </div>
 

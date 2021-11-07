@@ -23,7 +23,7 @@ html {
   body {
     width: 210mm; /*793px*/
     height: 297mm;
-    margin: 0px;
+    margin: 0;
   }
   .a4{
     /* color: blue !important; */
@@ -105,7 +105,7 @@ img{
   font-size: 70px;
   text-align: center;
   position: relative;
-  height: var(--height-write-hanja);
+  /* height: var(--height-write-hanja); */
   width: var(--height-write-hanja);
   /* line-height: var(--height-write-hanja); */
 }
@@ -113,6 +113,7 @@ img{
   position: relative;
   display: grid;
   align-items: center;
+  padding-bottom: 10px;
 }
 .total-stroke{
   position: absolute;
