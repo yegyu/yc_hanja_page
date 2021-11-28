@@ -44,6 +44,8 @@ function App(linkState: AppProps) {
     pathname = window.location.pathname
   }
 
+  console.log("now week",nowAsNextWeek);
+  
   //  = window.location.pathname;
   console.log('pathname', pathname);
 

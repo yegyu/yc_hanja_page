@@ -10,7 +10,7 @@ export function toAdultText(text: string): JSX.Element {
     var str = text
     var jsxList: JSX.Element[] = []
     while (true) {
-        if (cnt > 10) {
+        if (cnt > 20) {
             console.error("It may infinit loop")
             break
         }
@@ -76,6 +76,8 @@ export const BackView = (backContents: BackContents) => {
 
                 {backContents.back_hanja_list.filter((v, i) => { return i != 0 }).map((val, index) => {
 
+                    // console.log(val);
+                    
                     if (back.index == 1 && index >= 12) return
                     var el = val.trim()
                     const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
