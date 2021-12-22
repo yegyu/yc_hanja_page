@@ -25,11 +25,10 @@ function frontWriteTable(age: Index, rowCnt: Number, front_hanja_list: Array<Fro
         </tbody>
     </table>
     )
-
 }
 export function frontWriteView(age: Index, front_hanja_list: Array<FrontHanjaList>): JSX.Element {
     var rowCnt = 9
-    if (age == Index.Child) rowCnt = 6
+    if (age == Index.Child) rowCnt = 7
     return (
         <div className="bottom-table">
             <span className="bottom-left">
@@ -54,8 +53,8 @@ export function childWordWriteView(vocaArr: Array<Voca>): JSX.Element {
                                 <div className="voca_hanja_unit">
                                     <div className="voca_hanja">{hanja}</div>
                                     <div className="voca_mean_sound_unit">
-                                        <div className="voca_mean_key">뜻</div>
-                                        <div className="voca_sound_key">음</div>
+                                        <div className="voca_mean_key"><div>뜻</div></div>
+                                        <div className="voca_sound_key"><div>음</div></div>
                                         <div className="voca_mean_value">뜻</div>
                                         <div className="vocal_sound_value">음</div>
                                     </div>
