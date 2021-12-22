@@ -12,7 +12,6 @@ th {
   height: 20px;
 }
 
-
 /* body,
 html {
   width: 210mm ; 
@@ -25,22 +24,21 @@ html {
     height: 297mm;
     margin: 0;
   }
-  .a4{
+  .a4 {
     /* color: blue !important; */
   }
-   td, th{
+  td,
+  th {
     /* border: blue solid 1px; */
-
   }
   /* ... the rest of the rules ... */
 }
 
-img{
+img {
   max-width: 100%;
   max-height: 100%;
   height: var(--height-write-hanja);
 }
-
 
 .a4 {
   size: A4 portrait;
@@ -53,7 +51,6 @@ img{
   /* margin-bottom: 5.0cm; */
   box-sizing: border-box;
   page-break-after: always;
-  
 }
 #word-table {
   height: 5%;
@@ -94,14 +91,14 @@ img{
 /* .hanja-big{
   position: relative;
 } */
-.follow{
+.follow {
   color: rgba(0, 0, 0, 0.103) !important;
   /* color: transparent !important */
 }
-.follow-ch{
-  color:transparent;
+.follow-ch {
+  color: transparent;
 }
-.hanja-big td{
+.hanja-big td {
   font-size: 70px;
   text-align: center;
   position: relative;
@@ -109,16 +106,17 @@ img{
   width: var(--height-write-hanja);
   /* line-height: var(--height-write-hanja); */
 }
-.grid-hanja0{
+.grid-hanja0 {
   position: relative;
   display: grid;
   align-items: center;
   padding-bottom: 10px;
 }
-.total-stroke{
+.total-stroke {
   position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
   font-size: large !important;
 }
+

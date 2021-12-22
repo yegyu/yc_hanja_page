@@ -1,4 +1,4 @@
-import { ContentsDto } from "../../model/Api"
+import { ContentsDto, Index } from "../../model/Api"
 import { banList, getDate, getDiffWeek, getWeekly } from "../../model/const";
 import { Room } from "../../model/enum";
 import { FrontHeaderTable } from "../../model/table";
@@ -7,9 +7,11 @@ import '../print_css/stroks.css'
 import '../print_css/top.css'
 import '../print_css/var.css'
 import '../print_css/word.css'
+import '../print_css/voca.css'
 import { BackView } from "./BackView";
 import { HeaderView } from "./header";
 import { KinderPrintView } from "./KinderPrintView";
+import { childWordWriteView, frontWriteView } from "./FrontPrintViewUtils";
 export const makeNextLineBracket = (str: string): JSX.Element => {
     try {
         const list = str.split("(").map((el, i) => {
@@ -28,9 +30,6 @@ export const makeNextLineBracket = (str: string): JSX.Element => {
         return <div>정보가 없어요.</div>
 
     }
-
-
-
 }
 const EachOrderList = (weeks: number): number[] => [
     (Room.KINDERGARTEN + weeks),
@@ -56,6 +55,9 @@ export const PrintView = (contentDto: ContentsDto) => {
         return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
     })
 
+    interface AgeIndex{
+        age:Index
+    }
     const WordViews = () => {
         // var vocaCnt = 1
         
@@ -83,13 +85,13 @@ export const PrintView = (contentDto: ContentsDto) => {
         return view
     };
 
-    const indexList = [0, 1, 2, 3]
+    const frontHanjaIndexList = [0, 1, 2, 3]
 
     const strokeView: JSX.Element = (
         <div className="stroke-table">
             {
 
-                indexList.map((_, index) => {
+                frontHanjaIndexList.map((_, index) => {
                     const hanjaCount = contentDto.front_hanja_list.length
                     if (hanjaCount > index) {
                         var el = contentDto.front_hanja_list[index]
@@ -147,7 +149,8 @@ export const PrintView = (contentDto: ContentsDto) => {
     for (let index = 0; index < 9; index++) {
         nineList.push(index);
     }
-    const writeTable: JSX.Element = (
+
+    const writeTable =(
         <table>
             <tbody>
                 {
@@ -167,6 +170,7 @@ export const PrintView = (contentDto: ContentsDto) => {
             </tbody>
         </table>
     )
+  
     const wrtieView: JSX.Element = (
         <div className="bottom-table">
             <span className="bottom-left">
@@ -182,12 +186,15 @@ export const PrintView = (contentDto: ContentsDto) => {
         </div>
     )
 
+    let ageIndexList = [
+        Index.Kinder,Index.Child,Index.Youth,Index.Adult
+    ]
     return (
         <div>
 
-            {indexList.map((index) => {
+            {ageIndexList.map((index) => {
                 var view
-                if (index == 0) {
+                if (index == Index.Kinder) {
                     view =
                         <div>
                             <div className="a4">
@@ -209,9 +216,11 @@ export const PrintView = (contentDto: ContentsDto) => {
                             <div className="a4">
                               
                                 {headerViews[index]}
-                                <WordViews />
+                                <WordViews  />
+                                {index == Index.Child && childWordWriteView(contentDto.voca_list)}
+
                                 {strokeView}
-                                {wrtieView}
+                                {frontWriteView(index,contentDto.front_hanja_list)}
                             </div>
                             <div className="a4">
                                 <BackView main_words={contentDto.main_words}

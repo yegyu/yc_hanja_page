@@ -1,0 +1,78 @@
+.write_voca_total_container {
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1f;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  margin-top: var(--margin-top);
+  border-right: var(--border);
+  border-left: var(--border);
+  border-top: var(--border);
+  /* border-bottom: var(--border); */
+}
+.write_voca_container {
+  display: flex;
+  align-items: center;
+
+  border-bottom: var(--border);
+}
+
+.write_voca_mean {
+  font-size: xx-large;
+  color: transparent;
+}
+
+.voca_hanja_unit {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 0.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    "voca_hanja"
+    "voca_mean_sound_unit";
+  border-right: var(--border);
+}
+
+.voca_hanja {
+  grid-area: voca_hanja;
+  font-size: xxx-large;
+  text-align: center;
+  width: 100px;
+  border-bottom: var(--border);
+}
+.voca_mean_sound_unit {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  grid-template-rows: 1fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    "voca_mean_key voca_sound_key"
+    "voca_mean_value vocal_sound_value";
+}
+
+.voca_mean_key {
+  grid-area: voca_mean_key;
+  border-bottom: var(--border);
+  text-align: center;
+}
+
+.voca_sound_key {
+  grid-area: voca_sound_key;
+  border-bottom: var(--border);
+  border-left: var(--border);
+  text-align: center;
+}
+
+.voca_mean_value {
+  grid-area: voca_mean_value;
+  color: transparent;
+}
+
+.vocal_sound_value {
+  grid-area: vocal_sound_value;
+  border-left: var(--border);
+  color: transparent;
+}
