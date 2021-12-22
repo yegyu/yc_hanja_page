@@ -55,13 +55,13 @@
   
 }
 .youth-y1, .youth-y2 {
-  height: 190px;
+  height: auto;
 }
  .adult-y1{
   height: auto;
 }
 .child-y1{
-  height: 410px;
+  height: auto;
 }
 .back-child-yojeol-title{
   margin-bottom: 10px;
@@ -99,6 +99,7 @@ ol{
 .back-yojeol-where{
   text-align: end;
   margin-right: 20px;
+  margin-bottom: var(--marign-20);
 }
 .back-yojeol-where::before, .child-yojeol-where::before{
   content: "(" ;
@@ -138,15 +139,16 @@ ol{
   /* height: 260px; */
   /* height: 20%; */
   /* flex: 1; */
-  height: 290px;
+  height: auto;
   padding-top: var(--marign-20);
+  padding-bottom: var(--marign-20);
   font-size: var(--font-norm-size);
 }
-
+/* 
 .back-bottom1{
 
   height: 240px !important;
-}
+} */
 
 
 .back-content {
@@ -199,6 +201,7 @@ ol{
   margin-top: var(--back-bottom-hanja-container);
   margin-left: var(--back-bottom-hanja-container);
   margin-right: var(--back-bottom-hanja-container);
+  /* margin-bottom: var(--back-bottom-hanja-container); */
   flex-grow: 1; 
 
 }
