@@ -58,7 +58,7 @@
   height: 190px;
 }
  .adult-y1{
-  height: 390px;
+  height: auto;
 }
 .child-y1{
   height: 410px;
@@ -129,10 +129,10 @@ ol{
   margin-top: var(--marign-20);
   font-size: var(--font-norm-size);
 }
-.adult-y1{
+/* .adult-y1{
 
   height: 300px;
-}
+} */
 .back-bottom {
   /* position: relative; */
   /* height: 260px; */
