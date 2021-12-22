@@ -61,8 +61,11 @@ export interface BackContents {
     week: number;
     month: number;
     yaer: number;
-    index: number;
+    index: Index;
     order: number
+}
+export enum Index{
+    Kinder = 0,Child,Youth,Adult
 }
 export interface Voca {
     hanja: string;

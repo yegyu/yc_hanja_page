@@ -1,9 +1,9 @@
-import { BackContents } from "../../model/Api"
+import { BackContents, Index } from "../../model/Api"
 import { banList } from "../../model/const"
 import "../print_css/back.css"
 import { BackHeaderView, HeaderView } from "./header"
 type Back = {
-    index: number
+    index:Index 
 }
 export function toAdultText(text: string): JSX.Element {
     var cnt = 0
@@ -45,12 +45,13 @@ export function toAdultText(text: string): JSX.Element {
     return jsx
     // return <>{str.replaceAll("#","<span classNmae='ch'>").replaceAll("$","</span>")}</>
 }
+//backContents.index 
 export const BackView = (backContents: BackContents) => {
 
     const qCnt = backContents.questions.length
     const QuestionsView = (back: Back) => {
         const list = backContents.questions.map((questions) => {
-            if (back.index != 3)
+            if (back.index != Index.Adult)
                 return questions.q.replaceAll(/[(](.*?)[)]/gi, "")
             else {
                 return toAdultText(questions.q)
@@ -78,7 +79,7 @@ export const BackView = (backContents: BackContents) => {
 
                     // console.log(val);
                     
-                    if (back.index == 1 && index >= 12) return
+                    if (back.index == Index.Child && index >= 12) return
                     var el = val.trim()
                     const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
                     const regex = new RegExp(korean)
@@ -182,9 +183,9 @@ export const BackView = (backContents: BackContents) => {
                 문답
             </div>
 
-            {backContents.index == 1 && <ChildBackBottomView index={1} />}
-            {backContents.index == 2 && <YouthBackBottomView index={2} />}
-            {backContents.index == 3 && <AdultBackBottomView index={3} />}
+            {backContents.index == Index.Child && <ChildBackBottomView index={Index.Child} />}
+            {backContents.index == Index.Youth && <YouthBackBottomView index={Index.Youth} />}
+            {backContents.index == Index.Adult && <AdultBackBottomView index={Index.Adult} />}
         </div>
     )
 }

@@ -51,7 +51,7 @@
 }
 
 .q1, .q2, .q3{
-  height: 110px;
+  height: auto;
   
 }
 .youth-y1, .youth-y2 {
@@ -226,6 +226,6 @@ ol{
   content: "-";
 }
 .q-answer{
-  margin-top: var(--marign-20);
+  margin-bottom: var(--marign-20);
   margin-left: var(--marign-20);
 }
