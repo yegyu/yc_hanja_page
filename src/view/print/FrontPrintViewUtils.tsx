@@ -1,23 +1,22 @@
 import { ContentsDto, FrontHanjaList, Index, Voca } from "../../model/Api";
 
 
-function frontWriteTable(age: Index, rowCnt: Number, front_hanja_list: Array<FrontHanjaList>): JSX.Element {
-    let countList = new Array();
-    for (let index = 0; index < rowCnt; index++) {
-        countList[index] = index
+function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontHanjaList | null>): JSX.Element {
+    let rowArr = []
+    for (let i = 0; i < rowCnt; i++) {
+        rowArr[i] = i
     }
     return (<table>
         <tbody>
             {
-                countList.map((v, i) => {
-                    // const hanjaCnt =2
-                    const hanjaCnt = front_hanja_list.length
+                rowArr.map((value, index) => {
                     return (
-                        <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow-ch ch" || v == 3 && "hanja-name kr" || ""} >
-                            <td>{(v == 0 || v == 2) && front_hanja_list[0].hanja}</td>
-                            <td>{(v == 0 || v == 2) && front_hanja_list[1].hanja}</td>
-                            <td>{(v == 0 || v == 2) && hanjaCnt > 2 && front_hanja_list[2].hanja}</td>
-                            <td>{(v == 0 || v == 2) && hanjaCnt > 3 && front_hanja_list[3].hanja}</td>
+                        <tr className={index == 0 && "hanja-big ch" || index == 1 && "hanja-name kr" || index == 2 && "hanja-big follow-ch ch" || index == 3 && "hanja-name kr" || ""} >
+                            <td className="1">{((index == 0 || index == 2) && (swapHanjaList[0] !== null)) && (swapHanjaList[0] as FrontHanjaList).hanja}</td>
+
+                            <td className="2">{((index == 0 || index == 2) && (swapHanjaList[1] !== null)) && (swapHanjaList[1] as FrontHanjaList).hanja}</td>
+                            <td>{((index == 0 || index == 2) && (swapHanjaList[2] !== null)) && (swapHanjaList[2] as FrontHanjaList).hanja}</td>
+                            <td>{((index == 0 || index == 2) && (swapHanjaList[3] !== null)) && (swapHanjaList[3] as FrontHanjaList).hanja}</td>
                         </tr>
                     )
                 })
@@ -26,16 +25,21 @@ function frontWriteTable(age: Index, rowCnt: Number, front_hanja_list: Array<Fro
     </table>
     )
 }
-export function frontWriteView(age: Index, front_hanja_list: Array<FrontHanjaList>): JSX.Element {
+export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen:number): JSX.Element {
     var rowCnt = 9
-    if (age == Index.Child) rowCnt = 7
+    if (age == Index.Child) {
+        rowCnt = 7
+        if (firstVocaLen == 3){
+            rowCnt = 8
+        }
+    }
     return (
         <div className="bottom-table">
             <span className="bottom-left">
-                {frontWriteTable(age, rowCnt, front_hanja_list)}
+                {frontWriteTable(age, rowCnt, swapHanjaList)}
             </span>
             <span className="bottom-right">
-                {frontWriteTable(age, rowCnt, front_hanja_list)}
+                {frontWriteTable(age, rowCnt, swapHanjaList)}
             </span>
 
         </div>
@@ -43,11 +47,16 @@ export function frontWriteView(age: Index, front_hanja_list: Array<FrontHanjaLis
 }
 
 export function childWordWriteView(vocaArr: Array<Voca>): JSX.Element {
+    //예외 단어가 4글자일때
+    var isSpecialCase = false
+    if( vocaArr.length == 1 && vocaArr[0].hanja.length == 4){
+        isSpecialCase = true
+    }
     return (
         <div className="write_voca_total_container hanja">
             {
                 vocaArr.map((voca, i) => (
-                    <div className={"write_voca_container"}>
+                    <div className={`write_voca_container` }>
                         {voca.hanja.split("").filter((v) => v != "").map((hanja, j) => (
                             <>
                                 <div className="voca_hanja_unit">
@@ -61,13 +70,14 @@ export function childWordWriteView(vocaArr: Array<Voca>): JSX.Element {
                                 </div>
                             </>
                         ))}
-                        <div className={"write_voca_mean"}>
+                        <div className={ "write_voca_mean"}>
                         </div>
 
                     </div >
                 )
                 )
             }
+            {isSpecialCase && <div className="four_len_voca_write">{vocaArr[0].hanja}<br/>{vocaArr[0].hanja}</div>}
         </div>
     )
 }

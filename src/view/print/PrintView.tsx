@@ -1,4 +1,4 @@
-import { ContentsDto, Index } from "../../model/Api"
+import { ContentsDto, FrontHanjaList, Index, Voca } from "../../model/Api"
 import { banList, getDate, getDiffWeek, getWeekly } from "../../model/const";
 import { Room } from "../../model/enum";
 import { FrontHeaderTable } from "../../model/table";
@@ -21,7 +21,7 @@ export const makeNextLineBracket = (str: string): JSX.Element => {
 
         return (
             <>
-                <span className="sub-ch ch">{list[0]}</span><br/>
+                <span className="sub-ch ch">{list[0]}</span><br />
                 <span className="sub-kr kr">{list[1]}</span>
             </>
         )
@@ -39,7 +39,7 @@ const EachOrderList = (weeks: number): number[] => [
 ]
 export const PrintView = (contentDto: ContentsDto) => {
     console.log(contentDto.yaer, contentDto.month, contentDto.week);
-    
+
     const targetDate = getDate(contentDto.yaer, contentDto.month, contentDto.week);
 
     console.log('target', targetDate.toISOString());
@@ -55,18 +55,18 @@ export const PrintView = (contentDto: ContentsDto) => {
         return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
     })
 
-    interface AgeIndex{
-        age:Index
+    interface AgeIndex {
+        age: Index
     }
     const WordViews = () => {
         // var vocaCnt = 1
-        
-        var vocaCnt 
+
+        var vocaCnt
         try {
-           vocaCnt =  contentDto.voca_list.length
-            
+            vocaCnt = contentDto.voca_list.length
+
         } catch (error) {
-           return <div>정보 없음</div> 
+            return <div>정보 없음</div>
         }
         var view
         if (vocaCnt == 2) {
@@ -85,18 +85,19 @@ export const PrintView = (contentDto: ContentsDto) => {
         return view
     };
 
-    const frontHanjaIndexList = [0, 1, 2, 3]
 
+    let hanjaList = getNewHanjaList(contentDto.voca_list, contentDto.front_hanja_list)
     const strokeView: JSX.Element = (
         <div className="stroke-table">
             {
 
-                frontHanjaIndexList.map((_, index) => {
-                    const hanjaCount = contentDto.front_hanja_list.length
-                    if (hanjaCount > index) {
-                        var el = contentDto.front_hanja_list[index]
-                        if (index == 1) el = contentDto.front_hanja_list[2]
-                        if (index == 2) el = contentDto.front_hanja_list[1]
+                [0, 1, 2, 3].map((_, index) => {
+                    //한자 자리 배치도와주는 배열
+
+                    if (hanjaList[index] != null) {
+                        var el = hanjaList[index] as FrontHanjaList
+                        console.log("el >>" + el.hanja + ", index:" + index)
+
                         const drawCnt = el.draw_list.length
                         const realCnt = el.count
                         return (
@@ -150,44 +151,44 @@ export const PrintView = (contentDto: ContentsDto) => {
         nineList.push(index);
     }
 
-    const writeTable =(
-        <table>
-            <tbody>
-                {
-                    nineList.map((v, i) => {
-                        // const hanjaCnt =2
-                        const hanjaCnt = contentDto.front_hanja_list.length
-                        return (
-                            <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow-ch ch" || v == 3 && "hanja-name kr" || ""} >
-                                <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[0].hanja}</td>
-                                <td>{(v == 0 || v == 2) && contentDto.front_hanja_list[1].hanja}</td>
-                                <td>{(v == 0 || v == 2) && hanjaCnt > 2 && contentDto.front_hanja_list[2].hanja}</td>
-                                <td>{(v == 0 || v == 2) && hanjaCnt > 3 && contentDto.front_hanja_list[3].hanja}</td>
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
-        </table>
-    )
-  
-    const wrtieView: JSX.Element = (
-        <div className="bottom-table">
-            <span className="bottom-left">
+    let swapHanjaList = swap(hanjaList)
+    // const writeTable = (
+    //     <table>
+    //         <tbody>
+    //             {
+    //                 nineList.map((v, i) => {
+    //                     return (
+    //                         <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow-ch ch" || v == 3 && "hanja-name kr" || ""} >
+    //                             <td className="1">{((v == 0 || v == 2) && (swapHanjaList[0] !== null))&& (swapHanjaList[0] as FrontHanjaList).hanja}0</td>
 
-                {writeTable}
+    //                             <td className="2">{((v == 0 || v == 2) && (swapHanjaList[1] !== null)) && (swapHanjaList[1] as FrontHanjaList).hanja}1</td>
+    //                             <td>{((v == 0 || v == 2) && (swapHanjaList[2] !== null)) && (swapHanjaList[2] as FrontHanjaList).hanja}2</td>
+    //                             <td>{((v == 0 || v == 2) && (swapHanjaList[3] !== null)) &&  (swapHanjaList[3] as FrontHanjaList).hanja}3</td>
+    //                         </tr>
+    //                     )
+    //                 })
+    //             }
+    //         </tbody>
+    //     </table>
+    // )
 
-            </span>
-            <span className="bottom-right">
+    // const wrtieView: JSX.Element = (
+    //     <div className="bottom-table">
+    //         <span className="bottom-left">
 
-                {writeTable}
-            </span>
+    //             {writeTable}
 
-        </div>
-    )
+    //         </span>
+    //         <span className="bottom-right">
+
+    //             {writeTable}
+    //         </span>
+
+    //     </div>
+    // )
 
     let ageIndexList = [
-        Index.Kinder,Index.Child,Index.Youth,Index.Adult
+        Index.Kinder, Index.Child, Index.Youth, Index.Adult
     ]
     return (
         <div>
@@ -214,13 +215,13 @@ export const PrintView = (contentDto: ContentsDto) => {
                     view = (
                         <div>
                             <div className="a4">
-                              
+
                                 {headerViews[index]}
-                                <WordViews  />
+                                <WordViews />
                                 {index == Index.Child && childWordWriteView(contentDto.voca_list)}
 
                                 {strokeView}
-                                {frontWriteView(index,contentDto.front_hanja_list)}
+                                {frontWriteView(index, swapHanjaList, contentDto.voca_list[0].hanja.length)}
                             </div>
                             <div className="a4">
                                 <BackView main_words={contentDto.main_words}
@@ -242,3 +243,85 @@ export const PrintView = (contentDto: ContentsDto) => {
     )
 
 }
+
+function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
+    var boolArr = [true, true, true, true];
+    let totalVocaLen = voca_list.length
+    var secondVocaLen = 2
+    if (totalVocaLen == 1) {
+        let firstVocaLen = voca_list[0].hanja.length
+        switch (firstVocaLen) {
+            case 3:
+                return [true,true,true,false]
+            case 4:
+                return boolArr
+            default:
+                throw new Error("그렇게하지 말고, 좀 더 생각해봐. 너무 적다...");
+                
+        }
+    } else if (totalVocaLen == 2) {
+        let firstVocaLen = voca_list[0].hanja.length
+        secondVocaLen = voca_list[1].hanja.length
+        if(firstVocaLen == 1 && secondVocaLen == 1){
+            return [true,false,true,false]
+        } else if (firstVocaLen == 1 && secondVocaLen == 2){
+            return [true,false,true,true]
+        } else if(firstVocaLen == 1 && secondVocaLen == 3 ){
+            return boolArr
+        } else if(firstVocaLen == 2 && secondVocaLen == 2){
+            return boolArr
+        } else if(firstVocaLen == 2 && secondVocaLen == 1){
+            return [true,true,false,true]
+        }else if(firstVocaLen == 3 && secondVocaLen == 1){
+            return boolArr
+        }
+    }
+
+
+
+    if (totalVocaLen == 2) {
+        secondVocaLen = voca_list[1].hanja.length
+    }
+    let firstVocaLen = voca_list[0].hanja.length
+    if (firstVocaLen == 2) return boolArr
+    if (firstVocaLen == 1) {
+        switch (secondVocaLen) {
+            case 1:
+                return [true, false, true, false]
+            case 2:
+                return [true, false, true, true]
+            case 3:
+                return boolArr
+            default:
+                break;
+        }
+    }
+    return boolArr
+
+
+}
+function getNewHanjaList(voca_list: Voca[], front_hanja_list: FrontHanjaList[]): (FrontHanjaList | null)[] {
+    let getBoolArr = getEachHanjaIndexArr(voca_list)
+    var index = 0
+    var list = getBoolArr.map((hasHanja, i) => {
+        if (hasHanja) {
+            return front_hanja_list[index++]
+        } else {
+            return null
+        }
+    })
+    //swap
+    let temp = list[1]
+    list[1] = list[2]
+    list[2] = temp
+    return list
+}
+
+function swap(hanjaList: (FrontHanjaList | null)[]): (FrontHanjaList | null)[] {
+    var list = hanjaList
+    let temp = list[1]
+    list[1] = list[2]
+    list[2] = temp
+    return list
+}
+

@@ -189,7 +189,7 @@ ol{
   border-bottom: var(--border);
 }
 .back-bottom-hanja-container{
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows:  1fr 1fr 1fr 1fr;
