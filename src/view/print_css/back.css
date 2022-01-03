@@ -189,7 +189,7 @@ ol{
   border-bottom: var(--border);
 }
 .back-bottom-hanja-container{
-  display: grid;
+  display: flex;
   flex-wrap: wrap;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows:  1fr 1fr 1fr 1fr;
@@ -198,6 +198,7 @@ ol{
 .back-bottom-hanja-container > div{
   font-size: xx-large;
   text-align: center;
+  width: 20%;
   margin-top: var(--back-bottom-hanja-container);
   margin-left: var(--back-bottom-hanja-container);
   margin-right: var(--back-bottom-hanja-container);

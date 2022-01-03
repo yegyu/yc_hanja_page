@@ -90,8 +90,8 @@ export const BackView = (backContents: BackContents) => {
                     }
 
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{!isKr && el}(<span className="bracket">{val.trim()}</span>) </div>
-                    return <div className="back-hanja-text ">{isKr && jsx}{!isKr && el}(<span className="bracket">{val.trim()}</span>)</div>
+                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br/>}(<span className="bracket">{val.trim()}</span>) </div>
+                    return <div className="back-hanja-text ">{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br/>}(<span className="bracket">{val.trim()}</span>)</div>
                 })}
             </div>
 
