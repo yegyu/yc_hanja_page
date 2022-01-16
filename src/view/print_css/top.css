@@ -13,11 +13,11 @@
   border-left: var(--border);
 }
 .top > div {
-  height: calc(var(--height) + 13px);
+  height: calc(var(--height) + 4px);
   border-bottom: var(--border);
   border-right: var(--border);
   align-items: center;
-  line-height: calc(var(--height) + 13px);
+  line-height: calc(var(--height) + 4px);
 }
 
 .top-item {
