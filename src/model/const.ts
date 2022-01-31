@@ -28,10 +28,10 @@ export const getStartDate = (): Date => {
 }
 export const getWeekly = (targetDate: Date): number => {
     const firstDate = new Date();
-    firstDate.setHours(0, 0, 0, 0)
-    firstDate.setMonth(targetDate.getMonth())
+    // firstDate.setHours(0, 0, 0, 0)
     firstDate.setFullYear(targetDate.getFullYear())
-    firstDate.setDate(1)
+    firstDate.setMonth(targetDate.getMonth(),1)
+    // firstDate.setDate(1)
 
     var weeks = Math.floor(
         (targetDate.getTime() - firstDate.getTime()) / (1000 * 3600 * 24 * 7)
@@ -41,31 +41,22 @@ export const getWeekly = (targetDate: Date): number => {
 export const getDate = (year: number, month: number, week: number): Date => {
     const d = new Date();
     d.setFullYear(year);
-    d.setMonth(month - 1);
-    d.setDate(1);
+    d.setMonth(month - 1,1);
+    // d.setDate(1);
 
-    d.setHours(0, 0, 0, 0);
+    // d.setHours(0, 0, 0, 0);
+
+    //day indexing >> lord's day:0, mon:1 ~
+    var initDay  = d.getDay()
     console.log('getDate init D', d);
-    var offset = 1;
-    // 1일이 월요일 즉, 7일이 첫째 주일일 경우
-    if (d.getDay() == 1)
-        offset = 0;
-    while (true) {
-        if (0 == d.getDay()) {
-            if ((Math.floor(d.getDate() / 7) + offset) == week) {
-                break;
-            } else {
-                d.setDate(d.getDate() + 7);
-            }
-        } else {
-            d.setDate(d.getDate() + 1);
-        }
-    }
-    d.setDate(d.getDate())
-    console.log('getDate last D', d);
-    if (month - 1 != d.getMonth()) {
-        console.error('correct month:', month, ',but result:', d.getMonth() + 1);
-
+    console.log("year:",d.getUTCFullYear(),",month:",d.getUTCMonth(),",day:",d.getUTCDate());
+    if( initDay == 0){
+        let leftDate  = (week - 1) * 7;
+        d.setDate(1 + leftDate);
+    } else {
+        let nextOffsetOfSundayFromInitDay = 7 - initDay
+        let leftDate = (week - 1) * 7 
+        d.setDate(1 + nextOffsetOfSundayFromInitDay + leftDate)
     }
     return d;
 }

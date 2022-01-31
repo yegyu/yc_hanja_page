@@ -133,6 +133,8 @@ function App(linkState: AppProps) {
     )
   } else {
     const content = contentsDto![parseInt(week) - 1]
+    console.log("content:",content);
+    
     try {
 
       view = (
