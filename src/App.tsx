@@ -125,11 +125,11 @@ function App(linkState: AppProps) {
 
   if (printViewContentsDto == null) {
     view = (
-      <div>
+      <>
 
         <SideBar years={getYears()} stateHandler={handleUpdate} />
         <ContentsWrapper yearMonth={url_path} handleContentDto={handleContentDto} notFound={notFound} year={year} month={month} week={week} contentsList={contentsDto} />
-      </div>
+      </>
     )
   } else {
     const content = contentsDto![parseInt(week) - 1]
@@ -138,7 +138,7 @@ function App(linkState: AppProps) {
     try {
 
       view = (
-        <div>
+        <>
           <PrintView front_hanja_list={content.front_hanja_list}
             main_words={content.main_words}
             questions={content.questions}
@@ -148,7 +148,7 @@ function App(linkState: AppProps) {
             handleContentDto={content.handleContentDto}
             month={parseInt(month)}
             yaer={parseInt(year)} voca_list={content.voca_list} />
-        </div>
+        </>
       )
       return view;
     } catch (err) {

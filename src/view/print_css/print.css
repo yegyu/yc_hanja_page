@@ -28,6 +28,8 @@ img {
   margin: 0 auto 2cm;
   /* margin-bottom: 5.0cm; */
   /* box-sizing: border-box; */
+  /* print 시에 밑에 검은 줄 나와서 이걸로 가림*/
+  border: 10px rgb(255, 255, 255) solid;
   page-break-after: always;
 }
 #word-table {
