@@ -24,6 +24,7 @@ export const getStartDate = (): Date => {
     d.setFullYear(startYear)
     d.setMonth(startMonth)
     d.setDate(startDate)
+    d.setHours(0)
     return d;
 }
 export const getWeekly = (targetDate: Date): number => {
@@ -31,11 +32,14 @@ export const getWeekly = (targetDate: Date): number => {
     // firstDate.setHours(0, 0, 0, 0)
     firstDate.setFullYear(targetDate.getFullYear())
     firstDate.setMonth(targetDate.getMonth(),1)
+    
     // firstDate.setDate(1)
 
     var weeks = Math.floor(
         (targetDate.getTime() - firstDate.getTime()) / (1000 * 3600 * 24 * 7)
     );
+    console.log("weeks:",weeks);
+    
     return weeks;
 }
 export const getDate = (year: number, month: number, week: number): Date => {
@@ -62,9 +66,13 @@ export const getDate = (year: number, month: number, week: number): Date => {
     return d;
 }
 export const getDiffWeek = (targetDate: Date): number => {
-    var weeks = Math.floor(
-        (targetDate.getTime() - getStartDate().getTime()) / (1000 * 3600 * 24 * 7)
-    );
+    let startDate =  getStartDate()
+    let raw =         (targetDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24 * 7)
+    var weeks = Math.ceil( raw);
+    console.log("raw diff dates:",raw);
+    
+    console.log("getDiffWeek:",weeks,",targetDate:",targetDate,",startDate:",startDate);
+    
     return weeks;
 }
 

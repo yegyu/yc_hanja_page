@@ -39,17 +39,17 @@ export function getDefaultDate(): Date {
   date.setHours(0);
   return date;
 }
-export function getNextNo(room: Room) {
-  let date1 = new Date();
-  let date2 = getDefaultDate();
-  date1.setDate(1);
+// export function getNextNo(room: Room) {
+//   let date1 = new Date();
+//   let date2 = getDefaultDate();
+//   date1.setHours(0);
 
-  var weeks = Math.round(
-    (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24 * 7)
-  );
-  // console.log(weeks);
-  return room + weeks;
-}
+//   var weeks = Math.floor(
+//     (date2.getTime() - date1.getTime()) / (1000 * 3600 * 24 * 7)
+//   );
+//   console.log("week:",weeks);
+//   return room + weeks;
+// }
 export function getNextSundayAndWeekOrder(
   callback: (nextSunday: Date, order: number) => void
 ) {

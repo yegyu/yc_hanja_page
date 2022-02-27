@@ -42,7 +42,7 @@ export const PrintView = (contentDto: ContentsDto) => {
 
     const targetDate = getDate(contentDto.yaer, contentDto.month, contentDto.week);
 
-    console.log('target', targetDate.toISOString());
+    console.log('target!!', targetDate);
 
     const diffWeek = getDiffWeek(targetDate);
     const numList = EachOrderList(diffWeek)
