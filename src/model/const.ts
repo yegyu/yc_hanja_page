@@ -31,48 +31,58 @@ export const getWeekly = (targetDate: Date): number => {
     const firstDate = new Date();
     // firstDate.setHours(0, 0, 0, 0)
     firstDate.setFullYear(targetDate.getFullYear())
-    firstDate.setMonth(targetDate.getMonth(),1)
-    
+    firstDate.setMonth(targetDate.getMonth(), 1)
+    console.log("firstData:" + firstDate);
+    console.log("targDate:" + targetDate);
+    if (firstDate.getDate() == targetDate.getDate() &&
+        firstDate.getMonth() && targetDate.getMonth() &&
+        firstDate.getFullYear() == targetDate.getFullYear() &&
+        firstDate.getDay() == targetDate.getDay()) {
+        return 0;
+    }
+
+
+
     // firstDate.setDate(1)
 
     var weeks = Math.floor(
         (targetDate.getTime() - firstDate.getTime()) / (1000 * 3600 * 24 * 7)
     );
-    console.log("weeks:",weeks);
-    
+    console.log("weeks:", weeks);
+
     return weeks;
 }
 export const getDate = (year: number, month: number, week: number): Date => {
     const d = new Date();
     d.setFullYear(year);
-    d.setMonth(month - 1,1);
+    d.setMonth(month - 1, 1);
     d.setHours(0);
     // d.setDate(1);
 
     // d.setHours(0, 0, 0, 0);
 
     //day indexing >> lord's day:0, mon:1 ~
-    var initDay  = d.getDay()
+    var initDay = d.getDay()
     console.log('getDate init D', d);
-    console.log("year:",d.getUTCFullYear(),",month:",d.getUTCMonth(),",day:",d.getUTCDate());
-    if( initDay == 0){
-        let leftDate  = (week - 1) * 7;
+    console.log("year:", d.getUTCFullYear(), ",month:", d.getUTCMonth(), ",day:", d.getUTCDate());
+    if (initDay == 0) {
+        let leftDate = (week - 1) * 7;
         d.setDate(1 + leftDate);
     } else {
         let nextOffsetOfSundayFromInitDay = 7 - initDay
-        let leftDate = (week - 1) * 7 
+        let leftDate = (week - 1) * 7
         d.setDate(1 + nextOffsetOfSundayFromInitDay + leftDate)
     }
     return d;
 }
 export const getDiffWeek = (targetDate: Date): number => {
-    let startDate =  getStartDate()
-    let raw =         (targetDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24 * 7)
-    var weeks = Math.ceil( raw);
-    console.log("raw diff dates:",raw);
-    
-    console.log("getDiffWeek:",weeks,",targetDate:",targetDate,",startDate:",startDate);
-    
+    let startDate = getStartDate()
+    let raw = (targetDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24 * 7)
+    var weeks = Math.ceil(raw);
+    console.log("raw diff dates:", raw);
+
+    console.log("getDiffWeek:", weeks, ",targetDate:", targetDate, ",startDate:", startDate);
+
     return weeks;
 }
 
