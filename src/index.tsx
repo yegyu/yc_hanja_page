@@ -10,6 +10,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Root />
   </BrowserRouter>,
+
   document.getElementById('root')
 );
 
