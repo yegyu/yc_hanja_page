@@ -34,11 +34,17 @@ export const getWeekly = (targetDate: Date): number => {
     firstDate.setMonth(targetDate.getMonth(), 1)
     console.log("firstData:" + firstDate);
     console.log("targDate:" + targetDate);
-    if (firstDate.getDate() == targetDate.getDate() &&
-        firstDate.getMonth() && targetDate.getMonth() &&
-        firstDate.getFullYear() == targetDate.getFullYear() &&
-        firstDate.getDay() == targetDate.getDay()) {
-        return 0;
+    // if (firstDate.getDate() == targetDate.getDate() &&
+    //     firstDate.getMonth() && targetDate.getMonth() &&
+    //     firstDate.getFullYear() == targetDate.getFullYear() &&
+    //     firstDate.getDay() == targetDate.getDay()) {
+    //     return 0;
+    // }
+    var interpolation = 0
+    if(firstDate.getDay() == 0){
+        console.log(">>>>>");
+        interpolation += 1
+        
     }
 
 
@@ -47,7 +53,7 @@ export const getWeekly = (targetDate: Date): number => {
 
     var weeks = Math.floor(
         (targetDate.getTime() - firstDate.getTime()) / (1000 * 3600 * 24 * 7)
-    );
+    ) + interpolation;
     console.log("weeks:", weeks);
 
     return weeks;
