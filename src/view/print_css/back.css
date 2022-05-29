@@ -198,7 +198,7 @@ ol{
 .back-bottom-hanja-container > div{
   font-size: xx-large;
   text-align: center;
-  width: 20%;
+  /* width: 20%; */
   margin-top: var(--back-bottom-hanja-container);
   margin-left: var(--back-bottom-hanja-container);
   margin-right: var(--back-bottom-hanja-container);
