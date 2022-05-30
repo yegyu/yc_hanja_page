@@ -195,17 +195,23 @@ ol{
   grid-template-rows:  1fr 1fr 1fr 1fr;
   margin: var(--back-bottom-hanja-container);
 }
+
 .back-bottom-hanja-container > div{
   font-size: xx-large;
   text-align: center;
-  /* width: 20%; */
   margin-top: var(--back-bottom-hanja-container);
   margin-left: var(--back-bottom-hanja-container);
   margin-right: var(--back-bottom-hanja-container);
   /* margin-bottom: var(--back-bottom-hanja-container); */
+  width: 20%;
   flex-grow: 1; 
+  /* justify-content: center; */
+  /* position:fixed; */
+  /* position: relative; */
 
 }
+
+
 .bracket{
   color:transparent;
 }

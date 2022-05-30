@@ -3,7 +3,7 @@ import { banList } from "../../model/const"
 import "../print_css/back.css"
 import { BackHeaderView, HeaderView } from "./header"
 type Back = {
-    index:Index 
+    index: Index
 }
 export function toAdultText(text: string): JSX.Element {
     var cnt = 0
@@ -66,6 +66,8 @@ export const BackView = (backContents: BackContents) => {
             </>
         )
     }
+    const hasOverThreeWord = backContents.back_hanja_list.findIndex((v, i) =>  v.length > 2 );
+
     const BottomHanjasView = (back: Back) => (
         <div className={'back-box back-bottom ' + "back-bottom" + back.index}  >
             <div className="back-title-container">
@@ -78,9 +80,9 @@ export const BackView = (backContents: BackContents) => {
                 {backContents.back_hanja_list.filter((v, i) => { return i != 0 }).map((val, index) => {
 
                     // console.log(val);
-                    
                     if (back.index == Index.Child && index >= 12) return
                     var el = val.trim()
+                    const elLen = el.length;
                     const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
                     const regex = new RegExp(korean)
                     var jsx: JSX.Element = <></>
@@ -90,8 +92,8 @@ export const BackView = (backContents: BackContents) => {
                     }
 
 
-                    if (index % 4 == 0) return <div className="back-wrap back-hanja-text ">{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br/>}(<span className="bracket">{val.trim()}</span>) </div>
-                    return <div className="back-hanja-text ">{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br/>}(<span className="bracket">{val.trim()}</span>)</div>
+                    if (index % 4 == 0) return <div className={"back-wrap back-hanja-text " }>{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br />}(<span className="bracket">{val.trim()}</span>) </div>
+                    return <div className={"back-hanja-text "}>{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br />}(<span className="bracket">{val.trim()}</span>)</div>
                 })}
             </div>
 
