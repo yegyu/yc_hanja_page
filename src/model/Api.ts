@@ -1,3 +1,4 @@
+import { isatty } from "tty";
 
 export interface FrontHanjaList {
     hanja: string;
@@ -51,7 +52,74 @@ export interface ContentsDto {
     month: number;
     yaer: number;
     handleContentDto: (contentsDto: ContentsDto) => void;
+
 }
+function isEmpty(str: any): Boolean {
+    return (!str || str.length === 0);
+}
+function isArrayValueHasEmpty(strs: any[]): Boolean {
+    strs.forEach((value, i, arr) => {
+        if (isEmpty(value)) {
+            return true
+        }
+    })
+    return false
+}
+export function getMissedInfoSet(contentsDto: ContentsDto): Set<string> {
+    console.log("contents", contentsDto)
+    var set = new Set<string>();
+
+    if (isEmpty(contentsDto.back_hanja_list)) {
+        set.add("뒷면 아래 한자리스트");
+    } else
+        contentsDto.back_hanja_list.filter((value, index) => {
+            isEmpty(value)
+        }).map((rs) => { set.add("뒷면 아래 한자리스트"); })
+
+    if (isEmpty(contentsDto.front_hanja_list)) {
+        set.add("앞의 한자 단어 정보")
+    } else
+        contentsDto.front_hanja_list.filter((frontHanja, index) => {
+            isEmpty(frontHanja.hanja) || isEmpty(frontHanja.count) || isEmpty(frontHanja.name) || isEmpty(frontHanja.sub)
+        }).map((rs) => { set.add("앞의 한자 단어 정보") })
+
+    if (isEmpty(contentsDto.main_words)) {
+        set.add("본문 요절 정보")
+    }
+
+    if (isEmpty(contentsDto.week)) { set.add("주차 정보") }
+
+    if (isEmpty(contentsDto.questions)) {
+        set.add("문답 정보")
+    } else
+        contentsDto.questions.filter((q, index) => {
+            isEmpty(q.a) || isEmpty(q.q)
+        }).map((rs) => { set.add("문답 정보") })
+
+    if (isEmpty(contentsDto.voca_list)) {
+        set.add("앞의 한자 단어 정보")
+    } else {
+        contentsDto.voca_list.filter((voca, index) => {
+            isEmpty(voca.hanja) || isEmpty(voca.mean)
+        }).map((rs) => { set.add("앞의 한자 단어 정보") })
+    }
+
+    if (isArrayValueHasEmpty([contentsDto.yojeol.adult.answer, contentsDto.yojeol.adult.words, contentsDto.yojeol.adult.where])) {
+        set.add("어른 요절 정보")
+    }
+    if (isArrayValueHasEmpty([contentsDto.yojeol.morning.where, contentsDto.yojeol.morning.words])) {
+        set.add("오전 요절 정보")
+    }
+    if (isArrayValueHasEmpty([contentsDto.yojeol.child_afternoon.words, contentsDto.yojeol.child_afternoon.where])) {
+        set.add("유년부 오후 요절")
+    }
+    if (isArrayValueHasEmpty([contentsDto.yojeol.youth_afternoon.words, contentsDto.yojeol.youth_afternoon.where])) {
+        set.add("중등부 오후 요절")
+    }
+    console.log("빠진 부분:", set)
+    return set
+}
+
 export interface BackContents {
     main_words: string;
     questions: Question[];
@@ -64,8 +132,8 @@ export interface BackContents {
     index: Index;
     order: number
 }
-export enum Index{
-    Kinder = 0,Child,Youth,Adult
+export enum Index {
+    Kinder = 0, Child, Youth, Adult
 }
 export interface Voca {
     hanja: string;

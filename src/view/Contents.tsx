@@ -1,7 +1,7 @@
 import "./Contents.css"
 import axios, { AxiosResponse } from 'axios'
 import React, { DOMElement, ReactNode, useEffect, useState } from "react"
-import { ContentsDto, YearJson } from "../model/Api"
+import { ContentsDto, YearJson,getMissedInfoSet } from "../model/Api"
 import { FrontHanjaList } from "../model/table"
 
 import { error } from "console"
@@ -49,13 +49,14 @@ export const ContentsWrapper = (contentsProps: ContentsProps) => {
                 </div>
                 {
                     contentsProps.contentsList!.map((content, index) => (
+                        
                         <div>
                              {
                                 // 리액트 링크(URL) 훅 만들기
                                 <BrowserRouter>
                                     <Link className="print-link" to={`/${gitRoot}/${contentsProps.year}/${contentsProps.month}/${content.week}`}>
                                         
-                                        <button className="print-button" onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면`}</button>
+                                        <button className="print-button" onClick={() => contentsProps.handleContentDto.call(this, content)}>{`${content.week}주차 프린트 화면 ${getMissedInfoSet(content).size == 0 ? "(완성)" : "(미완성)"}`}</button>
                                     </Link>
                                 </BrowserRouter>
                             }
