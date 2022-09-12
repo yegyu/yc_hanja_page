@@ -70,10 +70,12 @@ export const PrintView = (contentDto: ContentsDto) => {
         }
         var view
         if (vocaCnt == 2) {
+            let needSmall0 = contentDto.voca_list[0].hanja.length == 3
+            let needSmall1 = contentDto.voca_list[1].hanja.length == 3
             view = (<div className="word hanja">
-                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
+                <div className={needSmall0 ? "grid-100 word-item ch ch-small": "grid-100 word-item ch"}>{contentDto.voca_list[0].hanja}</div>
                 <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
-                <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
+                <div className={needSmall1 ? "grid-102 word-item ch ch-small":"grid-102 word-item ch"}>{contentDto.voca_list[1].hanja}</div>
                 <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
             </div>)
         } else {

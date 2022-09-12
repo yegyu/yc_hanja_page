@@ -49,6 +49,9 @@
   font-size: xx-large;
 }
 
+.ch-small{
+  font-size: x-large !important;
+}
 
 .grid-100 {
   grid-area: grid-100;
