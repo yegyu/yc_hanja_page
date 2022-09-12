@@ -2,7 +2,7 @@
   display: grid;
 
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1f;
+  grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row dense;
   margin-top: var(--margin-top);
@@ -11,14 +11,29 @@
   border-top: var(--border);
   /* border-bottom: var(--border); */
 }
-.write_voca_container{
-
+.write_voca_container {
   display: flex;
   align-items: center;
 
   border-bottom: var(--border);
 }
-.four_len_voca_write{
+
+.write_voca_total_container3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+.write_voca_total_container3_12 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+.write_voca_total_container4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+.four_len_voca_write {
   border-bottom: var(--border);
   /* border-right: var(--border);
   border-left: var(--border); */

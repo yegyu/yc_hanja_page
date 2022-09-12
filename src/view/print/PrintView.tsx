@@ -63,24 +63,52 @@ export const PrintView = (contentDto: ContentsDto) => {
 
         var vocaCnt
         try {
-            vocaCnt = contentDto.voca_list.length
+            vocaCnt = contentDto.voca_list.filter((v,i)=>{return v.hanja != undefined}).length
 
         } catch (error) {
             return <div>정보 없음</div>
         }
         var view
-        if (vocaCnt == 2) {
-            view = (<div className="word hanja">
+        if (vocaCnt == 1) {
+            view = (<div className="word1 hanja">
+                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
+                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
+            </div>)
+        } else if (vocaCnt == 2) {
+            view = (<div className="word2 hanja">
                 <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
                 <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
                 <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
                 <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
             </div>)
-        } else {
-            view = (<div className="word1 hanja">
+        } else if (vocaCnt == 3) {
+            console.log(contentDto.voca_list);
+            let has2hanja0 = contentDto.voca_list[0].hanja.length
+            let has2hanja1 = contentDto.voca_list[1].hanja.length
+            let has2hanja2 = contentDto.voca_list[2].hanja.length
+            
+            view = (
+                <div className="word3 hanja">
+                    <div className={has2hanja0 == 2 ? "grid-100 word-item ch small-hanja" : "grid-100 word-item ch"}>{contentDto.voca_list[0].hanja}</div>
+                    <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
+                    <div className={has2hanja1 == 2 ? "grid-102 word-item ch small-hanja" : "grid-102 word-item ch"}>{contentDto.voca_list[1].hanja}</div>
+                    <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
+                    <div className={has2hanja2 == 2 ? "grid-104 word-item ch small-hanja" : "grid-104 word-item ch"}>{contentDto.voca_list[2].hanja}</div>
+                    <div className="grid-105 word-item kr">{contentDto.voca_list[2].mean}</div>
+                </div>)
+        } else if (vocaCnt == 4) {
+            view = (<div className="word4 hanja">
                 <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
                 <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
+                <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
+                <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
+                <div className="grid-104 word-item ch">{contentDto.voca_list[2].hanja}</div>
+                <div className="grid-105 word-item kr">{contentDto.voca_list[2].mean}</div>
+                <div className="grid-106 word-item ch">{contentDto.voca_list[3].hanja}</div>
+                <div className="grid-107 word-item kr">{contentDto.voca_list[3].mean}</div>
             </div>)
+        } else {
+            view = (<div></div>)
         }
         return view
     };
@@ -252,27 +280,27 @@ function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
         let firstVocaLen = voca_list[0].hanja.length
         switch (firstVocaLen) {
             case 3:
-                return [true,true,true,false]
+                return [true, true, true, false]
             case 4:
                 return boolArr
             default:
                 throw new Error("그렇게하지 말고, 좀 더 생각해봐. 너무 적다...");
-                
+
         }
     } else if (totalVocaLen == 2) {
         let firstVocaLen = voca_list[0].hanja.length
         secondVocaLen = voca_list[1].hanja.length
-        if(firstVocaLen == 1 && secondVocaLen == 1){
-            return [true,false,true,false]
-        } else if (firstVocaLen == 1 && secondVocaLen == 2){
-            return [true,false,true,true]
-        } else if(firstVocaLen == 1 && secondVocaLen == 3 ){
+        if (firstVocaLen == 1 && secondVocaLen == 1) {
+            return [true, false, true, false]
+        } else if (firstVocaLen == 1 && secondVocaLen == 2) {
+            return [true, false, true, true]
+        } else if (firstVocaLen == 1 && secondVocaLen == 3) {
             return boolArr
-        } else if(firstVocaLen == 2 && secondVocaLen == 2){
+        } else if (firstVocaLen == 2 && secondVocaLen == 2) {
             return boolArr
-        } else if(firstVocaLen == 2 && secondVocaLen == 1){
-            return [true,true,false,true]
-        }else if(firstVocaLen == 3 && secondVocaLen == 1){
+        } else if (firstVocaLen == 2 && secondVocaLen == 1) {
+            return [true, true, false, true]
+        } else if (firstVocaLen == 3 && secondVocaLen == 1) {
             return boolArr
         }
     }

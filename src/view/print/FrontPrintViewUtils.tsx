@@ -25,11 +25,11 @@ function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontH
     </table>
     )
 }
-export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen:number): JSX.Element {
+export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen: number): JSX.Element {
     var rowCnt = 9
     if (age == Index.Child) {
         rowCnt = 7
-        if (firstVocaLen == 3){
+        if (firstVocaLen == 3) {
             rowCnt = 8
         }
     }
@@ -45,39 +45,70 @@ export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList |
         </div>
     )
 }
-
+enum ChildWriteCase {
+    two2, one2two1, one3, one4, one
+}
 export function childWordWriteView(vocaArr: Array<Voca>): JSX.Element {
     //예외 단어가 4글자일때
-    var isSpecialCase = false
-    if( vocaArr.length == 1 && vocaArr[0].hanja.length == 4){
-        isSpecialCase = true
+    var childWordWriteView = ChildWriteCase.two2
+    var inThreeHanjaTwohanjaIndex = -1;
+    var rootClassName = "write_voca_total_container hanja"
+    if (vocaArr.length == 1 && vocaArr[0].hanja.length == 4) {
+        childWordWriteView = ChildWriteCase.one
+    } else if (vocaArr.length = 3) {
+        //#     #
+        //#
+        rootClassName += " write_voca_total_container3"
+        childWordWriteView = ChildWriteCase.one3
+        vocaArr.forEach((voca, index) => {
+            if (voca.hanja.length == 2) {
+                inThreeHanjaTwohanjaIndex = index
+                childWordWriteView = ChildWriteCase.one2two1
+                if(index == 0)
+                // ##
+                // #    #
+                rootClassName += " write_voca_total_container3_12"
+            }
+        })
+    } else {
+        rootClassName += " write_voca_total_container4"
+        //#     #
+        //#     #
+        childWordWriteView = ChildWriteCase.one4
     }
+
+
     return (
-        <div className="write_voca_total_container hanja">
+        <div className={rootClassName}>
+
             {
                 vocaArr.map((voca, i) => (
-                    <div className={`write_voca_container` }>
-                        {voca.hanja.split("").filter((v) => v != "").map((hanja, j) => (
-                            <>
-                                <div className="voca_hanja_unit">
-                                    <div className="voca_hanja">{hanja}</div>
-                                    <div className="voca_mean_sound_unit">
-                                        <div className="voca_mean_key"><div>뜻</div></div>
-                                        <div className="voca_sound_key"><div>음</div></div>
-                                        <div className="voca_mean_value">뜻</div>
-                                        <div className="vocal_sound_value">음</div>
-                                    </div>
-                                </div>
-                            </>
-                        ))}
-                        <div className={ "write_voca_mean"}>
-                        </div>
-
-                    </div >
-                )
-                )
+                    childVocaWriteUnit(voca, i)
+                ))
             }
-            {isSpecialCase && <div className="four_len_voca_write">{vocaArr[0].hanja}<br/>{vocaArr[0].hanja}</div>}
+            {childWordWriteView == ChildWriteCase.one && <div className="four_len_voca_write">{vocaArr[0].hanja}<br />{vocaArr[0].hanja}</div>}
         </div>
     )
+}
+export function childVocaWriteUnit(voca: Voca, index: Number): JSX.Element {
+
+    return (
+        <div className={`write_voca_container`}>
+            {voca.hanja.split("").filter((v) => v != "").map((hanja, j) => (
+                <>
+                    <div className="voca_hanja_unit">
+                        <div className="voca_hanja">{hanja}</div>
+                        <div className="voca_mean_sound_unit">
+                            <div className="voca_mean_key"><div>뜻</div></div>
+                            <div className="voca_sound_key"><div>음</div></div>
+                            <div className="voca_mean_value">뜻</div>
+                            <div className="vocal_sound_value">음</div>
+                        </div>
+                    </div>
+                </>
+            ))}
+            <div className={"write_voca_mean"}>
+            </div>
+
+        </div >)
 }

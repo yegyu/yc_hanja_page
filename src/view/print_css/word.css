@@ -1,33 +1,59 @@
-.word {
+.word1 {
+  display: grid;
+  grid-template-columns: 1fr 3.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas: "grid-100 grid-101";
+
+  margin-top: var(--margin-top);
+  height: var(--height);
+  border-bottom: var(--border);
+  border-left: var(--border);
+}
+.word2 {
   display: grid;
   grid-template-columns: 1fr 3.5fr 1fr 3.5fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row dense;
-  grid-template-areas: 
-  'grid-100 grid-101 grid-102 grid-103';
-  
+  grid-template-areas: "grid-100 grid-101 grid-102 grid-103";
+
   margin-top: var(--margin-top);
-  height: var(--height);  
+  height: var(--height);
   border-bottom: var(--border);
   border-left: var(--border);
-  
 }
-.word1{
+.word3 {
   display: grid;
-  grid-template-columns: 1fr 3.5fr ;
+  grid-template-columns: 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row dense;
-  grid-template-areas: 
-  'grid-100 grid-101';
-  
+  grid-template-areas: "grid-100 grid-101 grid-102 grid-103 grid-104 grid-105";
+
   margin-top: var(--margin-top);
-  height: var(--height);  
+  height: var(--height);
   border-bottom: var(--border);
   border-left: var(--border);
 }
-.word > div, .word1 > div{
+.word4 {
+  display: grid;
+  grid-template-columns: 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr 1fr 3.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row dense;
+  grid-template-areas: "grid-100 grid-101 grid-102 grid-103 grid-104 grid-105 grid-106 grid-107";
+
+  margin-top: var(--margin-top);
+  height: var(--height);
+  border-bottom: var(--border);
+  border-left: var(--border);
+}
+.word2 > div,
+.word1 > div,
+.word3 > div,
+.word4 > div {
   border-right: var(--border);
   border-top: var(--border);
   word-break: break-all;
@@ -36,7 +62,6 @@
   display: grid;
   align-items: center;
 
-
   font-size: var(--font-front-mean-hanja-name-size);
 }
 
@@ -44,11 +69,23 @@
   text-align: center;
   letter-spacing: 2px;
 }
-.word div:nth-child(1), .word div:nth-child(3), .word1 div:nth-child(1){
 
+.word1 div:nth-child(1),
+.word2 div:nth-child(1),
+.word2 div:nth-child(3),
+.word3 div:nth-child(1),
+.word3 div:nth-child(3),
+.word3 div:nth-child(5),
+.word4 div:nth-child(1),
+.word4 div:nth-child(3),
+.word4 div:nth-child(5),
+.word4 div:nth-child(7) {
   font-size: xx-large;
 }
 
+.word3 .small-hanja{
+  font-size: x-large  !important;
+}
 
 .grid-100 {
   grid-area: grid-100;
@@ -62,12 +99,38 @@
 .grid-102 {
   grid-area: grid-102;
 }
-.grid-101, .grid-103{
+.grid-101,
+.grid-103,
+.grid-105,
+.grid-107 {
   font-size: var(--font-norm-size);
 }
 
+
 .grid-103 {
   grid-area: grid-103;
+  text-align: start;
+  padding-left: 0.5em;
+}
+.grid-104 {
+  grid-area: grid-104;
+}
+.grid-105 {
+  grid-area: grid-105;
+  text-align: start;
+  padding-left: 0.5em;
+}
+
+.grid-106 {
+  grid-area: grid-106;
+}
+/* .grid-105,
+.grid-107 {
+  font-size: var(--font-norm-size);
+} */
+
+.grid-107 {
+  grid-area: grid-107;
   text-align: start;
   padding-left: 0.5em;
 }
