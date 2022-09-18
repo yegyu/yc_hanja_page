@@ -25,11 +25,11 @@ function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontH
     </table>
     )
 }
-export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen:number): JSX.Element {
+export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, vocaList:Array<Voca>): JSX.Element {
     var rowCnt = 9
     if (age == Index.Child) {
         rowCnt = 7
-        if (firstVocaLen == 3){
+        if (vocaList[0].hanja.length == 3 && vocaList.length == 1){
             rowCnt = 8
         }
     }

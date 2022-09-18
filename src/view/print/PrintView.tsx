@@ -223,7 +223,7 @@ export const PrintView = (contentDto: ContentsDto) => {
                                 {index == Index.Child && childWordWriteView(contentDto.voca_list)}
 
                                 {strokeView}
-                                {frontWriteView(index, swapHanjaList, contentDto.voca_list[0].hanja.length)}
+                                {frontWriteView(index, swapHanjaList, contentDto.voca_list)}
                             </div>
                             <div className="a4">
                                 <BackView main_words={contentDto.main_words}
