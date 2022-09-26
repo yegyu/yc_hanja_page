@@ -58,18 +58,19 @@ function isEmpty(str: any): Boolean {
     return (!str || str.length === 0);
 }
 function isArrayValueHasEmpty(strs: any[]): Boolean {
-    strs.forEach((value, i, arr) => {
-        if (isEmpty(value)) {
+    for (let index = 0; index < strs.length; index++) {
+        const element = strs[index];
+        if(isEmpty(element)){
             return true
         }
-    })
+    }
     return false
 }
 export function getMissedInfoSet(contentsDto: ContentsDto): Set<string> {
     console.log("contents", contentsDto)
     var set = new Set<string>();
 
-    if (isEmpty(contentsDto.back_hanja_list)) {
+    if (isEmpty(contentsDto.back_hanja_list) && contentsDto.back_hanja_list.length != 17) {
         set.add("뒷면 아래 한자리스트");
     } else
         contentsDto.back_hanja_list.filter((value, index) => {
