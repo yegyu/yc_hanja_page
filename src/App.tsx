@@ -10,8 +10,9 @@ import "./App.css"
 import { ContentsDto, YearJson } from "./model/Api";
 import { AxiosResponse } from "axios";
 import { getMonthsJson, getYearsJson } from "./util/api_utils";
-import { PrintView } from "./view/print/PrintView";
+import { PrintView, WordViews } from "./view/print/PrintView";
 import { GenModal } from "./view/Generator";
+import {  childWordWriteView, } from "./view/print/FrontPrintViewUtils";
 type AppProps = {
   link: string
 }
@@ -36,22 +37,22 @@ function App(linkState: AppProps) {
   const [tempPrintViewContentsDto, setTempPrintViewContentDto] = useState<ContentsDto | null>(null);
 
   const [tempYearMonth, updateTempYearMonth] = useState<string>("");
-  var pathname:string
+  var pathname: string
   //init
-  if (window.location.pathname == "/" || window.location.pathname =="/"+ gitRoot + "/") {
-    pathname = "/"+ gitRoot + initMonthYear
-  } else{
+  if (window.location.pathname == "/" || window.location.pathname == "/" + gitRoot + "/") {
+    pathname = "/" + gitRoot + initMonthYear
+  } else {
     pathname = window.location.pathname
   }
 
-  console.log("now week",nowAsNextWeek);
-  
+  console.log("now week", nowAsNextWeek);
+
   //  = window.location.pathname;
   console.log('pathname', pathname);
 
   var [year, month, week]: string[] = pathname.split("/").filter(v => v != "" && !v.includes(gitRoot));
   if (year == undefined) {
-    [year, month] = initMonthYear.split("/").filter(v => v != "" )
+    [year, month] = initMonthYear.split("/").filter(v => v != "")
   }
   console.log('filtered >>>> ', year, month, week);
   if (!week) {
@@ -122,6 +123,9 @@ function App(linkState: AppProps) {
     setTempPrintViewContentDto(dto);
   }
 
+  console.log("hostname", window.location.hostname);
+  let isDebug = window.location.hostname == "localhost"
+
 
   if (printViewContentsDto == null) {
     view = (
@@ -133,8 +137,8 @@ function App(linkState: AppProps) {
     )
   } else {
     const content = contentsDto![parseInt(week) - 1]
-    console.log("content:",content);
-    
+    console.log("content:", content);
+
     try {
 
       view = (
@@ -155,9 +159,30 @@ function App(linkState: AppProps) {
       view = React.createElement("div", null, "hello")
     }
   }
+  let test0 = [{ "hanja": "分亞", "mean": "나누다" }, { "hanja": "節氣", "mean": "한 해 동안을 24로 가른 철,한 해 동안을 24로 가른 철," }]
+  let test1 = [{ "hanja": "分", "mean": "나누다" }, { "hanja": "節", "mean": "마디" }, { "hanja": "節氣", "mean": "한 해 동안을 24로 가른 철,한 해 동안을 24로 가른 철," }]
+  let test11 = [{ "hanja": "節氣", "mean": "한 해 동안을 24로 가른 철" }, { "hanja": "分", "mean": "나누다" }, { "hanja": "節", "mean": "마디" }]
+  let test2 = [{ "hanja": "分", "mean": "나누다나누다나누다나누다" }, { "hanja": "節", "mean": "마디" }, { "hanja": "氣", "mean": "기운" }, { "hanja": "阿", "mean": "언덕" }]
+  let test3 = [{ "hanja": "分分分分", "mean": "나누다나누다나누다나누다" }]
+  let test4 = [{ "hanja": "分分分", "mean": "나누다" }, { "hanja": "分", "mean": "나누다" }]
   return (
     <div className="App">
       {/* <GenModal/> */}
+      {/* {isDebug ? childWordWriteView(test0) : {}}
+      {isDebug ? childWordWriteView(test4) : {}}
+      {isDebug ? childWordWriteView(test3) : {}}
+      {isDebug ? childWordWriteView(test2) : {}}
+      {isDebug ? childWordWriteView(test11) : {}}
+      {isDebug ? childWordWriteView(test1) : {}}
+      {isDebug ? WordViews(test0) : {}}
+      {isDebug ? WordViews(test1) : {}}
+      {isDebug ? WordViews(test11) : {}}
+      {isDebug ? WordViews(test2) : {}}
+      {isDebug ? WordViews(test3) : {}}
+      {isDebug ? WordViews(test4) : {}} */}
+      {/* {childWordWriteViewTable(test2)}
+      {childWordWriteViewTable(test3)}
+      {childWordWriteViewTable(test4)} */}
       {view}
     </div >
   );
