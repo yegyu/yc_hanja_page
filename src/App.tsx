@@ -143,6 +143,7 @@ function App(linkState: AppProps) {
 
       view = (
         <>
+        {/* front_hanja_list가 배열 순서대로 옴 */}
           <PrintView front_hanja_list={content.front_hanja_list}
             main_words={content.main_words}
             questions={content.questions}
@@ -165,9 +166,11 @@ function App(linkState: AppProps) {
   let test2 = [{ "hanja": "分", "mean": "나누다나누다나누다나누다" }, { "hanja": "節", "mean": "마디" }, { "hanja": "氣", "mean": "기운" }, { "hanja": "阿", "mean": "언덕" }]
   let test3 = [{ "hanja": "分分分分", "mean": "나누다나누다나누다나누다" }]
   let test4 = [{ "hanja": "分分分", "mean": "나누다" }, { "hanja": "分", "mean": "나누다" }]
+  let test5 = [{ "hanja": "分", "mean": "나누다" },{ "hanja": "分分分", "mean": "나누다" }]
   return (
     <div className="App">
       {/* <GenModal/> */}
+      {/* {isDebug ? childWordWriteView(test5) : {}} */}
       {/* {isDebug ? childWordWriteView(test0) : {}}
       {isDebug ? childWordWriteView(test4) : {}}
       {isDebug ? childWordWriteView(test3) : {}}

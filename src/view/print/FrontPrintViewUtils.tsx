@@ -4,6 +4,8 @@ import { ContentsDto, FrontHanjaList, Index, Voca } from "../../model/Api";
 
 function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontHanjaList | null>): JSX.Element {
     let rowArr = []
+    console.log("frontWriteTable:swapHanjaList", swapHanjaList, swapHanjaList[3]);
+
     for (let i = 0; i < rowCnt; i++) {
         rowArr[i] = i
     }
@@ -13,11 +15,11 @@ function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontH
                 rowArr.map((value, index) => {
                     return (
                         <tr className={index == 0 && "hanja-big ch" || index == 1 && "hanja-name kr" || index == 2 && "hanja-big follow-ch ch" || index == 3 && "hanja-name kr" || ""} >
-                            <td className="1">{((index == 0 || index == 2) && (swapHanjaList[0] !== null)) && (swapHanjaList[0] as FrontHanjaList).hanja}</td>
+                            <td className="1">{((index == 0 || index == 2) && (swapHanjaList[0] != undefined)) && (swapHanjaList[0] as FrontHanjaList).hanja}</td>
 
-                            <td className="2">{((index == 0 || index == 2) && (swapHanjaList[1] !== null)) && (swapHanjaList[1] as FrontHanjaList).hanja}</td>
-                            <td>{((index == 0 || index == 2) && (swapHanjaList[2] !== null)) && (swapHanjaList[2] as FrontHanjaList).hanja}</td>
-                            <td>{((index == 0 || index == 2) && (swapHanjaList[3] !== null)) && (swapHanjaList[3] as FrontHanjaList).hanja}</td>
+                            <td className="2">{((index == 0 || index == 2) && (swapHanjaList[1] != undefined)) && (swapHanjaList[1] as FrontHanjaList).hanja}</td>
+                            <td>{((index == 0 || index == 2) && (swapHanjaList[2] != undefined)) && (swapHanjaList[2] as FrontHanjaList).hanja}</td>
+                            <td>{((index == 0 || index == 2) && (swapHanjaList[3] != undefined)) && (swapHanjaList[3] as FrontHanjaList).hanja}</td>
                         </tr>
                     )
                 })
@@ -27,18 +29,18 @@ function frontWriteTable(age: Index, rowCnt: Number, swapHanjaList: Array<FrontH
     )
 }
 // <<<<<<< HEAD
-export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, vocaList:Array<Voca>): JSX.Element {
+export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, vocaList: Array<Voca>): JSX.Element {
     var rowCnt = 9
     if (age == Index.Child) {
         rowCnt = 7
-        if (vocaList[0].hanja.length == 3 && vocaList.length == 1){
-// =======
-// export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen: number): JSX.Element {
-//     var rowCnt = 9
-//     if (age == Index.Child) {
-//         rowCnt = 7
-//         if (firstVocaLen == 3) {
-// >>>>>>> front-hanja-more-than-two
+        if (vocaList[0].hanja.length == 3 && vocaList.length == 1) {
+            // =======
+            // export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen: number): JSX.Element {
+            //     var rowCnt = 9
+            //     if (age == Index.Child) {
+            //         rowCnt = 7
+            //         if (firstVocaLen == 3) {
+            // >>>>>>> front-hanja-more-than-two
             rowCnt = 8
         }
     }
@@ -54,7 +56,7 @@ export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList |
         </div>
     )
 }
-function getChildWriteCase(vocaArr: Array<Voca>): ChildWriteCase {
+export function getChildWriteCase(vocaArr: Array<Voca>): ChildWriteCase {
     var enumCase = ChildWriteCase.case22
     var arrLen = vocaArr.length
     switch (arrLen) {
@@ -66,9 +68,16 @@ function getChildWriteCase(vocaArr: Array<Voca>): ChildWriteCase {
                 enumCase = ChildWriteCase.case3
             break;
         case 2:
-            if (vocaArr[0].hanja.length == 3 || vocaArr[1].hanja.length == 3) {
+            let voca0len = vocaArr[0].hanja.length
+            let voca1len = vocaArr[1].hanja.length
+            if (voca0len == 3 || voca1len == 3) {
                 enumCase = ChildWriteCase.case31
+            }else if(voca0len == 1 && voca1len == 2){
+                enumCase = ChildWriteCase.case12
+            } else if(voca0len == 2 && voca1len == 1){
+                enumCase = ChildWriteCase.case21
             }
+
             break;
         case 3:
             enumCase = ChildWriteCase.case111
@@ -91,11 +100,13 @@ export function childVocaWriteUnit(voca: Voca, index: Number, childWriteCase: Ch
 
     var needEmptySpace = (childWriteCase == ChildWriteCase.case112 && index == 2) || (childWriteCase == ChildWriteCase.case211 && index == 0)
 
+    console.log("childVocaWriteUnit", childWriteCase);
+
     //#     #(this)
     var isRightPostion = false
     let vocaLen = voca.hanja.length
     if (vocaLen == 1) {
-        if (index == 1 && childWriteCase != ChildWriteCase.case211 && childWriteCase != ChildWriteCase.case31) {
+        if (index == 1 && childWriteCase != ChildWriteCase.case211 && childWriteCase != ChildWriteCase.case31 && childWriteCase != ChildWriteCase.case21) {
             isRightPostion = true
         } else if (index == 3) {
             isRightPostion = true
@@ -132,6 +143,8 @@ export function childVocaWriteUnit(voca: Voca, index: Number, childWriteCase: Ch
     )
 }
 enum ChildWriteCase {
+    case12,
+    case21,
     //##
     //##
     case22,

@@ -11,7 +11,7 @@ import '../print_css/voca.css'
 import { BackView } from "./BackView";
 import { HeaderView } from "./header";
 import { KinderPrintView } from "./KinderPrintView";
-import { childWordWriteView, frontWriteView } from "./FrontPrintViewUtils";
+import { childWordWriteView, frontWriteView, getChildWriteCase } from "./FrontPrintViewUtils";
 export const makeNextLineBracket = (str: string): JSX.Element => {
     try {
         const list = str.split("(").map((el, i) => {
@@ -93,7 +93,10 @@ export function WordViews(vocaArr: Array<Voca>): JSX.Element {
     }
     return view
 }
-export function StrokeView(hanjaList:(FrontHanjaList | null)[]) :JSX.Element{
+export function StrokeView(_hanjaList: (FrontHanjaList | null)[]): JSX.Element {
+    let hanjaList = swap(Object.assign([],_hanjaList))
+    console.log("strokeView::",hanjaList,_hanjaList);
+    
     return (
         <div className="stroke-table">
             {
@@ -152,7 +155,7 @@ export function StrokeView(hanjaList:(FrontHanjaList | null)[]) :JSX.Element{
             }
 
         </div>
-    ) 
+    )
 }
 export const PrintView = (contentDto: ContentsDto) => {
     console.log(contentDto.yaer, contentDto.month, contentDto.week);
@@ -176,13 +179,20 @@ export const PrintView = (contentDto: ContentsDto) => {
         age: Index
     }
 
-    let hanjaList = getNewHanjaList(contentDto.voca_list, contentDto.front_hanja_list)
+    console.log("init front list", contentDto.front_hanja_list);
+
+    let frontBigHanjaList = getFrontBigHanjaList(contentDto.voca_list, contentDto.front_hanja_list)
+    // let frontBigHanjaList = contentDto.front_hanja_list
+    let strokeHanjaList = swap(frontBigHanjaList)
+    // let strokeHanjaList = swap(frontBigHanjaList)
+    // let childWriteCase = getChildWriteCase(contentDto.voca_list)
+
     const nineList: number[] = []
     for (let index = 0; index < 9; index++) {
         nineList.push(index);
     }
 
-    let swapHanjaList = swap(hanjaList)
+    // let swapHanjaList = (hanjaList)
 
     let ageIndexList = [
         Index.Kinder, Index.Child, Index.Youth, Index.Adult
@@ -217,8 +227,8 @@ export const PrintView = (contentDto: ContentsDto) => {
                                 {WordViews(contentDto.voca_list)}
                                 {index == Index.Child && childWordWriteView(contentDto.voca_list)}
 
-                                {StrokeView(hanjaList)}
-                                {frontWriteView(index, swapHanjaList, contentDto.voca_list)}
+                                {StrokeView(strokeHanjaList)}
+                                {frontWriteView(index, frontBigHanjaList, contentDto.voca_list)}
                             </div>
                             <div className="a4">
                                 <BackView main_words={contentDto.main_words}
@@ -297,21 +307,27 @@ function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
 
 
 }
-function getNewHanjaList(voca_list: Voca[], front_hanja_list: FrontHanjaList[]): (FrontHanjaList | null)[] {
-    let getBoolArr = getEachHanjaIndexArr(voca_list)
-    var index = 0
-    var list = getBoolArr.map((hasHanja, i) => {
-        if (hasHanja) {
-            return front_hanja_list[index++]
-        } else {
-            return null
-        }
-    })
+function getFrontBigHanjaList(voca_list: Voca[], front_hanja_list: FrontHanjaList[]): (FrontHanjaList | null)[] {
+    // let writeCase = getChildWriteCase(voca_list);
+
+    // let getBoolArr = getEachHanjaIndexArr(voca_list)
+    // var index = 0
+    // var list = getBoolArr.map((hasHanja, i) => {
+    //     // if (hasHanja) {
+    //     //     return front_hanja_list[index++]
+    //     // } else {
+    //     //     return null
+    //     // }
+    //     return front_hanja_list[index++]
+    // })
+    let list = Object.assign([],front_hanja_list)
     //swap
+    // var list = front_hanja_list
     let temp = list[1]
     list[1] = list[2]
     list[2] = temp
     return list
+    // return front_hanja_list
 }
 
 function swap(hanjaList: (FrontHanjaList | null)[]): (FrontHanjaList | null)[] {
