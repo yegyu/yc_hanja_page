@@ -37,85 +37,64 @@ const EachOrderList = (weeks: number): number[] => [
     (Room.TEENAGER + weeks),
     (Room.ADULT + weeks)
 ]
-export const PrintView = (contentDto: ContentsDto) => {
-    console.log(contentDto.yaer, contentDto.month, contentDto.week);
+export function WordViews(vocaArr: Array<Voca>): JSX.Element {
+    // var vocaCnt = 1
 
-    const targetDate = getDate(contentDto.yaer, contentDto.month, contentDto.week);
+    var vocaCnt
+    try {
+        vocaCnt = vocaArr.filter((v, i) => { return v.hanja != undefined }).length
 
-    console.log('target!!', targetDate);
-
-    const diffWeek = getDiffWeek(targetDate);
-    const numList = EachOrderList(diffWeek)
-    const headerList: FrontHeaderTable[] = numList.map<FrontHeaderTable>((no, index) => {
-        return new FrontHeaderTable(no, targetDate, getWeekly(targetDate), banList[index])
-    })
-    console.log("headerList", headerList);
-
-    const headerViews: JSX.Element[] = headerList.map<JSX.Element>((frontTable) => {
-        return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
-    })
-
-    interface AgeIndex {
-        age: Index
+    } catch (error) {
+        return <div>정보 없음</div>
     }
-    const WordViews = () => {
-        // var vocaCnt = 1
+    var view
+    if (vocaCnt == 1) {
+        view = (<div className="word1 hanja">
+            <div className="grid-100 word-item ch">{vocaArr[0].hanja}</div>
+            <div className="grid-101 word-item kr">{vocaArr[0].mean}</div>
+        </div>)
+    } else if (vocaCnt == 2) {
+        let voca0Len = vocaArr[0].hanja.length
+        let voca1Len = vocaArr[1].hanja.length
+        view = (<div className="word2 hanja">
+            <div className={voca0Len > 2 ? "grid-100 word-item ch small-hanja" : "grid-100 word-item ch"}>{vocaArr[0].hanja}</div>
+            <div className="grid-101 word-item kr">{vocaArr[0].mean}</div>
+            <div className={voca1Len > 2 ? "grid-102 word-item ch small-hanja" : "grid-102 word-item ch"}>{vocaArr[1].hanja}</div>
+            <div className="grid-103 word-item kr">{vocaArr[1].mean}</div>
+        </div>)
+    } else if (vocaCnt == 3) {
+        console.log(vocaArr);
+        let has2hanja0 = vocaArr[0].hanja.length
+        let has2hanja1 = vocaArr[1].hanja.length
+        let has2hanja2 = vocaArr[2].hanja.length
 
-        var vocaCnt
-        try {
-            vocaCnt = contentDto.voca_list.filter((v,i)=>{return v.hanja != undefined}).length
-
-        } catch (error) {
-            return <div>정보 없음</div>
-        }
-        var view
-        if (vocaCnt == 1) {
-            view = (<div className="word1 hanja">
-                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
-                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
+        view = (
+            <div className="word3 hanja">
+                <div className={has2hanja0 == 2 ? "grid-100 word-item ch small-hanja" : "grid-100 word-item ch"}>{vocaArr[0].hanja}</div>
+                <div className="grid-101 word-item kr">{vocaArr[0].mean}</div>
+                <div className={has2hanja1 == 2 ? "grid-102 word-item ch small-hanja" : "grid-102 word-item ch"}>{vocaArr[1].hanja}</div>
+                <div className="grid-103 word-item kr">{vocaArr[1].mean}</div>
+                <div className={has2hanja2 == 2 ? "grid-104 word-item ch small-hanja" : "grid-104 word-item ch"}>{vocaArr[2].hanja}</div>
+                <div className="grid-105 word-item kr">{vocaArr[2].mean}</div>
             </div>)
-        } else if (vocaCnt == 2) {
-            view = (<div className="word2 hanja">
-                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
-                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
-                <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
-                <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
-            </div>)
-        } else if (vocaCnt == 3) {
-            console.log(contentDto.voca_list);
-            let has2hanja0 = contentDto.voca_list[0].hanja.length
-            let has2hanja1 = contentDto.voca_list[1].hanja.length
-            let has2hanja2 = contentDto.voca_list[2].hanja.length
-            
-            view = (
-                <div className="word3 hanja">
-                    <div className={has2hanja0 == 2 ? "grid-100 word-item ch small-hanja" : "grid-100 word-item ch"}>{contentDto.voca_list[0].hanja}</div>
-                    <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
-                    <div className={has2hanja1 == 2 ? "grid-102 word-item ch small-hanja" : "grid-102 word-item ch"}>{contentDto.voca_list[1].hanja}</div>
-                    <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
-                    <div className={has2hanja2 == 2 ? "grid-104 word-item ch small-hanja" : "grid-104 word-item ch"}>{contentDto.voca_list[2].hanja}</div>
-                    <div className="grid-105 word-item kr">{contentDto.voca_list[2].mean}</div>
-                </div>)
-        } else if (vocaCnt == 4) {
-            view = (<div className="word4 hanja">
-                <div className="grid-100 word-item ch">{contentDto.voca_list[0].hanja}</div>
-                <div className="grid-101 word-item kr">{contentDto.voca_list[0].mean}</div>
-                <div className="grid-102 word-item ch">{contentDto.voca_list[1].hanja}</div>
-                <div className="grid-103 word-item kr">{contentDto.voca_list[1].mean}</div>
-                <div className="grid-104 word-item ch">{contentDto.voca_list[2].hanja}</div>
-                <div className="grid-105 word-item kr">{contentDto.voca_list[2].mean}</div>
-                <div className="grid-106 word-item ch">{contentDto.voca_list[3].hanja}</div>
-                <div className="grid-107 word-item kr">{contentDto.voca_list[3].mean}</div>
-            </div>)
-        } else {
-            view = (<div></div>)
-        }
-        return view
-    };
-
-
-    let hanjaList = getNewHanjaList(contentDto.voca_list, contentDto.front_hanja_list)
-    const strokeView: JSX.Element = (
+    } else if (vocaCnt == 4) {
+        view = (<div className="word4 hanja">
+            <div className="grid-100 word-item ch">{vocaArr[0].hanja}</div>
+            <div className="grid-101 word-item kr">{vocaArr[0].mean}</div>
+            <div className="grid-102 word-item ch">{vocaArr[1].hanja}</div>
+            <div className="grid-103 word-item kr">{vocaArr[1].mean}</div>
+            <div className="grid-104 word-item ch">{vocaArr[2].hanja}</div>
+            <div className="grid-105 word-item kr">{vocaArr[2].mean}</div>
+            <div className="grid-106 word-item ch">{vocaArr[3].hanja}</div>
+            <div className="grid-107 word-item kr">{vocaArr[3].mean}</div>
+        </div>)
+    } else {
+        view = (<div></div>)
+    }
+    return view
+}
+export function StrokeView(hanjaList:(FrontHanjaList | null)[]) :JSX.Element{
+    return (
         <div className="stroke-table">
             {
 
@@ -173,47 +152,37 @@ export const PrintView = (contentDto: ContentsDto) => {
             }
 
         </div>
-    )
+    ) 
+}
+export const PrintView = (contentDto: ContentsDto) => {
+    console.log(contentDto.yaer, contentDto.month, contentDto.week);
+
+    const targetDate = getDate(contentDto.yaer, contentDto.month, contentDto.week);
+
+    console.log('target!!', targetDate);
+
+    const diffWeek = getDiffWeek(targetDate);
+    const numList = EachOrderList(diffWeek)
+    const headerList: FrontHeaderTable[] = numList.map<FrontHeaderTable>((no, index) => {
+        return new FrontHeaderTable(no, targetDate, getWeekly(targetDate), banList[index])
+    })
+    console.log("headerList", headerList);
+
+    const headerViews: JSX.Element[] = headerList.map<JSX.Element>((frontTable) => {
+        return <HeaderView no={frontTable.no} date={frontTable.date} weekly={frontTable.weekly} ban={frontTable.ban} dateString={frontTable.dateString} />;
+    })
+
+    interface AgeIndex {
+        age: Index
+    }
+
+    let hanjaList = getNewHanjaList(contentDto.voca_list, contentDto.front_hanja_list)
     const nineList: number[] = []
     for (let index = 0; index < 9; index++) {
         nineList.push(index);
     }
 
     let swapHanjaList = swap(hanjaList)
-    // const writeTable = (
-    //     <table>
-    //         <tbody>
-    //             {
-    //                 nineList.map((v, i) => {
-    //                     return (
-    //                         <tr className={v == 0 && "hanja-big ch" || v == 1 && "hanja-name kr" || v == 2 && "hanja-big follow-ch ch" || v == 3 && "hanja-name kr" || ""} >
-    //                             <td className="1">{((v == 0 || v == 2) && (swapHanjaList[0] !== null))&& (swapHanjaList[0] as FrontHanjaList).hanja}0</td>
-
-    //                             <td className="2">{((v == 0 || v == 2) && (swapHanjaList[1] !== null)) && (swapHanjaList[1] as FrontHanjaList).hanja}1</td>
-    //                             <td>{((v == 0 || v == 2) && (swapHanjaList[2] !== null)) && (swapHanjaList[2] as FrontHanjaList).hanja}2</td>
-    //                             <td>{((v == 0 || v == 2) && (swapHanjaList[3] !== null)) &&  (swapHanjaList[3] as FrontHanjaList).hanja}3</td>
-    //                         </tr>
-    //                     )
-    //                 })
-    //             }
-    //         </tbody>
-    //     </table>
-    // )
-
-    // const wrtieView: JSX.Element = (
-    //     <div className="bottom-table">
-    //         <span className="bottom-left">
-
-    //             {writeTable}
-
-    //         </span>
-    //         <span className="bottom-right">
-
-    //             {writeTable}
-    //         </span>
-
-    //     </div>
-    // )
 
     let ageIndexList = [
         Index.Kinder, Index.Child, Index.Youth, Index.Adult
@@ -245,10 +214,10 @@ export const PrintView = (contentDto: ContentsDto) => {
                             <div className="a4">
 
                                 {headerViews[index]}
-                                <WordViews />
+                                {WordViews(contentDto.voca_list)}
                                 {index == Index.Child && childWordWriteView(contentDto.voca_list)}
 
-                                {strokeView}
+                                {StrokeView(hanjaList)}
                                 {frontWriteView(index, swapHanjaList, contentDto.voca_list[0].hanja.length)}
                             </div>
                             <div className="a4">

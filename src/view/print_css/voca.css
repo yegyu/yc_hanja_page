@@ -16,6 +16,7 @@
   align-items: center;
 
   border-bottom: var(--border);
+  /* border: var(--border); */
 }
 
 .write_voca_total_container3 {
@@ -24,6 +25,13 @@
   grid-row: 1fr 1fr;
 }
 .write_voca_total_container3_12 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 1fr 1fr;
+  /* grid-template-areas: "write_voca_container write_voca_container" */
+  /* ""; */
+}
+.write_voca_total_container3_21 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row: 1fr 1fr;
@@ -56,6 +64,13 @@
     "voca_hanja"
     "voca_mean_sound_unit";
   border-right: var(--border);
+}
+.voca_hanja_unit_right{
+  border-left: var(--border);
+}
+.write_voca_empty{
+  border-bottom: var(--border);
+  /* border-right: var(--border); */
 }
 
 .voca_hanja {
