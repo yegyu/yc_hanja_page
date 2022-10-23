@@ -164,7 +164,10 @@ ol{
 }
 
 .back-text{
-  margin: var(--marign-20);
+  margin-top: var(--marign-20);
+  margin-left: var(--marign-20);
+  margin-right: var(--marign-20);
+  margin-bottom: 15px;
   font-size: var(--font-norm-size);
 }
 .back-last-answer{
@@ -238,4 +241,11 @@ ol{
 .q-answer{
   margin-bottom: var(--marign-20);
   margin-left: var(--marign-20);
+}
+
+.q-answer-show{
+  font-size: 20px;
+  margin-bottom: var(--marign-20);
+  margin-left: var(--marign-20);
+  margin-right: var(--marign-20)
 }

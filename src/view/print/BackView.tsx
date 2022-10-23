@@ -1,5 +1,6 @@
 import { BackContents, Index } from "../../model/Api"
 import { banList } from "../../model/const"
+import { Question } from "../../model/table"
 import "../print_css/back.css"
 import { BackHeaderView, HeaderView } from "./header"
 type Back = {
@@ -47,6 +48,7 @@ export function toAdultText(text: string): JSX.Element {
 }
 //backContents.index 
 export const BackView = (backContents: BackContents) => {
+    let needAnswer = backContents.index == Index.Youth 
 
     const qCnt = backContents.questions.length
     const QuestionsView = (back: Back) => {
@@ -57,16 +59,19 @@ export const BackView = (backContents: BackContents) => {
                 return toAdultText(questions.q)
             }
         })
+
+        let answers = backContents.questions
+
         return (
             <>
-                <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className="q-answer" /> </div>
-                <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className="q-answer" /> </div>
+                <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} > {needAnswer ? "- " +answers[0].a : ""}</div></div>
+                <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} > {needAnswer ? "- " +answers[1].a : ""}</div></div>
 
-                {(qCnt == 3 || (qCnt < 3 && backContents.index == 3)) && <div className="back-box q3 kr"><div className="back-text">3. {qCnt > 2 && list[2]}</div><div className="q-answer" /> </div>}
+                {(qCnt == 3 || (qCnt < 3 && backContents.index == 3)) && <div className="back-box q3 kr"><div className="back-text">3. {qCnt > 2 && list[2]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} >{needAnswer ? "- " +answers[2].a : ""}</div> </div>}
             </>
         )
     }
-    const hasOverThreeWord = backContents.back_hanja_list.findIndex((v, i) =>  v.length > 2 );
+    const hasOverThreeWord = backContents.back_hanja_list.findIndex((v, i) => v.length > 2);
 
     const BottomHanjasView = (back: Back) => (
         <div className={'back-box back-bottom ' + "back-bottom" + back.index}  >
@@ -92,7 +97,7 @@ export const BackView = (backContents: BackContents) => {
                     }
 
 
-                    if (index % 4 == 0) return <div className={"back-wrap back-hanja-text " }>{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br />}(<span className="bracket">{val.trim()}</span>) </div>
+                    if (index % 4 == 0) return <div className={"back-wrap back-hanja-text "}>{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br />}(<span className="bracket">{val.trim()}</span>) </div>
                     return <div className={"back-hanja-text "}>{isKr && jsx}{!isKr && el}{val.trim().length > 2 && <br />}(<span className="bracket">{val.trim()}</span>)</div>
                 })}
             </div>

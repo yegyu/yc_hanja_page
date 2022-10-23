@@ -8,7 +8,7 @@ export interface FrontHanjaList {
     sub: string;
 }
 
-export interface Question {
+export interface QuestionModel {
     q: string;
     a: string;
 }
@@ -45,7 +45,7 @@ export interface ContentsDto {
     voca_list: Voca[];
     front_hanja_list: FrontHanjaList[];
     main_words: string;
-    questions: Question[];
+    questions: QuestionModel[];
     yojeol: Yojeol;
     back_hanja_list: string[];
     week: number;
@@ -123,7 +123,7 @@ export function getMissedInfoSet(contentsDto: ContentsDto): Set<string> {
 
 export interface BackContents {
     main_words: string;
-    questions: Question[];
+    questions: QuestionModel[];
     yojeol: Yojeol;
     //0: where, 
     back_hanja_list: string[];
