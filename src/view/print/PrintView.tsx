@@ -94,9 +94,9 @@ export function WordViews(vocaArr: Array<Voca>): JSX.Element {
     return view
 }
 export function StrokeView(_hanjaList: (FrontHanjaList | null)[]): JSX.Element {
-    let hanjaList = swap(Object.assign([],_hanjaList))
-    console.log("strokeView::",hanjaList,_hanjaList);
-    
+    let hanjaList = swap(Object.assign([], _hanjaList))
+    console.log("strokeView::", hanjaList, _hanjaList);
+
     return (
         <div className="stroke-table">
             {
@@ -269,7 +269,7 @@ function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
     } else if (totalVocaLen == 2) {
         let firstVocaLen = voca_list[0].hanja.length
         secondVocaLen = voca_list[1].hanja.length
-        if (firstVocaLen == 1 && secondVocaLen == 1) {
+        if (firstVocaLen == 1 && secondVocaLen == 1 && voca_list.length == 2) {
             return [true, false, true, false]
         } else if (firstVocaLen == 1 && secondVocaLen == 2) {
             return [true, false, true, true]
@@ -291,10 +291,11 @@ function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
     }
     let firstVocaLen = voca_list[0].hanja.length
     if (firstVocaLen == 2) return boolArr
-    if (firstVocaLen == 1) {
+    if (firstVocaLen == 1 && totalVocaLen == 2) {
         switch (secondVocaLen) {
             case 1:
                 return [true, false, true, false]
+
             case 2:
                 return [true, false, true, true]
             case 3:
@@ -308,19 +309,23 @@ function getEachHanjaIndexArr(voca_list: Voca[]): Array<Boolean> {
 
 }
 function getFrontBigHanjaList(voca_list: Voca[], front_hanja_list: FrontHanjaList[]): (FrontHanjaList | null)[] {
-    // let writeCase = getChildWriteCase(voca_list);
+    let writeCase = getChildWriteCase(voca_list);
 
-    // let getBoolArr = getEachHanjaIndexArr(voca_list)
-    // var index = 0
-    // var list = getBoolArr.map((hasHanja, i) => {
-    //     // if (hasHanja) {
-    //     //     return front_hanja_list[index++]
-    //     // } else {
-    //     //     return null
-    //     // }
-    //     return front_hanja_list[index++]
-    // })
-    let list = Object.assign([],front_hanja_list)
+    let getBoolArr = getEachHanjaIndexArr(voca_list)
+    var index = 0
+    var list = getBoolArr.map((hasHanja, i) => {
+        if (hasHanja) {
+            return front_hanja_list[index++]
+        } else {
+            return null
+        }
+        // return front_hanja_list[index++]
+    })
+    if (front_hanja_list[0].hanja.length == 1) {
+
+    }
+
+    // let list = Object.assign([],front_hanja_list)
     //swap
     // var list = front_hanja_list
     let temp = list[1]

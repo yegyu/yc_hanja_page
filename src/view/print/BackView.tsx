@@ -48,7 +48,7 @@ export function toAdultText(text: string): JSX.Element {
 }
 //backContents.index 
 export const BackView = (backContents: BackContents) => {
-    let needAnswer = backContents.index == Index.Youth 
+    let needAnswer = backContents.index == Index.Youth
 
     const qCnt = backContents.questions.length
     const QuestionsView = (back: Back) => {
@@ -64,10 +64,10 @@ export const BackView = (backContents: BackContents) => {
 
         return (
             <>
-                <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} > {needAnswer ? "- " +answers[0].a : ""}</div></div>
-                <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} > {needAnswer ? "- " +answers[1].a : ""}</div></div>
+                <div className="back-box q1 kr">      <div className="back-text">1. {qCnt > 0 && list[0]}</div><div className={needAnswer ? "q-answer-show" : "q-answer"} > {needAnswer ? "- " + answers[0].a : ""}</div></div>
+                <div className="back-box q2 kr">      <div className="back-text">2. {qCnt > 1 && list[1]}</div><div className={needAnswer ? "q-answer-show" : "q-answer"} > {needAnswer ? "- " + answers[1].a : ""}</div></div>
 
-                {(qCnt == 3 || (qCnt < 3 && backContents.index == 3)) && <div className="back-box q3 kr"><div className="back-text">3. {qCnt > 2 && list[2]}</div><div className={needAnswer ? "q-answer-show":"q-answer"} >{needAnswer ? "- " +answers[2].a : ""}</div> </div>}
+                {(qCnt == 3 || (qCnt < 3 && backContents.index == 3)) && <div className="back-box q3 kr"><div className="back-text">3. {qCnt > 2 && list[2]}</div><div className={needAnswer ? "q-answer-show" : "q-answer"} >{needAnswer ? "- " + answers[2].a : ""}</div> </div>}
             </>
         )
     }
