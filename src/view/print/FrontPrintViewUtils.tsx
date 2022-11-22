@@ -33,7 +33,7 @@ export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList |
     var rowCnt = 9
     if (age == Index.Child) {
         rowCnt = 7
-        if (vocaList[0].hanja.length == 3 && vocaList.length == 1) {
+        // if (vocaList[0].hanja.length == 3 && vocaList.length == 1) {
             // =======
             // export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList | null>, firstVocaLen: number): JSX.Element {
             //     var rowCnt = 9
@@ -41,8 +41,8 @@ export function frontWriteView(age: Index, swapHanjaList: Array<FrontHanjaList |
             //         rowCnt = 7
             //         if (firstVocaLen == 3) {
             // >>>>>>> front-hanja-more-than-two
-            rowCnt = 8
-        }
+            // rowCnt = 8
+        // }
     }
     return (
         <div className="bottom-table">
