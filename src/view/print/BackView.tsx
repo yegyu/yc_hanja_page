@@ -48,7 +48,8 @@ export function toAdultText(text: string): JSX.Element {
 }
 //backContents.index 
 export const BackView = (backContents: BackContents) => {
-    let needAnswer = backContents.index == Index.Youth
+    // let needAnswer = backContents.index == Index.Youth
+    let needAnswer = false;
 
     const qCnt = backContents.questions.length
     const QuestionsView = (back: Back) => {
