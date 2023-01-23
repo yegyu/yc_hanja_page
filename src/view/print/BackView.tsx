@@ -105,6 +105,7 @@ export const BackView = (backContents: BackContents) => {
 
         </div>
     )
+    let isTotalRecap = backContents.yojeol.youth_afternoon.has_total_recap == backContents.week
     const YouthYojeolView = () => (
         <>
             <div className="back-box youth-y1 kr">
@@ -115,10 +116,23 @@ export const BackView = (backContents: BackContents) => {
                 </div>
                 <div className="back-yojeol-where kr">{backContents.yojeol.morning.where}</div>
             </div>
+
             <div className="back-box youth-y2 kr">
-                <div className="back-text back-yojeol yojeol-title"> 이번 주 <span className="ch">午後 要節</span></div>
-                <div className="back-text back-yojeol">{backContents.yojeol.youth_afternoon.words}</div>
-                <div className="back-yojeol-where">{backContents.yojeol.youth_afternoon.where}</div>
+                <div className="back-text back-yojeol yojeol-title"> 이번 주 <span className="ch">午後 要節</span>{isTotalRecap ? " 총복습":""}</div>
+                {isTotalRecap ? 
+                    <div className="youth_recap_box">
+                        <div className="back-text back-yojeol0">{backContents.yojeol.youth_afternoon.before_words}</div>
+                        <div className="back-yojeol-where0 kr">{backContents.yojeol.youth_afternoon.before_where}</div>
+                        <div className="back-text back-yojeol1">{backContents.yojeol.youth_afternoon.words}</div>
+                        <div className="back-yojeol-where1 kr">{backContents.yojeol.youth_afternoon.where}</div>
+                    </div>
+                :
+                    <>
+                        <div className="back-text back-yojeol">{backContents.yojeol.youth_afternoon.words}</div>
+                        <div className="back-yojeol-where">{backContents.yojeol.youth_afternoon.where}</div>
+                    </>
+                }
+
             </div>
         </>
     )

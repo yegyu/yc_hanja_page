@@ -26,6 +26,11 @@ export interface ChildAfternoon {
 export interface YouthAfternoon {
     words: string;
     where: string;
+    before_words:string;
+    before_where:string;
+    next_words:string;
+    next_where:string;
+    has_total_recap:Number;
 }
 
 export interface Adult {
