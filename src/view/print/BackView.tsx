@@ -117,6 +117,8 @@ export const BackView = (backContents: BackContents) => {
                 <div className="back-yojeol-where kr">{backContents.yojeol.morning.where}</div>
             </div>
 
+
+
             <div className="back-box youth-y2 kr">
                 <div className="back-text back-yojeol yojeol-title"> 이번 주 <span className="ch">午後 要節</span>{isTotalRecap ? " 총복습":""}</div>
                 {isTotalRecap ? 

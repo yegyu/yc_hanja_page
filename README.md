@@ -1,3 +1,7 @@
+
+### temp_react_hanja/yc_hanja_page 로 변경!!!!!!!!!!
+
+
 ### https://yegyu.github.io/yc_hanja_page/
 
 ### Get Hanja-strok links script (https://hanja.dict.naver.com/) from console
